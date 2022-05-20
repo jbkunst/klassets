@@ -2,10 +2,10 @@
 % Please edit documentation in R/quasianscombe.R
 \name{sim_quasianscombe_set_1}
 \alias{sim_quasianscombe_set_1}
-\title{Functions to generate \emph{quasi} Anscombe data sets}
+\title{Generate \emph{quasi} Anscombe data sets Type 1}
 \usage{
 sim_quasianscombe_set_1(
-  n = 50,
+  n = 100,
   beta0 = 3,
   beta1 = 0.5,
   error_sd = 0.1,
@@ -15,7 +15,7 @@ sim_quasianscombe_set_1(
 )
 }
 \arguments{
-\item{n}{n, default value: 50}
+\item{n}{n, default value: 100}
 
 \item{beta0}{beta0, default value: 3,}
 
@@ -30,13 +30,13 @@ sim_quasianscombe_set_1(
 \item{seed}{seed, default value: 1234}
 }
 \description{
-Functions to generate \emph{quasi} Anscombe data sets
+Generate \emph{quasi} Anscombe data sets Type 1
 }
 \examples{
 
 dataset <- sim_quasianscombe_set_1(n = 100)
 
-class(dataset)
+dataset
 
 plot(dataset)
 

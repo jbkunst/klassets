@@ -88,7 +88,9 @@ sim_quasianscombe_set_1 <- function(n = 100,
 #' - Apply `residual_factor` factor to residual to get minor variance and
 #'   better visual impresion of the outlier effect.
 #'
+#' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
 #' @param prop The proportion of value to modify as outliers.
+#' @param  beta1_factor Numeric value to modify the beta1 value.
 #' @param residual_factor Numeric value to multiply residual to modify their
 #'     variance.
 #'
@@ -106,10 +108,14 @@ sim_quasianscombe_set_1 <- function(n = 100,
 #'
 #' plot(sim_quasianscombe_set_3(df, prop = 0.1, residual_factor = 0))
 #'
-#' @importFrom dplyr select pull
+#' @importFrom dplyr select mutate pull case_when row_number
 #' @importFrom rlang .data
+#' @importFrom stats optim
 #' @export
-sim_quasianscombe_set_3 <- function(df, prop = .05, residual_factor = 0.25){
+sim_quasianscombe_set_3 <- function(df,
+                                    prop = .05,
+                                    beta1_factor = 0.5,
+                                    residual_factor = 0.25){
 
   # pars
   modlm <- lm(y ~ x, data = df)
@@ -119,7 +125,7 @@ sim_quasianscombe_set_3 <- function(df, prop = .05, residual_factor = 0.25){
 
   # creating y3 1st ver
   df <- df |>
-    mutate(y3 = b[1] + (b[2] * 0.5) * .data$x + e * residual_factor)
+    mutate(y3 = b[1] + (b[2] * beta1_factor) * .data$x + e * residual_factor)
 
   # plot(df)
   # plot(df |> select(x, y = y3))
@@ -128,7 +134,7 @@ sim_quasianscombe_set_3 <- function(df, prop = .05, residual_factor = 0.25){
 
   f_to_optim <- function(value = 0){
 
-    y3_new <- pull(df, y3)
+    y3_new <- pull(df, .data$y3)
     y3_new[ids] <- y3_new[ids] + value
     y3_mod <- lm(y3_new ~ x, data = tibble(x = pull(df, .data$x), y3_new))
 
@@ -159,7 +165,7 @@ sim_quasianscombe_set_3 <- function(df, prop = .05, residual_factor = 0.25){
     mutate(y3 = .data$y3 + beta0 - beta0_new)
 
   df <- df |>
-    select(x, y = y3)
+    select(x = .data$x, y = .data$y3)
 
   class(df) <- c("quasi_anscombe", class(df))
 
