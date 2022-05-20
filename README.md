@@ -1,5 +1,5 @@
 
-# klasset
+# klassets
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/jbkunst/klasset/workflows/R-CMD-check/badge.svg)](https://github.com/jbkunst/klasset/actions)

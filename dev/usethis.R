@@ -11,15 +11,20 @@ usethis::use_github_action_check_standard()
 # pkgdown -----------------------------------------------------------------
 usethis::use_github_action("pkgdown")
 
-usethis::edit_r_buildignore() # add docs folder to Rbuilignore to test
+# add docs folder to Rbuilignore to test
+usethis::edit_r_buildignore()
+usethis::edit_git_ignore()
 
-pkgdown::build_site_github_pages()
+pkgdown::build_site()
+pkgdown::preview_site()
 
 
 # developing package ------------------------------------------------------
 usethis::use_package("tibble")
 usethis::use_package("ggplot2")
 usethis::use_package("stringr")
+usethis::use_package("dplyr")
+usethis::use_package("rlang")
 
 
 devtools::load_all()
