@@ -1,4 +1,5 @@
-#' @importFrom ggplot2 ggplot aes_string geom_point geom_smooth xlim ylim labs
+#' @importFrom ggplot2 ggplot aes_string geom_point geom_smooth  labs
+#  @importFrom ggplot2 xlim ylim
 #' @importFrom stringr str_glue
 #' @export
 plot.quasi_anscombe <- function(x, ...){
@@ -24,8 +25,8 @@ plot.quasi_anscombe <- function(x, ...){
       color = "gray40",
       formula = y ~ x
       ) +
-    ggplot2::xlim(c(0, NA)) +
-    ggplot2::ylim(c(0, NA)) +
+    # ggplot2::xlim(c(0, NA)) +
+    # ggplot2::ylim(c(0, NA)) +
     ggplot2::labs(title = stringr::str_glue("Model: y = {b0} + {b1} x"))
 
 }
@@ -44,11 +45,21 @@ plot.quasi_anscombe <- function(x, ...){
 #'
 #' @examples
 #'
-#' dataset <- sim_quasianscombe_set_1(n = 100)
+#' dataset <- sim_quasianscombe_set_1()
 #'
 #' dataset
 #'
 #' plot(dataset)
+#'
+#' # Some particular cases
+#'
+#' plot(sim_quasianscombe_set_1(x_mean = 0))
+#'
+#' plot(sim_quasianscombe_set_1(x_sd = 0))
+#'
+#' plot(sim_quasianscombe_set_1(error_sd = 0))
+#'
+#' plot(sim_quasianscombe_set_1(x_mean = 0, x_sd = 0))
 #'
 #' @importFrom tibble tibble
 #' @importFrom stats coefficients lm rnorm runif
@@ -65,13 +76,13 @@ sim_quasianscombe_set_1 <- function(n = 100,
 
   set.seed(seed)
 
-  x <- sort(rnorm(n = n, mean = x_mean, sd = 1))
+  x <- sort(rnorm(n = n, mean = x_mean, sd = x_sd))
 
   if(x_dist == "unif"){
     x <- sort(runif(n, min = min(x), max = max(x)))
   }
 
-  e <- rnorm(n, error_sd)
+  e <- rnorm(n, sd = error_sd)
 
   y <- beta0 + beta1 * x + e
 
@@ -92,7 +103,7 @@ sim_quasianscombe_set_1 <- function(n = 100,
 #' model.
 #'
 #' This function will:
-#' - Calculate the linear regression model and will calculate new trend usingo
+#' - Calculate the linear regression model and will calculate new trend using
 #'   0.5 times beta1
 #' - Take `prop`% values from the greater `2*prop` `x` values and modify the
 #'   related `y` value to get the original estimation of `beta1`
@@ -104,6 +115,7 @@ sim_quasianscombe_set_1 <- function(n = 100,
 #' @param  beta1_factor Numeric value to modify the beta1 value.
 #' @param residual_factor Numeric value to multiply residual to modify their
 #'     variance.
+#' @param seed seed, default value: 1234
 #'
 #' @examples
 #'
@@ -126,7 +138,8 @@ sim_quasianscombe_set_1 <- function(n = 100,
 sim_quasianscombe_set_3 <- function(df,
                                     prop = .05,
                                     beta1_factor = 0.5,
-                                    residual_factor = 0.25){
+                                    residual_factor = 0.25,
+                                    seed = 1234){
 
   # pars
   modlm <- lm(y ~ x, data = df)
@@ -140,6 +153,8 @@ sim_quasianscombe_set_3 <- function(df,
 
   # plot(df)
   # plot(df |> select(x, y = y3))
+
+  set.seed(seed)
 
   ids <- sample(seq(round((1 - 2*prop) * n), n), round(n * prop))
 
