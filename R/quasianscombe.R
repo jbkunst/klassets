@@ -13,8 +13,17 @@ plot.quasi_anscombe <- function(x, ...){
   b1 <- round(b[2], 2)
 
   ggplot2::ggplot(x, ggplot2::aes_string("x", "y")) +
-    ggplot2::geom_point(shape = 21, color = "gray60", fill = "gray80") +
-    ggplot2::geom_smooth(method = "lm", se = FALSE, color = "gray40") +
+    ggplot2::geom_point(
+      shape = 21,
+      color = "gray60",
+      fill = "gray80"
+      ) +
+    ggplot2::geom_smooth(
+      method = "lm",
+      se = FALSE,
+      color = "gray40",
+      formula = y ~ x
+      ) +
     ggplot2::xlim(c(0, NA)) +
     ggplot2::ylim(c(0, NA)) +
     ggplot2::labs(title = stringr::str_glue("Model: y = {b0} + {b1} x"))
