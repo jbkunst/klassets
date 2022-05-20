@@ -38,6 +38,7 @@ plot.quasi_anscombe <- function(x, ...){
 #' @param beta1 beta1, default value: 0.5
 #' @param error_sd error_sd, default value: 0.1
 #' @param x_mean x_mean, default value: 5
+#' @param x_sd x_sd, default value: 1
 #' @param x_dist x_dist, default value: "norm"
 #' @param seed seed, default value: 1234
 #'
@@ -57,13 +58,14 @@ sim_quasianscombe_set_1 <- function(n = 100,
                                     beta1 = 0.5,
                                     error_sd = 0.1,
                                     x_mean = 5,
+                                    x_sd = 1,
                                     x_dist = "norm",
                                     seed = 1234
                                     ){
 
   set.seed(seed)
 
-  x <- sort(rnorm(n, x_mean))
+  x <- sort(rnorm(n = n, mean = x_mean, sd = 1))
 
   if(x_dist == "unif"){
     x <- sort(runif(n, min = min(x), max = max(x)))

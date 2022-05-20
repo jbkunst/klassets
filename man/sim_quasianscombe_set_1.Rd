@@ -10,6 +10,7 @@ sim_quasianscombe_set_1(
   beta1 = 0.5,
   error_sd = 0.1,
   x_mean = 5,
+  x_sd = 1,
   x_dist = "norm",
   seed = 1234
 )
@@ -24,6 +25,8 @@ sim_quasianscombe_set_1(
 \item{error_sd}{error_sd, default value: 0.1}
 
 \item{x_mean}{x_mean, default value: 5}
+
+\item{x_sd}{x_sd, default value: 1}
 
 \item{x_dist}{x_dist, default value: "norm"}
 
