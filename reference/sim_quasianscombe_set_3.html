@@ -52,7 +52,8 @@ model.</p>
   <span class="va">df</span>,
   prop <span class="op">=</span> <span class="fl">0.05</span>,
   beta1_factor <span class="op">=</span> <span class="fl">0.5</span>,
-  residual_factor <span class="op">=</span> <span class="fl">0.25</span>
+  residual_factor <span class="op">=</span> <span class="fl">0.25</span>,
+  seed <span class="op">=</span> <span class="fl">1234</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -67,10 +68,12 @@ model.</p>
 <dt>residual_factor</dt>
 <dd><p>Numeric value to multiply residual to modify their
 variance.</p></dd>
+<dt>seed</dt>
+<dd><p>seed, default value: 1234</p></dd>
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>This function will:</p><ul><li><p>Calculate the linear regression model and will calculate new trend usingo
+    <p>This function will:</p><ul><li><p>Calculate the linear regression model and will calculate new trend using
 0.5 times beta1</p></li>
 <li><p>Take <code>prop</code>% values from the greater <code>2*prop</code> <code>x</code> values and modify the
 related <code>y</code> value to get the original estimation of <code>beta1</code></p></li>
