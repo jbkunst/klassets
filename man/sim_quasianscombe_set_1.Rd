@@ -37,10 +37,20 @@ Generate \emph{quasi} Anscombe data sets Type 1
 }
 \examples{
 
-dataset <- sim_quasianscombe_set_1(n = 100)
+dataset <- sim_quasianscombe_set_1()
 
 dataset
 
 plot(dataset)
+
+# Some particular cases
+
+plot(sim_quasianscombe_set_1(x_mean = 0))
+
+plot(sim_quasianscombe_set_1(x_sd = 0))
+
+plot(sim_quasianscombe_set_1(error_sd = 0))
+
+plot(sim_quasianscombe_set_1(x_mean = 0, x_sd = 0))
 
 }

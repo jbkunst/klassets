@@ -8,7 +8,8 @@ sim_quasianscombe_set_3(
   df,
   prop = 0.05,
   beta1_factor = 0.5,
-  residual_factor = 0.25
+  residual_factor = 0.25,
+  seed = 1234
 )
 }
 \arguments{
@@ -20,6 +21,8 @@ sim_quasianscombe_set_3(
 
 \item{residual_factor}{Numeric value to multiply residual to modify their
 variance.}
+
+\item{seed}{seed, default value: 1234}
 }
 \description{
 Data sets \emph{Type 3} get some outliers but conserving the $x$ mean and
@@ -29,7 +32,7 @@ model.
 \details{
 This function will:
 \itemize{
-\item Calculate the linear regression model and will calculate new trend usingo
+\item Calculate the linear regression model and will calculate new trend using
 0.5 times beta1
 \item Take \code{prop}\% values from the greater \code{2*prop} \code{x} values and modify the
 related \code{y} value to get the original estimation of \code{beta1}
