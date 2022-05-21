@@ -69,14 +69,14 @@ ggplot(dfs, aes(x, y)) +
 
 df_mods <- dfs |> 
   dplyr::group_nest(set) |> 
-  mutate(
+  dplyr::mutate(
     model = map(data, lm, formula = y ~ x),
     value = map(model, coefficients),
     coef  = map(value, names)
     ) 
 
 df_mods |> 
-  select(-data, -model) |> 
+  dplyr::select(-data, -model) |> 
   tidyr::unnest(cols = c(value, coef)) |> 
   tidyr::pivot_wider(names_from = coef, values_from = value)
 ```
