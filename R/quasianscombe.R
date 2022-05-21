@@ -155,8 +155,6 @@ sim_quasianscombe_set_3 <- function(df,
   # plot(df)
   # plot(df |> select(x, y = y3))
 
-  set.seed(seed)
-
   ids <- sample(seq(round((1 - 2*prop) * n), n), round(n * prop))
 
   f_to_optim <- function(value = 0){
