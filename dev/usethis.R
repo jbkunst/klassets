@@ -27,5 +27,7 @@ usethis::use_package("dplyr")
 usethis::use_package("rlang")
 usethis::use_package("scales")
 
+usethis::use_package("tidyr", type = "Suggests")
+
 
 devtools::load_all()

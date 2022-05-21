@@ -19,4 +19,5 @@ Imports:
     stringr,
     tibble
 Suggests: 
-    rmarkdown
+    rmarkdown,
+    tidyr
