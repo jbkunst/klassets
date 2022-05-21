@@ -118,7 +118,6 @@ sim_quasianscombe_set_1 <- function(n = 100,
 #' @param beta1_factor Numeric value to modify the beta1 value.
 #' @param residual_factor Numeric value to multiply residual to modify their
 #'     variance.
-#' @param seed seed, default value: 1234
 #'
 #' @examples
 #'
@@ -141,8 +140,7 @@ sim_quasianscombe_set_1 <- function(n = 100,
 sim_quasianscombe_set_3 <- function(df,
                                     prop = .05,
                                     beta1_factor = 0.5,
-                                    residual_factor = 0.25,
-                                    seed = 1234){
+                                    residual_factor = 0.25){
 
   # pars
   modlm <- lm(y ~ x, data = df)
