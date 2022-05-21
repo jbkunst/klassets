@@ -8,8 +8,7 @@ sim_quasianscombe_set_3(
   df,
   prop = 0.05,
   beta1_factor = 0.5,
-  residual_factor = 0.25,
-  seed = 1234
+  residual_factor = 0.25
 )
 }
 \arguments{
@@ -21,8 +20,6 @@ sim_quasianscombe_set_3(
 
 \item{residual_factor}{Numeric value to multiply residual to modify their
 variance.}
-
-\item{seed}{seed, default value: 1234}
 }
 \description{
 Data sets \emph{Type 3} get some outliers but conserving the $x$ mean and
