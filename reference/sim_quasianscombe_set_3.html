@@ -27,7 +27,23 @@ model."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Quasi-Anscombe-data-sets.html">Quasi Anscombe data sets</a>
+    </li>
+  </ul></li>
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/jbkunst/klassets/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -37,7 +53,7 @@ model."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate <em>quasi</em> Anscombe data sets Type 3</h1>
-    
+    <small class="dont-index">Source: <a href="https://github.com/jbkunst/klassets/blob/HEAD/R/quasianscombe.R" class="external-link"><code>R/quasianscombe.R</code></a></small>
     <div class="hidden name"><code>sim_quasianscombe_set_3.Rd</code></div>
     </div>
 
@@ -52,8 +68,7 @@ model.</p>
   <span class="va">df</span>,
   prop <span class="op">=</span> <span class="fl">0.05</span>,
   beta1_factor <span class="op">=</span> <span class="fl">0.5</span>,
-  residual_factor <span class="op">=</span> <span class="fl">0.25</span>,
-  seed <span class="op">=</span> <span class="fl">1234</span>
+  residual_factor <span class="op">=</span> <span class="fl">0.25</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -68,8 +83,6 @@ model.</p>
 <dt>residual_factor</dt>
 <dd><p>Numeric value to multiply residual to modify their
 variance.</p></dd>
-<dt>seed</dt>
-<dd><p>seed, default value: 1234</p></dd>
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -94,14 +107,14 @@ better visual impresion of the outlier effect.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  2.65  4.76</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  2.82  4.78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  3.19  4.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  3.37  4.92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  3.55  4.96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  3.19  4.88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  3.37  4.91</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  3.55  4.95</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  3.61  4.99</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  3.63  4.97</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  3.66  5.01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  3.66  5.00</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  3.75  5.03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  3.79  5.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  3.79  5.03</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 90 more rows</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># plot(df)</span></span>
