@@ -25,6 +25,7 @@ usethis::use_package("ggplot2")
 usethis::use_package("stringr")
 usethis::use_package("dplyr")
 usethis::use_package("rlang")
+usethis::use_package("scales")
 
 
 devtools::load_all()

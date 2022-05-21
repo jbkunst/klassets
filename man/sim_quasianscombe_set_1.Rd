@@ -33,15 +33,17 @@ sim_quasianscombe_set_1(
 \item{seed}{seed, default value: 1234}
 }
 \description{
-Generate \emph{quasi} Anscombe data sets Type 1
+This function generate a data frame creating first a \code{x} a random vector
+then apply a linear transformation using \code{beta0} and \code{beta1} and finally
+adding a normal distributed noise using \code{error_sd} creating \code{y} values.
 }
 \examples{
 
-dataset <- sim_quasianscombe_set_1()
+df <- sim_quasianscombe_set_1()
 
-dataset
+df
 
-plot(dataset)
+plot(df)
 
 # Some particular cases
 

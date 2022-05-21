@@ -34,6 +34,10 @@ plot.quasi_anscombe <- function(x, ...){
 
 #' Generate _quasi_ Anscombe data sets Type 1
 #'
+#' This function generate a data frame creating first a `x` a random vector
+#' then apply a linear transformation using `beta0` and `beta1` and finally
+#' adding a normal distributed noise using `error_sd` creating `y` values.
+#'
 #' @param n n, default value: 100
 #' @param beta0 beta0, default value: 3,
 #' @param beta1 beta1, default value: 0.5
@@ -45,11 +49,11 @@ plot.quasi_anscombe <- function(x, ...){
 #'
 #' @examples
 #'
-#' dataset <- sim_quasianscombe_set_1()
+#' df <- sim_quasianscombe_set_1()
 #'
-#' dataset
+#' df
 #'
-#' plot(dataset)
+#' plot(df)
 #'
 #' # Some particular cases
 #'
@@ -95,7 +99,6 @@ sim_quasianscombe_set_1 <- function(n = 100,
 }
 
 
-
 #' Generate _quasi_ Anscombe data sets Type 3
 #'
 #' Data sets _Type 3_ get some outliers but conserving the $x$ mean and
@@ -112,7 +115,7 @@ sim_quasianscombe_set_1 <- function(n = 100,
 #'
 #' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
 #' @param prop The proportion of value to modify as outliers.
-#' @param  beta1_factor Numeric value to modify the beta1 value.
+#' @param beta1_factor Numeric value to modify the beta1 value.
 #' @param residual_factor Numeric value to multiply residual to modify their
 #'     variance.
 #' @param seed seed, default value: 1234
@@ -199,3 +202,120 @@ sim_quasianscombe_set_3 <- function(df,
 
 }
 
+
+#' Generate _quasi_ Anscombe data sets Type 4
+#'
+#' Data sets _Type 4_ recreate two cluster keeping the coefficient of the original
+#' regression model.
+#'
+#' This function will:
+#' - Disorder the order of `x` values.
+#' - Rescale the `x` value to specific original quantiles.
+#' - Then take a porportion of value and traslate to left keeppping the original
+#' mean of `x`.
+#' - Finally add some value to the associated `y` value and substract to the
+#' complement group to have the same regression model in term of coefficients.
+#'
+#' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
+#' @param rescale_to Rescale the x value before create the second cluster.
+#' @param prop The proportion of value to modify as the second group/cluster.
+#'
+#' @examples
+#'
+#' df <- sim_quasianscombe_set_1()
+#'
+#' dataset4 <- sim_quasianscombe_set_4(df)
+#'
+#' dataset4
+#'
+#' # plot(df)
+#'
+#' plot(dataset4)
+#'
+#' plot(sim_quasianscombe_set_4(df, rescale_to = c(0, .1), prop = 0.5))
+#'
+#'
+#' @importFrom dplyr if_else between
+#' @importFrom stats quantile
+#' @importFrom scales rescale
+#' @export
+sim_quasianscombe_set_4 <- function(df, rescale_to = c(.10, .20), prop = 0.15){
+
+  # validation
+  stopifnot(
+    is.numeric(rescale_to),
+    length(rescale_to) == 2,
+    all(dplyr::between(rescale_to, 0, 1))
+  )
+
+  # pars
+  modlm <- lm(y ~ x, data = df)
+  b <- coefficients(modlm)
+  e <- modlm$residuals
+  n <- length(e)
+
+  qs <- quantile(df$x, rescale_to)
+
+  df <- df |>
+    mutate(x4 = sample(.data$x)) |>
+    mutate(x4 = scales::rescale(.data$x4, to = qs))
+
+  # plot(df |> select(x, y))      + ggplot2::xlim(0, NA)
+  # plot(df |> select(x = x4, y)) + ggplot2::xlim(0, NA)
+
+  ids <- sample(n, size = round(n * prop))
+
+  f_to_optim <- function(value = 0){
+
+    x4_new <- pull(df, .data$x4)
+    x4_new[ids] <- x4_new[ids] + value
+
+    (mean(df$x) - mean(x4_new))^2
+
+  }
+
+  value <- suppressWarnings(optim(0, f_to_optim)$par)
+
+  df <- df |>
+    mutate(x4 = dplyr::if_else(row_number() %in% ids, .data$x4 + value, .data$x4))
+
+  f_to_optim2 <- function(value = 10){
+
+    y4_new <- pull(df, .data$y)
+
+    y4_new[ ids] <- y4_new[ ids] + value
+    y4_new[-ids] <- y4_new[-ids] - value
+
+    xy4_mod <- lm(y4 ~ x, data = tibble(x = df$x4, y4 = y4_new))
+
+    # plot(df$x4, y4_new)
+
+    (b[2] - coefficients(xy4_mod)[2])^2
+
+  }
+
+  value <- suppressWarnings(optim(0, f_to_optim2)$par)
+
+  df <- df |>
+    mutate(
+      y4 = .data$y,
+      y4 = case_when(
+        row_number() %in%  ids ~ .data$y4 + value,
+        !row_number() %in% ids ~ .data$y4 - value
+        )
+      )
+
+  beta0     <- lm(y  ~ x , df)$coefficients[1]
+  beta0_new <- lm(y4 ~ x4, df)$coefficients[1]
+
+  df <- df |>
+    mutate(y4 = .data$y4 + beta0 - beta0_new)
+
+  df <- df |>
+    select(x = .data$x4, y = .data$y4)
+
+  class(df) <- c("quasi_anscombe", class(df))
+
+  df
+
+}
