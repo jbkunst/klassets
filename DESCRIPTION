@@ -3,7 +3,7 @@ Title: Tools to simulate data set to teach Statical Models and ML Algorithms
 Description: Collection of functions to simulate data sets to teach and explain
   how Machine Learning Algorithms works.
 Version: 0.0.0.9000
-Authors@R: person("Joshua", "Kunst", , "jbkunst@gmail.com", role = c("aut", "cre"))
+Authors@R: person("Joshua", "Kunst", "jbkunst@gmail.com", role = c("aut", "cre"))
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
