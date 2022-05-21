@@ -15,8 +15,10 @@ usethis::use_github_action("pkgdown")
 usethis::edit_r_buildignore()
 usethis::edit_git_ignore()
 
+pkgdown::build_home(preview = TRUE)
 pkgdown::build_site()
 pkgdown::preview_site()
+
 
 
 # developing package ------------------------------------------------------
