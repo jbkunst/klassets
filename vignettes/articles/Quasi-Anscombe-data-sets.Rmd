@@ -178,7 +178,7 @@ dfs <- dfs |>
     set = forcats::fct_inorder(set)
     )
 
-ggplot(dfs, aes(x, y)) +
+gga <- ggplot(dfs, aes(x, y)) +
   geom_point(shape = 21, fill = "gray80", color = "gray60") +
   geom_smooth(method = "lm", se = FALSE, formula = y ~ x) +
   facet_null() +
@@ -191,6 +191,8 @@ ggplot(dfs, aes(x, y)) +
   ease_aes("cubic-in-out") +
   # shadow_wake(wake_length = 0.2, alpha = 0.1) +
   transition_states(set, transition_length = 2, state_length = 1)
+
+print(gga)
 ```
 
 ## Residuals
