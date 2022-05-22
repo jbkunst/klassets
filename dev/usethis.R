@@ -28,6 +28,8 @@ usethis::use_package("stringr")
 usethis::use_package("dplyr")
 usethis::use_package("rlang")
 usethis::use_package("scales")
+usethis::use_package("purrr")
+usethis::use_package("MASS")
 
 usethis::use_package("tidyr", type = "Suggests")
 usethis::use_package("broom", type = "Suggests")

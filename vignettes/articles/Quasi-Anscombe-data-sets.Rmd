@@ -129,3 +129,13 @@ df_mods |>
   tidyr::unnest(cols = c(parameters)) |> 
   dplyr::mutate(sig = stars.pval(p.value))
 ```
+
+## Residuals
+
+```{r}
+# df_mods |>
+#   pull(model) |>
+#   map(pluck, "residuals") |>
+#   map(plot)
+```
+

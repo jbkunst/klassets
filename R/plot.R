@@ -2,17 +2,16 @@
 #  @importFrom ggplot2 xlim ylim
 #' @importFrom stringr str_glue
 #' @export
-plot.klassets_xy <- function(x, ...){
+plot.klassets_quasianscombe <- function(x, add_lm = TRUE, ...){
 
-
-  pxy <- ggplot2::ggplot(x, ggplot2::aes_string("x", "y")) +
+  pxy <- ggplot2::ggplot(x, ggplot2::aes_string("x", "y"))  +
     ggplot2::geom_point(
       shape = 21,
       color = "gray60",
       fill = "gray80"
     )
 
-  if(inherits(x, "klassets_quasianscombe")){
+  if(add_lm){
 
     mod <- lm(y ~ x, data = x)
 
@@ -21,12 +20,43 @@ plot.klassets_xy <- function(x, ...){
     b0 <- round(b[1], 2)
     b1 <- round(b[2], 2)
 
-    pxy <- pxy  +
-      ggplot2::geom_smooth(method = "lm", se = FALSE,
-                           color = "gray40", formula = y ~ x) +
-      # ggplot2::xlim(c(0, NA)) +
-      # ggplot2::ylim(c(0, NA)) +
+    pxy <- pxy +
+      ggplot2::geom_smooth(
+        method = "lm", se = FALSE,
+        color = "gray40", formula = y ~ x
+        ) +
       ggplot2::labs(title = stringr::str_glue("Model: y = {b0} + {b1} x"))
+
+  }
+
+  pxy
+
+
+}
+
+#' @export
+plot.klassets_cluster <- function(x, ...){
+
+  pxy <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
+
+  if("group" %in% names(x)) {
+
+    pxy <- pxy +
+      ggplot2::geom_point(
+        ggplot2::aes(shape = as.factor(.data$group)),
+        # shape = 21,
+        color = "gray60",
+        fill = "gray80"
+      )
+
+  } else {
+
+    pxy <- pxy +
+      ggplot2::geom_point(
+        shape = 21,
+        color = "gray60",
+        fill = "gray80"
+        )
 
   }
 

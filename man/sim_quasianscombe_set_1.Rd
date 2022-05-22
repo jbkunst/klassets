@@ -11,8 +11,7 @@ sim_quasianscombe_set_1(
   error_sd = 0.5,
   x_mean = 5,
   x_sd = 1,
-  x_dist = "norm",
-  seed = 123
+  x_dist = "norm"
 )
 }
 \arguments{
@@ -29,8 +28,6 @@ sim_quasianscombe_set_1(
 \item{x_sd}{x_sd, default value: 1}
 
 \item{x_dist}{x_dist, default value: "norm"}
-
-\item{seed}{seed, default value: 1234}
 }
 \description{
 This function generate a data set \emph{Type 1}  creating first a \code{x} a random vector

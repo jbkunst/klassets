@@ -13,7 +13,6 @@
 #' @param x_mean x_mean, default value: 5
 #' @param x_sd x_sd, default value: 1
 #' @param x_dist x_dist, default value: "norm"
-#' @param seed seed, default value: 1234
 #'
 #' @examples
 #'
@@ -38,11 +37,10 @@ sim_quasianscombe_set_1 <- function(n = 100,
                                     error_sd = 0.5,
                                     x_mean = 5,
                                     x_sd = 1,
-                                    x_dist = "norm",
-                                    seed = 123
+                                    x_dist = "norm"
                                     ){
 
-  set.seed(seed)
+  # set.seed(seed)
 
   x <- sort(rnorm(n = n, mean = x_mean, sd = x_sd))
 
