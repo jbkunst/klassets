@@ -88,7 +88,7 @@ dfs <- dfs |>
   tidyr::unnest(cols = c(value))
 ```
 
-From [@warnes](https://github.com/warnes)'  [gtools](https://github.com/r-gregmisc/gtools/blob/master/R/stars.pval.R)  package 
+From [@warnes](https://github.com/warnes) [gtools](https://github.com/r-gregmisc/gtools/blob/master/R/stars.pval.R)  package 
 
 ```{r}
 stars.pval <- function(p.value) {
@@ -109,10 +109,12 @@ stars.pval <- function(p.value) {
 ggplot(dfs, aes(x, y)) +
   geom_point(shape = 21, fill = "gray80", color = "gray60") +
   geom_smooth(method = "lm", se = FALSE) +
-  facet_wrap(vars(set)) + 
-  xlim(0, NA) +
-  ylim(0, NA) 
+  facet_wrap(vars(set))
+```
 
+## Coefficients and its significance
+
+```{r}
 df_mods <- dfs |> 
   dplyr::group_nest(set) |> 
   dplyr::mutate(

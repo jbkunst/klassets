@@ -17,14 +17,12 @@ Data sets \emph{Type 5} recreates the phenomenon of heteroskedasticity in
 the residuals.
 }
 \details{
-This function will take residuals $e_i$ and then get $e'_i = e_i * f(i)$
+This function will take residuals $e_i$ and then get $e'_i = e_i * fun(i)$
 and then rescale the $e'_i$ to the range of $e_i$.
 }
 \examples{
 
 df <- sim_quasianscombe_set_1()
-
-plot(df)
 
 dataset5 <- sim_quasianscombe_set_5(df)
 
@@ -38,8 +36,6 @@ plot(sim_quasianscombe_set_5(df, fun = sqrt))
 
 plot(sim_quasianscombe_set_5(df, fun = log))
 
-plot(sim_quasianscombe_set_5(df, fun = function(x) x^(1+0.1)))
-
-plot(sim_quasianscombe_set_5(df, fun = function(x) abs(sin(x/10))))
+plot(sim_quasianscombe_set_5(df, fun = function(x) x^(1+0.6)))
 
 }

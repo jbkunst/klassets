@@ -281,7 +281,7 @@ sim_quasianscombe_set_4 <- function(df, rescale_to = c(.10, .20), prop = 0.15){
 #' Data sets _Type 5_ recreates the phenomenon of heteroskedasticity in
 #' the residuals.
 #'
-#' This function will take residuals $e_i$ and then get $e'_i = e_i * f(i)$
+#' This function will take residuals $e_i$ and then get $e'_i = e_i * fun(i)$
 #' and then rescale the $e'_i$ to the range of $e_i$.
 #'
 #' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
@@ -291,8 +291,6 @@ sim_quasianscombe_set_4 <- function(df, rescale_to = c(.10, .20), prop = 0.15){
 #' @examples
 #'
 #' df <- sim_quasianscombe_set_1()
-#'
-#' plot(df)
 #'
 #' dataset5 <- sim_quasianscombe_set_5(df)
 #'
@@ -306,9 +304,7 @@ sim_quasianscombe_set_4 <- function(df, rescale_to = c(.10, .20), prop = 0.15){
 #'
 #' plot(sim_quasianscombe_set_5(df, fun = log))
 #'
-#' plot(sim_quasianscombe_set_5(df, fun = function(x) x^(1+0.1)))
-#'
-#' plot(sim_quasianscombe_set_5(df, fun = function(x) abs(sin(x/10))))
+#' plot(sim_quasianscombe_set_5(df, fun = function(x) x^(1+0.6)))
 #'
 #' @export
 sim_quasianscombe_set_5 <- function(df, fun = identity){
@@ -328,11 +324,14 @@ sim_quasianscombe_set_5 <- function(df, fun = identity){
 
   # plot(df |> dplyr::select(x, y = y5))
 
-  # take last value of y to get same b1
-  f_to_optim <- function(value = 0){
+  # kind of _rotate_ to get same b1
+  f_to_optim <- function(value = 1){
 
     y5_new <- pull(df, .data$y5)
-    y5_new[n] <- y5_new[n] + value
+
+    values <- seq(-1, 1, length.out = n) * value
+
+    y5_new <- y5_new + values
 
     y5_mod <- lm(y5_new ~ x, data = tibble(x = pull(df, .data$x), y5_new))
 
@@ -340,10 +339,16 @@ sim_quasianscombe_set_5 <- function(df, fun = identity){
 
   }
 
+  # values  <- seq(-5, 5, length.out = 100)
+  # fvalues <- Vectorize(f_to_optim)(values)
+  # plot(values, fvalues)
+
   value <- suppressWarnings(optim(0, f_to_optim)$par)
 
   df <- df |>
-    mutate(y5 = if_else(row_number() == n, .data$y5 + value, .data$y5))
+    mutate(y5 = .data$y5 + seq(-1, 1, length.out = n) * value)
+
+  # plot(df |> dplyr::select(x, y = y5))
 
   beta0     <- lm(y  ~ x, df)$coefficients[1]
   beta0_new <- lm(y5 ~ x, df)$coefficients[1]
