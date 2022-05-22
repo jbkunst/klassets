@@ -22,11 +22,11 @@
 #'
 #' plot(df)
 #'
-#' plot(sim_quasianscombe_set_1(x_sd = 0))
+#' plot(sim_quasianscombe_set_1(n = 1000))
 #'
 #' plot(sim_quasianscombe_set_1(error_sd = 0))
 #'
-#' plot(sim_quasianscombe_set_1(x_mean = 0, x_sd = 0))
+#' plot(sim_quasianscombe_set_1(x_sd = 0))
 #'
 #' @importFrom tibble tibble
 #' @importFrom stats coefficients lm rnorm runif
@@ -53,6 +53,131 @@ sim_quasianscombe_set_1 <- function(n = 100,
   y <- beta0 + beta1 * x + e
 
   df <- tibble::tibble(x, y)
+
+  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
+
+  df
+
+}
+
+
+
+#' Generate _quasi_ Anscombe data sets Type 2
+#'
+#' Data sets _Type 2_ shows how a no linear realtionship between `x` and `y` can
+#' lead in the same regression model (in terms of parameter values) of
+#' the _Type 1_.
+#'
+#' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
+#' @param fun A function to apply, this is applied to normalized version of `x`.
+#' @param residual_factor Numeric value to multiply residual to modify their
+#'     variance.
+#'
+#' @examples
+#'
+#' df <- sim_quasianscombe_set_1()
+#'
+#' dataset2 <- sim_quasianscombe_set_2(df)
+#'
+#' dataset2
+#'
+#' plot(dataset2)
+#'
+#' plot(sim_quasianscombe_set_2(df, residual_factor = 0))
+#'
+#' fun1 <- function(x){ 2 * sin(x*diff(range(x))) }
+#'
+#' plot(sim_quasianscombe_set_2(df, fun = fun1))
+#'
+#' fun2 <- abs
+#'
+#' plot(sim_quasianscombe_set_2(df, fun = fun2))
+#'
+#' fun3 <- function(x){ (x - mean(x)) * sin(x*diff(range(x))) }
+#'
+#' plot(sim_quasianscombe_set_2(df, fun = fun3))
+#'
+#' @importFrom stats dnorm sd
+#' @export
+sim_quasianscombe_set_2 <- function(df,
+                                    fun = function(x){ x**2 },
+                                    residual_factor = 0.25){
+
+  # df <- sim_quasianscombe_set_1()
+
+  # pars
+  modlm <- lm(y ~ x, data = df)
+  b <- coefficients(modlm)
+  e <- modlm$residuals
+  n <- length(e)
+
+  x_mean <- mean(df$x)
+  x_stdv <- sd(df$x)
+
+  e_new <- e * residual_factor
+  # e_new <- 0
+
+  df <- df |>
+    dplyr::mutate(
+      x2 = (.data$x - x_mean)/x_stdv,
+      # x2 = x,
+      y2 = fun(.data$x2) + e_new
+      )
+
+  # plot(df |> dplyr::select(x, y))
+  # plot(df |> dplyr::select(x = x2, y = y2))
+
+  # kind of _rotate_ to get same b1
+  # I think this method is more fancy than sim_quasianscombe_set_5
+  f_to_optim <- function(value = 1){
+
+    y2_new <- dplyr::pull(df, .data$y2)
+
+    values <- scales::rescale(1 - dnorm(df$x2), to = c(0, 1)) * sign(df$x2) * value
+    # values <- scales::rescale(1 - df$x2, to = c(0, 1)) * sign(df$x2) * value
+    # values <- seq(-1, 1, length.out = n) * value
+
+    y2_new <- y2_new + values
+
+    y2_mod <- lm(y2_new ~ x, data = tibble(x = pull(df, .data$x), y2_new))
+
+    (b[2] - coefficients(y2_mod)[2])^2
+
+  }
+
+  # values  <- seq(-5, 5, length.out = 100)
+  # fvalues <- Vectorize(f_to_optim)(values)
+  # plot(values, fvalues)
+  value <- suppressWarnings(optim(0, f_to_optim)$par)
+
+  # f_to_optim(value)
+
+  values <- scales::rescale(1 - dnorm(df$x2), to = c(0, 1)) * sign(df$x2) * value
+  # values <- scales::rescale(1 - df$x2, to = c(0, 1)) * sign(df$x2) * value
+
+  df <- df |>
+    mutate(y2 = .data$y2 + values)
+
+  # plot(df |> dplyr::select(x = x , y = y))
+  # plot(df |> dplyr::select(x = x2, y = y2))
+
+  # df <- df |>
+  #   mutate(x2 = .data$x2*x_stdv + x_mean)
+  #
+  # plot(df |> dplyr::select(x = x , y = y))
+  # plot(df |> dplyr::select(x = x2, y = y2))
+
+  beta0     <- lm(y  ~ x, df)$coefficients[1]
+  beta0_new <- lm(y2 ~ x, df)$coefficients[1]
+
+  df <- df |>
+    mutate(y2 = .data$y2 + beta0 - beta0_new)
+
+  # plot(df |> dplyr::select(x, y = y))
+  # plot(df |> dplyr::select(x = x, y = y2))
+
+  df <- df |>
+    select(x = .data$x, y = .data$y2)
 
   class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
 

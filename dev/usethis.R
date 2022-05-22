@@ -15,10 +15,9 @@ usethis::use_github_action("pkgdown")
 usethis::edit_r_buildignore()
 usethis::edit_git_ignore()
 
+pkgdown::init_site()
 pkgdown::build_home(preview = TRUE)
-pkgdown::build_site()
-pkgdown::preview_site()
-
+pkgdown::build_site(preview = TRUE)
 
 
 # developing package ------------------------------------------------------
@@ -34,6 +33,10 @@ usethis::use_package("MASS")
 usethis::use_package("tidyr", type = "Suggests")
 usethis::use_package("broom", type = "Suggests")
 usethis::use_package("showtext", type = "Suggests")
+
+usethis::use_package("transformr", type = "Suggests")
+usethis::use_package("gganimate", type = "Suggests")
+
 
 
 devtools::load_all()

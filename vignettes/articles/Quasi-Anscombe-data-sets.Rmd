@@ -40,7 +40,19 @@ df <- sim_quasianscombe_set_1(n = 100, x_sd = 5)
 plot(df) +
   # xlim(0, NA) +
   # ylim(0, NA) +
-  labs(title = "Original data set")
+  labs(subtitle = "Original data set")
+```
+
+### Set 4: No linear relationship
+
+```{r}
+func <- function(x) { 2 * x^2  }
+
+df2_1 <- sim_quasianscombe_set_2(df, residual_factor = 0, fun = func)
+
+funktion <- function(x){ 2 * sin(x*diff(range(x))) }
+
+df2_2 <- sim_quasianscombe_set_2(df, fun = funktion)
 ```
 
 ### Set 3: Outliers
@@ -55,7 +67,7 @@ df3_2 <- sim_quasianscombe_set_3(df, prop = 0.1, residual_factor = 0)
 ### Set 4: Cluster
 
 ```{r}
-df4_1 <- sim_quasianscombe_set_4(df,  prop = 0.2)
+df4_1 <- sim_quasianscombe_set_4(df, prop = 0.25)
 
 df4_2 <- sim_quasianscombe_set_4(df, rescale_to = c(0, .1), prop = 0.5)
 ```
@@ -87,6 +99,8 @@ library(broom)
 
 dfs <- list(
   "Original" = df,
+  "Set 2 v1" = df2_1,
+  "Set 2 v2" = df2_2,
   "Set 3 v1" = df3_1,
   "Set 3 v2" = df3_2,
   "Set 4 v1" = df4_1,
@@ -119,11 +133,13 @@ stars.pval <- function(p.value) {
 
 ## Visually
 
-```{r, fig.height=8}
-ggplot(dfs, aes(x, y)) +
+```{r, fig.height=9}
+pxy <- ggplot(dfs, aes(x, y)) +
   geom_point(shape = 21, fill = "gray80", color = "gray60") +
-  geom_smooth(method = "lm", se = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, formula = y ~ x) +
   facet_wrap(vars(set))
+
+pxy
 ```
 
 ## Coefficients and its significance
@@ -141,10 +157,44 @@ df_mods <- dfs |>
 df_mods |> 
   dplyr::select(set, parameters) |> 
   tidyr::unnest(cols = c(parameters)) |> 
-  dplyr::mutate(sig = stars.pval(p.value))
+  dplyr::mutate(sig = stars.pval(p.value)) |> 
+  dplyr::select(set, term, estimate) |> 
+  tidyr::pivot_wider(names_from = "term", values_from = "estimate")
+```
+
+## Animated version
+
+```{r}
+library(gganimate)
+library(stringr)
+
+dfs <- dfs |> 
+  mutate(
+    set = str_replace_all(set, "Set 2", "No linear relationship"),
+    set = str_replace_all(set, "Set 3", "Extreme values (outliers)"),
+    set = str_replace_all(set, "Set 4", "Cluster"),
+    set = str_replace_all(set, "Set 5", "Heteroskedasticity"),
+    set = str_replace_all(set, "Set 6", "Simpson's Paradox"),
+    set = forcats::fct_inorder(set)
+    )
+
+ggplot(dfs, aes(x, y)) +
+  geom_point(shape = 21, fill = "gray80", color = "gray60") +
+  geom_smooth(method = "lm", se = FALSE, formula = y ~ x) +
+  facet_null() +
+   # then animate
+  labs(
+    title = "Iteration {closest_state}",
+    # caption = "Frame {frame} of {nframes}"
+    ) +
+  ease_aes("cubic-in-out") +
+  # shadow_wake(wake_length = 0.2, alpha = 0.1) +
+  transition_states(set, transition_length = 2, state_length = 1)
 ```
 
 ## Residuals
+
+Comming soon.
 
 ```{r}
 # df_mods |>

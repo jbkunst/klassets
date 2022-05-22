@@ -22,6 +22,8 @@ Imports:
     tibble
 Suggests: 
     broom,
+    gganimate,
     rmarkdown,
     showtext,
-    tidyr
+    tidyr,
+    transformr

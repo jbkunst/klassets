@@ -45,10 +45,10 @@ df
 
 plot(df)
 
-plot(sim_quasianscombe_set_1(x_sd = 0))
+plot(sim_quasianscombe_set_1(n = 1000))
 
 plot(sim_quasianscombe_set_1(error_sd = 0))
 
-plot(sim_quasianscombe_set_1(x_mean = 0, x_sd = 0))
+plot(sim_quasianscombe_set_1(x_sd = 0))
 
 }
