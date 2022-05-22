@@ -192,7 +192,7 @@ gga <- ggplot(dfs, aes(x, y)) +
   # shadow_wake(wake_length = 0.2, alpha = 0.1) +
   transition_states(set, transition_length = 2, state_length = 1)
 
-print(gga)
+gga
 ```
 
 ## Residuals
