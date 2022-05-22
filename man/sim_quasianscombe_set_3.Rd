@@ -34,7 +34,7 @@ This function will:
 \item Take \code{prop}\% values from the greater \code{2*prop} \code{x} values and modify the
 related \code{y} value to get the original estimation of \code{beta1}
 \item Apply \code{residual_factor} factor to residual to get minor variance and
-better visual impresion of the outlier effect.
+better visual impression of the outliers effect.
 }
 }
 \examples{

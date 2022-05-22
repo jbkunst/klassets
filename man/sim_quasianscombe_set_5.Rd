@@ -4,13 +4,16 @@
 \alias{sim_quasianscombe_set_5}
 \title{Generate \emph{quasi} Anscombe data sets Type 5}
 \usage{
-sim_quasianscombe_set_5(df, fun = identity)
+sim_quasianscombe_set_5(df, fun = identity, residual_factor = 10)
 }
 \arguments{
 \item{df}{A data frame from \code{sim_quasianscombe_set_1} (or similar).}
 
 \item{fun}{A function to apply to the index to multiply the residuals of
 the original model.}
+
+\item{residual_factor}{Numeric value to multiply residual to modify their
+variance.}
 }
 \description{
 Data sets \emph{Type 5} recreates the phenomenon of heteroskedasticity in

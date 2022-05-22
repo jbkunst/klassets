@@ -73,7 +73,7 @@ sim_quasianscombe_set_1 <- function(n = 100,
 #' - Take `prop`% values from the greater `2*prop` `x` values and modify the
 #'   related `y` value to get the original estimation of `beta1`
 #' - Apply `residual_factor` factor to residual to get minor variance and
-#'   better visual impresion of the outlier effect.
+#'   better visual impression of the outliers effect.
 #'
 #' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
 #' @param prop The proportion of value to modify as outliers.
@@ -285,6 +285,8 @@ sim_quasianscombe_set_4 <- function(df, rescale_to = c(.10, .20), prop = 0.15){
 #' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
 #' @param fun A function to apply to the index to multiply the residuals of
 #'   the original model.
+#' @param residual_factor Numeric value to multiply residual to modify their
+#'     variance.
 #'
 #' @examples
 #'
@@ -305,7 +307,7 @@ sim_quasianscombe_set_4 <- function(df, rescale_to = c(.10, .20), prop = 0.15){
 #' plot(sim_quasianscombe_set_5(df, fun = function(x) x^(1+0.6)))
 #'
 #' @export
-sim_quasianscombe_set_5 <- function(df, fun = identity){
+sim_quasianscombe_set_5 <- function(df, fun = identity, residual_factor = 10){
 
   # pars
   modlm <- lm(y ~ x, data = df)
@@ -315,10 +317,10 @@ sim_quasianscombe_set_5 <- function(df, fun = identity){
 
   e_new <- e * fun(1:length(e))
 
-  e_new <- scales::rescale(e_new,to = c(min(abs(e)), max(abs(e))))
+  e_new <- scales::rescale(e_new,to = c(min(abs(e)), max(abs(e)))) * residual_factor
 
   df <- df |>
-    mutate(y5 = b[1] + b[2] * .data$x + e_new)
+    dplyr::mutate(y5 = b[1] + b[2] * .data$x + e_new)
 
   # plot(df |> dplyr::select(x, y = y5))
 
@@ -343,8 +345,10 @@ sim_quasianscombe_set_5 <- function(df, fun = identity){
 
   value <- suppressWarnings(optim(0, f_to_optim)$par)
 
+  values <- seq(-1, 1, length.out = n) * value
+
   df <- df |>
-    mutate(y5 = .data$y5 + seq(-1, 1, length.out = n) * value)
+    mutate(y5 = .data$y5 + values)
 
   # plot(df |> dplyr::select(x, y = y5))
 
@@ -352,15 +356,110 @@ sim_quasianscombe_set_5 <- function(df, fun = identity){
   beta0_new <- lm(y5 ~ x, df)$coefficients[1]
 
   df <- df |>
-    mutate(y5 = .data$y5 + beta0 - beta0_new)
+    dplyr::mutate(y5 = .data$y5 + beta0 - beta0_new)
 
   # plot(df |> dplyr::select(x, y = y5))
 
   df <- df |>
-    select(x = .data$x, y = .data$y5)
+    dplyr::select(x = .data$x, y = .data$y5)
 
   class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
 
   df
 
 }
+
+
+#' Generate _quasi_ Anscombe data sets Type 6
+#'
+#' Data sets _Type 6_ recreates the phenomenon of Simpon's paradox.
+#'
+#' This function will take `x` vector and separate `groups` groups to apply
+#' a local model with a modified regresion using the `b1_factor` factor.
+#'
+#' The residual will be multiply with a value between 0 and 1 to make the visual
+#' effect greater.
+#'
+#' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
+#' @param groups Number of groups to separate `x` values.
+#' @param b1_factor A numeric value get the slope in each group from $beta_1$.
+#' @param residual_factor Numeric value to multiply residual to modify their
+#'     variance.
+#'
+#' @examples
+#'
+#' df <- sim_quasianscombe_set_1()
+#'
+#' dataset6 <- sim_quasianscombe_set_6(df)
+#'
+#' dataset6
+#'
+#' plot(dataset6)
+#'
+#' @export
+sim_quasianscombe_set_6 <- function(df,
+                                    groups = 3,
+                                    b1_factor = -1,
+                                    residual_factor = 0.25){
+
+
+  # pars
+  modlm <- lm(y ~ x, data = df)
+  b <- coefficients(modlm)
+  e <- modlm$residuals
+  n <- length(e)
+
+  group <- sort(rep(1:groups, length.out = n))
+  group
+
+  df <- df |>
+    mutate(y6 = b[1] + b[2] * b1_factor * .data$x + e*residual_factor)
+
+  # plot(df |> dplyr::select(x, y))
+  # plot(df |> dplyr::select(x, y = y6))
+
+
+  # kind of _rotate_ in groups
+  f_to_optim <- function(value = 1.2){
+
+    y6_new <- pull(df, .data$y6)
+
+    values <- sort(rep(-1:1, length.out = n)) * value
+
+    # table(group, values)
+
+    y6_new <- y6_new + values
+
+    y6_mod <- lm(y6_new ~ x, data = tibble(x = pull(df, .data$x), y6_new))
+
+    (b[2] - coefficients(y6_mod)[2])^2
+
+  }
+
+  value <- suppressWarnings(optim(0, f_to_optim)$par)
+
+  values <- sort(rep(-1:1, length.out = n)) * value
+
+  df <- df |>
+    mutate(y6 = .data$y6 + values)
+
+  # plot(df |> dplyr::select(x, y = y6))
+
+  beta0     <- lm(y  ~ x, df)$coefficients[1]
+  beta0_new <- lm(y6 ~ x, df)$coefficients[1]
+
+  df <- df |>
+    mutate(y6 = .data$y6 + beta0 - beta0_new)
+
+  # plot(df |> dplyr::select(x, y = y6))
+
+  df <- df |>
+    select(x = .data$x, y = .data$y6)
+
+  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
+
+  df
+
+}
+
+

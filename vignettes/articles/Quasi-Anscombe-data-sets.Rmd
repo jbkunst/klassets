@@ -33,37 +33,49 @@ library(ggplot2)
 ### Set 1: The original
 
 ```{r}
-df <- sim_quasianscombe_set_1()
+# df <- sim_quasianscombe_set_1()
+
+df <- sim_quasianscombe_set_1(n = 100, x_sd = 5)
 
 plot(df) +
-  xlim(0, NA) +
-  ylim(0, NA) 
+  # xlim(0, NA) +
+  # ylim(0, NA) +
+  labs(title = "Original data set")
 ```
 
 ### Set 3: Outliers
 
 ```{r}
-df3_1 <- sim_quasianscombe_set_3(df)
+df3_1 <- sim_quasianscombe_set_3(df, prop = 0.1)
 
-df3_2 <- sim_quasianscombe_set_3(df, residual_factor = 0)
+df3_2 <- sim_quasianscombe_set_3(df, prop = 0.1, residual_factor = 0)
 ```
 
 
 ### Set 4: Cluster
 
 ```{r}
-df4_1 <- sim_quasianscombe_set_4(df)
+df4_1 <- sim_quasianscombe_set_4(df,  prop = 0.2)
 
 df4_2 <- sim_quasianscombe_set_4(df, rescale_to = c(0, .1), prop = 0.5)
 ```
 
-### Set 5: heteroskedasticity
+### Set 5: Heteroskedasticity
 
 ```{r}
-df5_1 <- sim_quasianscombe_set_5(df)
+df5_1 <- sim_quasianscombe_set_5(df, residual_factor = 2)
 
-df5_2 <- sim_quasianscombe_set_5(df, fun = function(x) rev(x**4))
+df5_2 <- sim_quasianscombe_set_5(df, fun = function(x) rev(x**2))
 ```
+
+### Set 6: Simpson's Paradox
+
+```{r}
+df6_1 <- sim_quasianscombe_set_6(df, residual_factor = 1)
+
+df6_2 <- sim_quasianscombe_set_6(df, b1_factor = 0, residual_factor = 0.1)
+```
+
 
 ## Compare results
 
@@ -80,7 +92,9 @@ dfs <- list(
   "Set 4 v1" = df4_1,
   "Set 4 v2" = df4_2,
   "Set 5 v1" = df5_1,
-  "Set 5 v2" = df5_2
+  "Set 5 v2" = df5_2,
+  "Set 6 v1" = df6_1,
+  "Set 6 v2" = df6_2
 )
 
 dfs <- dfs |> 
@@ -105,7 +119,7 @@ stars.pval <- function(p.value) {
 
 ## Visually
 
-```{r}
+```{r, fig.height=8}
 ggplot(dfs, aes(x, y)) +
   geom_point(shape = 21, fill = "gray80", color = "gray60") +
   geom_smooth(method = "lm", se = FALSE) +

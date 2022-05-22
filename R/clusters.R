@@ -106,3 +106,15 @@ sim_clusters <- function(n = 1000,
 
 }
 
+apply_kmeans <- function(df){
+
+  stopifnot(inherits(df, "klassets_cluster"))
+
+}
+
+apply_hclust <- function(df){
+
+  stopifnot(inherits(df, "klassets_cluster"))
+
+}
+
