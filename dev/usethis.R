@@ -33,7 +33,7 @@ usethis::use_package("MASS")
 usethis::use_package("tidyr", type = "Suggests")
 usethis::use_package("broom", type = "Suggests")
 usethis::use_package("showtext", type = "Suggests")
-
+usethis::use_package("forcats", type = "Suggests")
 usethis::use_package("transformr", type = "Suggests")
 usethis::use_package("gganimate", type = "Suggests")
 
