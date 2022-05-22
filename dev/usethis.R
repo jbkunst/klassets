@@ -30,6 +30,8 @@ usethis::use_package("rlang")
 usethis::use_package("scales")
 
 usethis::use_package("tidyr", type = "Suggests")
+usethis::use_package("broom", type = "Suggests")
+usethis::use_package("showtext", type = "Suggests")
 
 
 devtools::load_all()

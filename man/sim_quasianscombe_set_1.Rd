@@ -8,11 +8,11 @@ sim_quasianscombe_set_1(
   n = 100,
   beta0 = 3,
   beta1 = 0.5,
-  error_sd = 0.1,
+  error_sd = 0.5,
   x_mean = 5,
   x_sd = 1,
   x_dist = "norm",
-  seed = 1234
+  seed = 123
 )
 }
 \arguments{
@@ -33,9 +33,12 @@ sim_quasianscombe_set_1(
 \item{seed}{seed, default value: 1234}
 }
 \description{
-This function generate a data frame creating first a \code{x} a random vector
+This function generate a data set \emph{Type 1}  creating first a \code{x} a random vector
 then apply a linear transformation using \code{beta0} and \code{beta1} and finally
 adding a normal distributed noise using \code{error_sd} creating \code{y} values.
+}
+\details{
+This is the \emph{typical} example when regression analysis is taught.
 }
 \examples{
 
@@ -44,10 +47,6 @@ df <- sim_quasianscombe_set_1()
 df
 
 plot(df)
-
-# Some particular cases
-
-plot(sim_quasianscombe_set_1(x_mean = 0))
 
 plot(sim_quasianscombe_set_1(x_sd = 0))
 

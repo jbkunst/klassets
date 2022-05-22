@@ -1,42 +1,10 @@
-#' @importFrom ggplot2 ggplot aes_string geom_point geom_smooth  labs
-#  @importFrom ggplot2 xlim ylim
-#' @importFrom stringr str_glue
-#' @export
-plot.quasi_anscombe <- function(x, ...){
-
-  # cor_xy <- cor(df[["x"]], df[["y"]])
-
-  mod <- lm(y ~ x, data = x)
-
-  b <- coefficients(mod)
-
-  b0 <- round(b[1], 2)
-  b1 <- round(b[2], 2)
-
-  ggplot2::ggplot(x, ggplot2::aes_string("x", "y")) +
-    ggplot2::geom_point(
-      shape = 21,
-      color = "gray60",
-      fill = "gray80"
-      ) +
-    ggplot2::geom_smooth(
-      method = "lm",
-      se = FALSE,
-      color = "gray40",
-      formula = y ~ x
-      ) +
-    # ggplot2::xlim(c(0, NA)) +
-    # ggplot2::ylim(c(0, NA)) +
-    ggplot2::labs(title = stringr::str_glue("Model: y = {b0} + {b1} x"))
-
-}
-
-
 #' Generate _quasi_ Anscombe data sets Type 1
 #'
-#' This function generate a data frame creating first a `x` a random vector
+#' This function generate a data set _Type 1_  creating first a `x` a random vector
 #' then apply a linear transformation using `beta0` and `beta1` and finally
 #' adding a normal distributed noise using `error_sd` creating `y` values.
+#'
+#' This is the _typical_ example when regression analysis is taught.
 #'
 #' @param n n, default value: 100
 #' @param beta0 beta0, default value: 3,
@@ -55,10 +23,6 @@ plot.quasi_anscombe <- function(x, ...){
 #'
 #' plot(df)
 #'
-#' # Some particular cases
-#'
-#' plot(sim_quasianscombe_set_1(x_mean = 0))
-#'
 #' plot(sim_quasianscombe_set_1(x_sd = 0))
 #'
 #' plot(sim_quasianscombe_set_1(error_sd = 0))
@@ -71,11 +35,11 @@ plot.quasi_anscombe <- function(x, ...){
 sim_quasianscombe_set_1 <- function(n = 100,
                                     beta0 = 3,
                                     beta1 = 0.5,
-                                    error_sd = 0.1,
+                                    error_sd = 0.5,
                                     x_mean = 5,
                                     x_sd = 1,
                                     x_dist = "norm",
-                                    seed = 1234
+                                    seed = 123
                                     ){
 
   set.seed(seed)
@@ -92,7 +56,7 @@ sim_quasianscombe_set_1 <- function(n = 100,
 
   df <- tibble::tibble(x, y)
 
-  class(df) <- c("quasi_anscombe", class(df))
+  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
 
   df
 
@@ -126,8 +90,6 @@ sim_quasianscombe_set_1 <- function(n = 100,
 #' dataset3 <- sim_quasianscombe_set_3(df)
 #'
 #' dataset3
-#'
-#' # plot(df)
 #'
 #' plot(dataset3)
 #'
@@ -192,7 +154,7 @@ sim_quasianscombe_set_3 <- function(df,
   df <- df |>
     select(x = .data$x, y = .data$y3)
 
-  class(df) <- c("quasi_anscombe", class(df))
+  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
 
   df
 
@@ -224,14 +186,11 @@ sim_quasianscombe_set_3 <- function(df,
 #'
 #' dataset4
 #'
-#' # plot(df)
-#'
 #' plot(dataset4)
 #'
 #' plot(sim_quasianscombe_set_4(df, rescale_to = c(0, .1), prop = 0.5))
 #'
-#'
-#' @importFrom dplyr if_else between
+#' @importFrom dplyr if_else between arrange
 #' @importFrom stats quantile
 #' @importFrom scales rescale
 #' @export
@@ -308,9 +267,96 @@ sim_quasianscombe_set_4 <- function(df, rescale_to = c(.10, .20), prop = 0.15){
     mutate(y4 = .data$y4 + beta0 - beta0_new)
 
   df <- df |>
-    select(x = .data$x4, y = .data$y4)
+    select(x = .data$x4, y = .data$y4) |>
+    arrange(.data$x)
 
-  class(df) <- c("quasi_anscombe", class(df))
+  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
+
+  df
+
+}
+
+#' Generate _quasi_ Anscombe data sets Type 5
+#'
+#' Data sets _Type 5_ recreates the phenomenon of heteroskedasticity in
+#' the residuals.
+#'
+#' This function will take residuals $e_i$ and then get $e'_i = e_i * f(i)$
+#' and then rescale the $e'_i$ to the range of $e_i$.
+#'
+#' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
+#' @param fun A function to apply to the index to multiply the residuals of
+#'   the original model.
+#'
+#' @examples
+#'
+#' df <- sim_quasianscombe_set_1()
+#'
+#' plot(df)
+#'
+#' dataset5 <- sim_quasianscombe_set_5(df)
+#'
+#' dataset5
+#'
+#' plot(dataset5)
+#'
+#' plot(sim_quasianscombe_set_5(df, fun = rev))
+#'
+#' plot(sim_quasianscombe_set_5(df, fun = sqrt))
+#'
+#' plot(sim_quasianscombe_set_5(df, fun = log))
+#'
+#' plot(sim_quasianscombe_set_5(df, fun = function(x) x^(1+0.1)))
+#'
+#' plot(sim_quasianscombe_set_5(df, fun = function(x) abs(sin(x/10))))
+#'
+#' @export
+sim_quasianscombe_set_5 <- function(df, fun = identity){
+
+  # pars
+  modlm <- lm(y ~ x, data = df)
+  b <- coefficients(modlm)
+  e <- modlm$residuals
+  n <- length(e)
+
+  e_new <- e * fun(1:length(e))
+
+  e_new <- scales::rescale(e_new,to = c(min(abs(e)), max(abs(e))))
+
+  df <- df |>
+    mutate(y5 = b[1] + b[2] * .data$x + e_new)
+
+  # plot(df |> dplyr::select(x, y = y5))
+
+  # take last value of y to get same b1
+  f_to_optim <- function(value = 0){
+
+    y5_new <- pull(df, .data$y5)
+    y5_new[n] <- y5_new[n] + value
+
+    y5_mod <- lm(y5_new ~ x, data = tibble(x = pull(df, .data$x), y5_new))
+
+    (b[2] - coefficients(y5_mod)[2])^2
+
+  }
+
+  value <- suppressWarnings(optim(0, f_to_optim)$par)
+
+  df <- df |>
+    mutate(y5 = if_else(row_number() == n, .data$y5 + value, .data$y5))
+
+  beta0     <- lm(y  ~ x, df)$coefficients[1]
+  beta0_new <- lm(y5 ~ x, df)$coefficients[1]
+
+  df <- df |>
+    mutate(y5 = .data$y5 + beta0 - beta0_new)
+
+  # plot(df |> dplyr::select(x, y = y5))
+
+  df <- df |>
+    select(x = .data$x, y = .data$y5)
+
+  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
 
   df
 

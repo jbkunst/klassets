@@ -36,11 +36,8 @@ dataset4 <- sim_quasianscombe_set_4(df)
 
 dataset4
 
-# plot(df)
-
 plot(dataset4)
 
 plot(sim_quasianscombe_set_4(df, rescale_to = c(0, .1), prop = 0.5))
-
 
 }

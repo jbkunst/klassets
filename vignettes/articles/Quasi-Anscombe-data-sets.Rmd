@@ -7,34 +7,49 @@ editor_options:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = FALSE
 )
+
+library(ggplot2)
+
+theme_set(theme_minimal(base_size = 21))
+
+if(require(showtext)){
+ 
+  sysfonts::font_add_google("IBM Plex Sans", "plex")
+  showtext::showtext_auto()
+   
+}
 ```
 
 ```{r setup}
 library(klassets)
 library(ggplot2)
-library(purrr)
 ```
 
-## The original set (Type 1)
+## The sets
+
+### Set 1: The original
 
 ```{r}
-df <- sim_quasianscombe_set_1(beta0 = 10, beta1 = 2, error_sd = 0.1)
+df <- sim_quasianscombe_set_1()
 
 plot(df) +
   xlim(0, NA) +
   ylim(0, NA) 
 ```
 
-## Set 3: Outliers
+### Set 3: Outliers
 
 ```{r}
 df3_1 <- sim_quasianscombe_set_3(df)
+
+df3_2 <- sim_quasianscombe_set_3(df, residual_factor = 0)
 ```
 
 
-## Set 4: Cluster
+### Set 4: Cluster
 
 ```{r}
 df4_1 <- sim_quasianscombe_set_4(df)
@@ -42,24 +57,55 @@ df4_1 <- sim_quasianscombe_set_4(df)
 df4_2 <- sim_quasianscombe_set_4(df, rescale_to = c(0, .1), prop = 0.5)
 ```
 
+### Set 5: heteroskedasticity
+
+```{r}
+df5_1 <- sim_quasianscombe_set_5(df)
+
+df5_2 <- sim_quasianscombe_set_5(df, fun = function(x) rev(x**4))
+```
 
 ## Compare results
 
-
 ```{r}
+library(dplyr, warn.conflicts = FALSE)
+library(tidyr)
+library(purrr)
+library(broom)
+
 dfs <- list(
   "Original" = df,
-  "Set 3" = df3_1,
+  "Set 3 v1" = df3_1,
+  "Set 3 v2" = df3_2,
   "Set 4 v1" = df4_1,
-  "Set 4 v2" = df4_2
+  "Set 4 v2" = df4_2,
+  "Set 5 v1" = df5_1,
+  "Set 5 v2" = df5_2
 )
 
 dfs <- dfs |> 
   tibble::enframe(name = "set") |> 
-  tidyr::unnest()
+  tidyr::unnest(cols = c(value))
+```
 
-dfs
+From [@warnes](https://github.com/warnes)'  [gtools](https://github.com/r-gregmisc/gtools/blob/master/R/stars.pval.R)  package 
 
+```{r}
+stars.pval <- function(p.value) {
+  unclass(
+    symnum(p.value,
+      corr = FALSE, na = FALSE,
+      cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+      symbols = c("***", "**", "*", ".", " ")
+    )
+  )
+}
+```
+
+
+## Visually
+
+```{r}
 ggplot(dfs, aes(x, y)) +
   geom_point(shape = 21, fill = "gray80", color = "gray60") +
   geom_smooth(method = "lm", se = FALSE) +
@@ -71,12 +117,13 @@ df_mods <- dfs |>
   dplyr::group_nest(set) |> 
   dplyr::mutate(
     model = map(data, lm, formula = y ~ x),
-    value = map(model, coefficients),
-    coef  = map(value, names)
+    parameters = map(model, broom::tidy)
+    # value = map(model, coefficients),
+    # coef  = map(value, names)
     ) 
 
 df_mods |> 
-  dplyr::select(-data, -model) |> 
-  tidyr::unnest(cols = c(value, coef)) |> 
-  tidyr::pivot_wider(names_from = coef, values_from = value)
+  dplyr::select(set, parameters) |> 
+  tidyr::unnest(cols = c(parameters)) |> 
+  dplyr::mutate(sig = stars.pval(p.value))
 ```

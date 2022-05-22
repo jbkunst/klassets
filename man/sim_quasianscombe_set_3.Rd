@@ -45,8 +45,6 @@ dataset3 <- sim_quasianscombe_set_3(df)
 
 dataset3
 
-# plot(df)
-
 plot(dataset3)
 
 plot(sim_quasianscombe_set_3(df, prop = 0.1, residual_factor = 0))
