@@ -186,6 +186,7 @@ ggplot(dfs, aes(x, y)) +
   labs(
     title = "Iteration {closest_state}",
     # caption = "Frame {frame} of {nframes}"
+    caption = "Quasi Anscombe sets\n(only keep the regresion coefficients, and sometimes the mean of x's)"
     ) +
   ease_aes("cubic-in-out") +
   # shadow_wake(wake_length = 0.2, alpha = 0.1) +

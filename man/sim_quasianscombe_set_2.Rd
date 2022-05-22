@@ -35,7 +35,7 @@ plot(dataset2)
 
 plot(sim_quasianscombe_set_2(df, residual_factor = 0))
 
-fun1 <- function(x){ sin(x*diff(range(x))) }
+fun1 <- function(x){ 2 * sin(x*diff(range(x))) }
 
 plot(sim_quasianscombe_set_2(df, fun = fun1))
 
