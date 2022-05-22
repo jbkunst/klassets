@@ -140,7 +140,7 @@
 <span class="va">dfs</span> <span class="op">&lt;-</span> <span class="va">dfs</span> |&gt; 
   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">enframe</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"set"</span><span class="op">)</span> |&gt; 
   <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>From <span class="citation">[@warnes]</span>(<a href="https://github.com/warnes" class="external-link uri">https://github.com/warnes</a>)’ <a href="https://github.com/r-gregmisc/gtools/blob/master/R/stars.pval.R" class="external-link">gtools</a> package</p>
+<p>From <span class="citation">[@warnes]</span>(<a href="https://github.com/warnes" class="external-link uri">https://github.com/warnes</a>) <a href="https://github.com/r-gregmisc/gtools/blob/master/R/stars.pval.R" class="external-link">gtools</a> package</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stars.pval</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span>
@@ -159,14 +159,15 @@
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dfs</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"gray80"</span>, color <span class="op">=</span> <span class="st">"gray60"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">set</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">xlim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">NA</span><span class="op">)</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">set</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span></code></pre></div>
 <p><img src="Quasi-Anscombe-data-sets_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+</div>
+<div class="section level2">
+<h2 id="coefficients-and-its-significance">Coefficients and its significance<a class="anchor" aria-label="anchor" href="#coefficients-and-its-significance"></a>
+</h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">df_mods</span> <span class="op">&lt;-</span> <span class="va">dfs</span> |&gt; 
+<code class="sourceCode R"><span class="va">df_mods</span> <span class="op">&lt;-</span> <span class="va">dfs</span> |&gt; 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_nest.html" class="external-link">group_nest</a></span><span class="op">(</span><span class="va">set</span><span class="op">)</span> |&gt; 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>
     model <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">lm</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span>,
@@ -192,10 +193,10 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Set 4 v1 x              0.541    0.032<span style="text-decoration: underline;">0</span>     16.9  8.13<span style="color: #949494;">e</span><span style="color: #BB0000;">-31</span> ***  </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Set 4 v2 (Intercept)    2.74     0.206      13.3  1.28<span style="color: #949494;">e</span><span style="color: #BB0000;">-23</span> ***  </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Set 4 v2 x              0.541    0.038<span style="text-decoration: underline;">2</span>     14.2  2.00<span style="color: #949494;">e</span><span style="color: #BB0000;">-25</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Set 5 v1 (Intercept)    2.74     0.155      17.7  2.98<span style="color: #949494;">e</span><span style="color: #BB0000;">-32</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Set 5 v1 x              0.541    0.029<span style="text-decoration: underline;">9</span>     18.1  6.08<span style="color: #949494;">e</span><span style="color: #BB0000;">-33</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Set 5 v2 (Intercept)    2.74     0.135      20.2  9.37<span style="color: #949494;">e</span><span style="color: #BB0000;">-37</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> Set 5 v2 x              0.541    0.026<span style="text-decoration: underline;">2</span>     20.7  1.74<span style="color: #949494;">e</span><span style="color: #BB0000;">-37</span> ***</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Set 5 v1 (Intercept)    2.74     0.158      17.3  1.64<span style="color: #949494;">e</span><span style="color: #BB0000;">-31</span> ***  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Set 5 v1 x              0.541    0.030<span style="text-decoration: underline;">6</span>     17.6  3.41<span style="color: #949494;">e</span><span style="color: #BB0000;">-32</span> ***  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Set 5 v2 (Intercept)    2.74     0.122      22.5  1.94<span style="color: #949494;">e</span><span style="color: #BB0000;">-40</span> ***  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> Set 5 v2 x              0.541    0.023<span style="text-decoration: underline;">6</span>     22.9  3.38<span style="color: #949494;">e</span><span style="color: #BB0000;">-41</span> ***</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

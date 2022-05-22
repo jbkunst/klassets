@@ -70,7 +70,7 @@ the original model.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function will take residuals $e_i$ and then get $e'_i = e_i * f(i)$
+    <p>This function will take residuals $e_i$ and then get $e'_i = e_i * fun(i)$
 and then rescale the $e'_i$ to the range of $e_i$.</p>
     </div>
 
@@ -79,44 +79,38 @@ and then rescale the $e'_i$ to the range of $e_i$.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
 <span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="sim_quasianscombe_set_1.html">sim_quasianscombe_set_1</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="sim_quasianscombe_set_5-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="va">dataset5</span> <span class="op">&lt;-</span> <span class="fu">sim_quasianscombe_set_5</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">dataset5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        x     y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  2.69  4.18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  3.03  4.37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  3.31  4.52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  3.45  4.59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  3.73  4.73</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  3.73  4.75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  3.78  4.75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  3.86  4.76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  3.88  4.82</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  3.93  4.91</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  2.69  4.16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  3.03  4.35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  3.31  4.50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  3.45  4.57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  3.73  4.71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  3.73  4.73</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  3.78  4.73</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  3.86  4.74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  3.88  4.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  3.93  4.89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 90 more rows</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dataset5</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="sim_quasianscombe_set_5-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="sim_quasianscombe_set_5-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_5</span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="va">rev</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="sim_quasianscombe_set_5-3.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="sim_quasianscombe_set_5-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_5</span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="va">sqrt</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="sim_quasianscombe_set_5-4.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="sim_quasianscombe_set_5-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_5</span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="va">log</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="sim_quasianscombe_set_5-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_5</span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fl">0.6</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="sim_quasianscombe_set_5-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_5</span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="sim_quasianscombe_set_5-6.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_5</span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="sim_quasianscombe_set_5-7.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
