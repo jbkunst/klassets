@@ -55,3 +55,7 @@ You can install the development version of klassets from
 # install.packages("remotes")
 remotes::install_github("jbkunst/klassets")
 ```
+
+## Why *Klassets*?
+
+Just a weird merge for Class/Klass and sets.
