@@ -1,0 +1,72 @@
+---
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+
+library(ggplot2)
+
+theme_set(theme_minimal(base_size = 8))
+
+if(require(showtext)){
+  sysfonts::font_add_google("IBM Plex Sans", "plex")
+  showtext::showtext_auto()
+}
+```
+
+# klassets
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/jbkunst/klassets/workflows/R-CMD-check/badge.svg)](https://github.com/jbkunst/klassets/actions)
+<!-- badges: end -->
+
+The `{klassets}` package is a collection of functions to simulate data sets to:
+
+- Teach how some Statistics Models and Machine Learning algorithms works.
+- Illustrate certain some particular events such as heteroskedasticity or the Simpson's paradox
+
+```{r, echo=FALSE}
+knitr::include_graphics("man/figures/animation_quasi_anscombre.gif")
+```
+
+For example:
+
+```{r}
+library(klassets)
+
+df <- sim_quasianscombe_set_1(n = 500, beta0 = 3, beta1 = 0.5)
+
+plot(df) +
+  ggplot2::labs(subtitle = "Very similar to the given parameters (3 and 0.5)")
+```
+
+```{r}
+library(patchwork)
+
+df2 <- sim_quasianscombe_set_2(df, fun = sin)
+df6 <- sim_quasianscombe_set_6(df, groups = 2, b1_factor = -1)
+
+plot(df2) + plot(df6)
+```
+
+More details in the articles section!
+
+## Installation
+
+You can install the development version of klassets from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("jbkunst/klassets")
+```
+

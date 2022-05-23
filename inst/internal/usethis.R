@@ -11,6 +11,10 @@ usethis::use_github_action_check_standard()
 # pkgdown -----------------------------------------------------------------
 usethis::use_github_action("pkgdown")
 
+usethis::use_readme_rmd()
+
+usethis::use_github_actions_badge()
+
 # add docs folder to Rbuilignore to test
 usethis::edit_r_buildignore()
 usethis::edit_git_ignore()

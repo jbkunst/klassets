@@ -107,16 +107,23 @@ gga <- gxy +
   labs(
     title = "The importance of visualization and residual analysis",
     subtitle = "{closest_state}",
-    caption = "Quasi Anscombe sets\nSame regression coefficients.") +
+    caption = "Quasi Anscombe sets\n(Same regression coefficients)") +
   ease_aes("cubic-in-out") +
   # shadow_wake(wake_length = 0.01, alpha = 0.1) +
   transition_states(set2, transition_length = 2, state_length = 1)
 
 options(gganimate.dev_args = list(width = 800, height = 600))
 
-animate(gga, fps = 60, duration = 10)
+gganim <- animate(gga, fps = 60, duration = 10)
 
 # .Last.value
+
+gganimate::save_animation(
+  gganim,
+  file = "man/figures/animation_quasi_anscombre.gif"
+  )
+
+
 
 
 

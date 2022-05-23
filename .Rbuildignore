@@ -1,8 +1,8 @@
 ^klassets\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
-^dev$
 ^docs$
 ^LICENSE\.md$
 ^vignettes/articles$
 ^pkgdown/
+^README\.Rmd$
