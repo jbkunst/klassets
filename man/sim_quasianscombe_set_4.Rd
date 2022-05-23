@@ -25,7 +25,7 @@ This function will:
 \item Then take a porportion of value and traslate to left keeppping the original
 mean of \code{x}.
 \item Finally add some value to the associated \code{y} value and substract to the
-complement group to have the same regression model in term of coefficients.
+complement group to have the same regression model in terms of coefficients.
 }
 }
 \examples{

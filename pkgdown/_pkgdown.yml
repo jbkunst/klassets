@@ -17,4 +17,4 @@ reference:
   desc: Functions to simulate data for test ans explaing clustering methods and
     functions to apply some basics algorimths.
 - contents:
-  - contains("clust")
+  - matches("clust|kmeans")

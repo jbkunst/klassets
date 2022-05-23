@@ -44,31 +44,36 @@ plot.klassets_cluster <- function(x, ...){
     pxy <- pxy +
       ggplot2::geom_point(
         ggplot2::aes(
-          shape = (.data$group),
-          color = (.data$cluster)
+          shape = .data$group,
+          color = .data$cluster
           ),
         ...
-        )
+        ) +
+      labs(
+        shape = "(Original) Group",
+        color = "(Assigned) Cluster"
+      )
 
   } else if ("group" %in% names(x)) {
 
     pxy <- pxy +
       ggplot2::geom_point(
-        ggplot2::aes(shape = (.data$group)),
+        ggplot2::aes(shape = .data$group),
         color = "gray60",
         fill = "gray80",
         ...
-
-      )
+      ) +
+      labs(shape = "(Original) Group")
 
   } else if ("cluster" %in% names(x)) {
 
     pxy <- pxy +
       ggplot2::geom_point(
-        ggplot2::aes(color = (.data$cluster)),
+        ggplot2::aes(color = .data$cluster),
         shape = 21,
         ...
-        )
+        ) +
+      labs(color = "(Assigned) Cluster")
 
   } else {
 
@@ -78,5 +83,51 @@ plot.klassets_cluster <- function(x, ...){
   }
 
   pxy
+
+}
+
+#' @export
+plot.klassets_kmiterations <- function(x, ...){
+
+  data_hist <- x$data_hist
+
+  center_hist <- x$center_hist
+
+  k <- center_hist |>
+    dplyr::count(.data$cluster) |>
+    nrow()
+
+  # ggplot(center_hist, aes(cx, cy)) +
+  #   geom_point() +
+  #   geom_path(aes(group = cluster))
+
+  colors <- viridisLite::viridis(k, begin = 0.1, end = .9)
+  colors <- purrr::set_names(colors, LETTERS[seq_len(k)])
+
+  # colors <- c("Start" = "gray70", colors)
+
+  # scales::show_col(colors)
+
+  p <- ggplot2::ggplot() +
+    ggplot2::geom_point(
+      data = data_hist,
+      ggplot2::aes(.data$x, .data$y, group = .data$id, color = .data$cluster, shape = .data$group),
+      size = 3,
+      alpha = 0.5
+    ) +
+    ggplot2::geom_point(
+      data = center_hist,
+      ggplot2::aes(.data$cx, .data$cy, group = .data$cluster, fill = .data$cluster),
+      size = 6,
+      alpha = 1,
+      shape = 21,
+    ) +
+    ggplot2::labs(shape = "(Original) Group") +
+    ggplot2::scale_color_manual(values = colors, name = "(Assigned) Cluster", na.value = "gray70") +
+    ggplot2::scale_fill_manual(values = colors, name = "(Assigned) Cluster", na.value = "gray70") +
+    ggplot2::facet_wrap(dplyr::vars(.data$iteration)) +
+    labs()
+
+  p
 
 }

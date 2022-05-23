@@ -4,7 +4,7 @@
 \alias{sim_clusters}
 \title{Generate data sets to apply a clustering algorithm}
 \usage{
-sim_clusters(n = 1000, groups = 3, props = NULL, add_group_col = FALSE)
+sim_clusters(n = 1000, groups = 3, props = NULL)
 }
 \arguments{
 \item{n}{An intenger}
@@ -12,8 +12,6 @@ sim_clusters(n = 1000, groups = 3, props = NULL, add_group_col = FALSE)
 \item{groups}{An integer}
 
 \item{props}{A vector of probabilties with length \code{groups}.}
-
-\item{add_group_col}{A logical value.}
 }
 \description{
 Generate data sets to apply a clustering algorithm
@@ -23,12 +21,6 @@ Generate data sets to apply a clustering algorithm
 set.seed(123456)
 
 df <- sim_clusters()
-
-plot(df)
-
-set.seed(123456)
-
-df <- sim_clusters(add_group_col = TRUE)
 
 plot(df)
 

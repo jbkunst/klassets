@@ -45,6 +45,8 @@ df
 
 plot(df)
 
+plot(df, add_lm = FALSE)
+
 plot(sim_quasianscombe_set_1(n = 1000))
 
 plot(sim_quasianscombe_set_1(error_sd = 0))

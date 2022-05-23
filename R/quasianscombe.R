@@ -22,6 +22,8 @@
 #'
 #' plot(df)
 #'
+#' plot(df, add_lm = FALSE)
+#'
 #' plot(sim_quasianscombe_set_1(n = 1000))
 #'
 #' plot(sim_quasianscombe_set_1(error_sd = 0))
@@ -54,7 +56,7 @@ sim_quasianscombe_set_1 <- function(n = 100,
 
   df <- tibble::tibble(x, y)
 
-  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
+  class(df) <- c( "klassets_quasianscombe", class(df))
 
   df
 
@@ -179,7 +181,7 @@ sim_quasianscombe_set_2 <- function(df,
   df <- df |>
     select(x = .data$x, y = .data$y2)
 
-  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
+  class(df) <- c( "klassets_quasianscombe", class(df))
 
   df
 
@@ -277,7 +279,7 @@ sim_quasianscombe_set_3 <- function(df,
   df <- df |>
     select(x = .data$x, y = .data$y3)
 
-  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
+  class(df) <- c( "klassets_quasianscombe", class(df))
 
   df
 
@@ -295,7 +297,7 @@ sim_quasianscombe_set_3 <- function(df,
 #' - Then take a porportion of value and traslate to left keeppping the original
 #' mean of `x`.
 #' - Finally add some value to the associated `y` value and substract to the
-#' complement group to have the same regression model in term of coefficients.
+#' complement group to have the same regression model in terms of coefficients.
 #'
 #' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
 #' @param rescale_to Rescale the x value before create the second cluster.
@@ -393,7 +395,7 @@ sim_quasianscombe_set_4 <- function(df, rescale_to = c(.10, .20), prop = 0.15){
     select(x = .data$x4, y = .data$y4) |>
     arrange(.data$x)
 
-  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
+  class(df) <- c( "klassets_quasianscombe", class(df))
 
   df
 
@@ -488,7 +490,7 @@ sim_quasianscombe_set_5 <- function(df, fun = identity, residual_factor = 10){
   df <- df |>
     dplyr::select(x = .data$x, y = .data$y5)
 
-  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
+  class(df) <- c( "klassets_quasianscombe", class(df))
 
   df
 
@@ -581,7 +583,7 @@ sim_quasianscombe_set_6 <- function(df,
   df <- df |>
     select(x = .data$x, y = .data$y6)
 
-  class(df) <- c("klassets_xy", "klassets_quasianscombe", class(df))
+  class(df) <- c( "klassets_quasianscombe", class(df))
 
   df
 

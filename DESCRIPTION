@@ -13,16 +13,17 @@ URL: https://jkunst.com/klassets/, https://github.com/jbkunst/klassets
 BugReports: https://github.com/jbkunst/klassets/issues
 Imports: 
     dplyr,
+    forcats,
     ggplot2,
     MASS,
     purrr,
     rlang,
     scales,
     stringr,
-    tibble
+    tibble,
+    viridisLite
 Suggests: 
     broom,
-    forcats,
     gganimate,
     gifski,
     rmarkdown,

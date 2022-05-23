@@ -17,18 +17,11 @@ Posdef <- function (n, ev = runif(n, 0, 10)) {
 #' @param n An intenger
 #' @param groups An integer
 #' @param props A vector of probabilties with length `groups`.
-#' @param add_group_col A logical value.
 #' @examples
 #'
 #' set.seed(123456)
 #'
 #' df <- sim_clusters()
-#'
-#' plot(df)
-#'
-#' set.seed(123456)
-#'
-#' df <- sim_clusters(add_group_col = TRUE)
 #'
 #' plot(df)
 #'
@@ -40,15 +33,14 @@ Posdef <- function (n, ev = runif(n, 0, 10)) {
 #' @export
 sim_clusters <- function(n = 1000,
                          groups = 3,
-                         props = NULL,
-                         add_group_col = FALSE) {
+                         props = NULL) {
 
   stopifnot(
     as.integer(n) == n,
     as.integer(groups) == groups,
     is.integer(as.integer(groups)),
     groups > 1
-    )
+  )
 
   if(is.null(props)) {
 
@@ -79,74 +71,234 @@ sim_clusters <- function(n = 1000,
   # to get n
   ns[groups] <- ns[groups] + (sum(ns) - n)
 
-  dpars <- tibble(
+  dpars <- tibble::tibble(
     n = ns,
     mu = mus,
     Sigma = sigmas
   )
 
   df <- purrr::pmap(dpars, MASS::mvrnorm) |>
-    purrr::map(as_tibble, .name_repair = "minimal") |>
+    purrr::map(tibble::as_tibble, .name_repair = "minimal") |>
     purrr::map(purrr::set_names, c("x", "y"))
 
-  if(add_group_col){
+  # if(add_group_col){
 
-    df <- purrr::map2_df(
-      df,
-      seq_len_groups,
-      ~ mutate(.x, group = as.character(.y), .before = 1)
-      )
+  df <- purrr::map2_df(
+    df,
+    seq_len_groups,
+    ~ dplyr::mutate(.x, group = as.character(.y), .before = 1)
+  )
 
-  } else {
+  # } else {
+  #
+  #   df <- dplyr::bind_rows(df)
+  #
+  # }
 
-    df <- dplyr::bind_rows(df)
-
-  }
-
-  class(df) <- c("klassets_xy", "klassets_cluster", class(df))
+  class(df) <- c("klassets_cluster", class(df))
 
   df
 
 }
 
+#' Generate intermediate iterations when performing K-means
+#'
+#' @param df A object from `sim_clusters`.
+#' @param centers How many clusters
+#' @param tolerance A value to indicating early stop.
+#' @param max_iterations Max iterations to calculate.
+#' @param verbose A logical value, to show or not iterations messages.
+#' @examples
+#'
+#' set.seed(123456)
+#'
+#' df <- sim_clusters(n = 500, groups = 4)
+#'
+#' plot(df)
+#'
+#' set.seed(123)
+#'
+#' kmi <- kmeans_iterations(df, centers = 3)
+#'
+#' plot(kmi)
+#'
+#' @importFrom stats dist
+#' @export
+kmeans_iterations <- function(df,
+                              centers = 3,
+                              tolerance = 10e-6,
+                              max_iterations = 15,
+                              verbose = FALSE
+                              ){
+
+  stopifnot(inherits(df, "klassets_cluster"))
+
+  daux <- df |>
+    dplyr::mutate(id = dplyr::row_number(), .before = 1) |>
+    dplyr::mutate(cluster = NA_integer_)
+
+  dcenters <- daux |>
+    dplyr::sample_n(3) |>
+    dplyr::select(cx = .data$x, cy = .data$y) |>
+    dplyr::arrange(.data$cx, .data$cy) |>
+    dplyr::mutate(cluster = dplyr::row_number(), .before = 1)
+
+  center_hist <- list(dcenters)
+  data_hist   <- list(daux)
+
+  iteration <- 1
+
+  while(TRUE){
+
+    if(verbose) message(iteration)
+
+    daux <- tidyr::crossing(
+      daux |> dplyr::select(.data$id, .data$group, .data$x, .data$y),
+      dcenters
+    ) |>
+      dplyr::mutate(dist = (.data$x - .data$cx)^2 + (.data$y - .data$cy)^2) |>
+      dplyr::group_by(.data$id) |>
+      # new cluster
+      dplyr::filter(dist == min(.data$dist)) |>
+      dplyr::ungroup()
+
+    # daux
+    # daux |> count(group, cluster)
+
+    dcenters <- daux |>
+      dplyr::group_by(.data$cluster) |>
+      # new centers
+      dplyr::summarise(cx = mean(.data$x), cy = mean(.data$y))
+
+    # dcenters
+
+    daux <- daux |>
+      select(.data$id, .data$group, .data$x, .data$y, .data$cluster)
+
+    center_hist <- append(center_hist, list(dcenters))
+    data_hist   <- append(data_hist, list(daux))
+
+    c1 <- dplyr::last(center_hist) |>
+      dplyr::select(.data$cx, .data$cy) |>
+      as.matrix()
+
+    c2 <- dplyr::nth(center_hist, -2) |>
+      dplyr::select(.data$cx, .data$cy) |>
+      as.matrix()
+
+    if(mean((c1 - c2)^2) < tolerance) break
+
+    iteration <- iteration + 1
+
+    if(iteration == max_iterations) break
+
+  }
+
+  length(center_hist)
+  length(data_hist)
+
+  seq_along_i <- seq_len(length(center_hist))
+
+  center_hist <- map2_df(center_hist, seq_along_i, ~ mutate(.x, iteration = .y, .before = 1))
+
+  assigned_cluster <- pull(center_hist, .data$cluster)
+  assigned_cluster <- LETTERS[assigned_cluster]
+
+  center_hist <- center_hist |>
+    dplyr::mutate(cluster = forcats::fct_inorder(assigned_cluster))
+
+  data_hist <- map2_df(data_hist, seq_along_i, ~ mutate(.x, iteration = .y, .before = 1))
+
+  assigned_cluster <- pull(data_hist, .data$cluster)
+  assigned_cluster <- LETTERS[assigned_cluster]
+
+  data_hist <- data_hist |>
+    dplyr::mutate(cluster = forcats::fct_inorder(assigned_cluster))
+
+  # data_hist |> dplyr::count(cluster)
+
+  kmi <- list(data_hist = data_hist, center_hist = center_hist)
+
+  class(kmi) <- c("klassets_kmiterations", class(kmi))
+
+  kmi
+
+}
+
+
 #' Apply K-means to `klassets_cluster` object
 #'
 #' @param df A `klassets_cluster` object.
-#' @param k A numeric value to pass to `stats::kmeans` method.
-#' @param ... Extra parameter for `stats::kmeans` function.
-#'
+#' @param centers A numeric value to pass to `kmeans_iterations` function
+#'   The famous k parameter.
+#' @param ... Extra parameters for `kmeans_iterations` function.
 #'
 #' @examples
 #'
 #' set.seed(123456)
 #'
-#' df <- sim_clusters()
+#' df <- sim_clusters(groups = 3)
 #'
-#' plot(apply_kmeans_clust(df, k = 4))
+#' plot(df)
 #'
-#' df2 <- sim_clusters(groups = 2, add_group_col = TRUE)
-#'
-#' plot(apply_kmeans_clust(df2, k = 2))
+#' plot(apply_kmeans_clust(df, centers = 3))
 #'
 #' @importFrom stats kmeans
 #'
 #' @export
-apply_kmeans_clust <- function(df, k = 3, ...){
+apply_kmeans_clust <- function(df, centers = 3, ...){
+
+  stopifnot(inherits(df, "klassets_cluster"))
+
+  kmi <- kmeans_iterations(df, centers = centers, ...)
+
+  cls <- kmi$data_hist |>
+    dplyr::filter(.data$iteration == max(.data$iteration)) |>
+    pull(.data$cluster)
+
+  df <- df |>
+    mutate(cluster = cls)
+
+  df
+
+}
+
+#' Apply K-means to `klassets_cluster` object using `stats::kmeans`
+#'
+#' @param df A `klassets_cluster` object.
+#' @param centers A numeric value to pass to `stats::kmeans` method.
+#'   The famous k parameter.
+#' @param ... Extra parameter for `stats::kmeans` function.
+#'
+#' @examples
+#'
+#' set.seed(123456)
+#'
+#' df <- sim_clusters(groups = 3)
+#'
+#' plot(df)
+#'
+#' plot(apply_statskmeans_clust(df, centers = 3))
+#'
+#' @importFrom stats kmeans
+#'
+#' @export
+apply_statskmeans_clust <- function(df, centers = 3, ...){
 
   stopifnot(inherits(df, "klassets_cluster"))
 
   cl <- kmeans(
     dplyr::select(df, .data$x, .data$y),
-    centers = k,
+    centers = centers,
     ...
-    )
+  )
 
-  assignes_cluster <- cl$cluster
+  assigned_cluster <- cl$cluster
 
-  assignes_cluster <- LETTERS[assignes_cluster]
+  assigned_cluster <- LETTERS[assigned_cluster]
 
   df <- df |>
-    mutate(cluster = assignes_cluster)
+    mutate(cluster = assigned_cluster)
 
   df
 

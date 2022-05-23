@@ -4,14 +4,15 @@
 \alias{apply_kmeans_clust}
 \title{Apply K-means to \code{klassets_cluster} object}
 \usage{
-apply_kmeans_clust(df, k = 3, ...)
+apply_kmeans_clust(df, centers = 3, ...)
 }
 \arguments{
 \item{df}{A \code{klassets_cluster} object.}
 
-\item{k}{A numeric value to pass to \code{stats::kmeans} method.}
+\item{centers}{A numeric value to pass to \code{kmeans_iterations} function
+The famous k parameter.}
 
-\item{...}{Extra parameter for \code{stats::kmeans} function.}
+\item{...}{Extra parameters for \code{kmeans_iterations} function.}
 }
 \description{
 Apply K-means to \code{klassets_cluster} object
@@ -20,12 +21,10 @@ Apply K-means to \code{klassets_cluster} object
 
 set.seed(123456)
 
-df <- sim_clusters()
+df <- sim_clusters(groups = 3)
 
-plot(apply_kmeans_clust(df, k = 4))
+plot(df)
 
-df2 <- sim_clusters(groups = 2, add_group_col = TRUE)
-
-plot(apply_kmeans_clust(df2, k = 2))
+plot(apply_kmeans_clust(df, centers = 3))
 
 }
