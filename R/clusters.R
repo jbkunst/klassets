@@ -110,15 +110,15 @@ sim_clusters <- function(n = 1000,
 #' @param verbose A logical value, to show or not iterations messages.
 #' @examples
 #'
-#' set.seed(123456)
+#' set.seed(12)
 #'
-#' df <- sim_clusters(n = 500, groups = 4)
+#' df <- sim_clusters(n = 200, groups = 3)
 #'
 #' plot(df)
 #'
-#' set.seed(123)
+#' set.seed(124)
 #'
-#' kmi <- kmeans_iterations(df, centers = 3)
+#' kmi <- kmeans_iterations(df, centers = 4, max_iterations = 6)
 #'
 #' plot(kmi)
 #'
@@ -138,7 +138,7 @@ kmeans_iterations <- function(df,
     dplyr::mutate(cluster = NA_integer_)
 
   dcenters <- daux |>
-    dplyr::sample_n(3) |>
+    dplyr::sample_n(centers) |>
     dplyr::select(cx = .data$x, cy = .data$y) |>
     dplyr::arrange(.data$cx, .data$cy) |>
     dplyr::mutate(cluster = dplyr::row_number(), .before = 1)
@@ -235,15 +235,17 @@ kmeans_iterations <- function(df,
 #'
 #' @examples
 #'
-#' set.seed(123456)
+#' set.seed(12)
 #'
-#' df <- sim_clusters(groups = 3)
+#' df <- sim_clusters(n = 200, groups = 3)
 #'
 #' plot(df)
 #'
-#' plot(apply_kmeans_clust(df, centers = 3))
+#' set.seed(124)
 #'
-#' @importFrom stats kmeans
+#' dfc <- apply_kmeans_clust(df, centers = 4, max_iterations = 6)
+#'
+#' plot(dfc)
 #'
 #' @export
 apply_kmeans_clust <- function(df, centers = 3, ...){
@@ -272,16 +274,19 @@ apply_kmeans_clust <- function(df, centers = 3, ...){
 #'
 #' @examples
 #'
-#' set.seed(123456)
+#' set.seed(12)
 #'
-#' df <- sim_clusters(groups = 3)
+#' df <- sim_clusters(n = 200, groups = 3)
 #'
 #' plot(df)
 #'
-#' plot(apply_statskmeans_clust(df, centers = 3))
+#' set.seed(124)
+#'
+#' dfc <- apply_statskmeans_clust(df, centers = 4)
+#'
+#' plot(dfc)
 #'
 #' @importFrom stats kmeans
-#'
 #' @export
 apply_statskmeans_clust <- function(df, centers = 3, ...){
 

@@ -28,15 +28,15 @@ Generate intermediate iterations when performing K-means
 }
 \examples{
 
-set.seed(123456)
+set.seed(12)
 
-df <- sim_clusters(n = 500, groups = 4)
+df <- sim_clusters(n = 200, groups = 3)
 
 plot(df)
 
-set.seed(123)
+set.seed(124)
 
-kmi <- kmeans_iterations(df, centers = 3)
+kmi <- kmeans_iterations(df, centers = 4, max_iterations = 6)
 
 plot(kmi)
 

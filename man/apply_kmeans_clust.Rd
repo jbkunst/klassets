@@ -19,12 +19,16 @@ Apply K-means to \code{klassets_cluster} object
 }
 \examples{
 
-set.seed(123456)
+set.seed(12)
 
-df <- sim_clusters(groups = 3)
+df <- sim_clusters(n = 200, groups = 3)
 
 plot(df)
 
-plot(apply_kmeans_clust(df, centers = 3))
+set.seed(124)
+
+dfc <- apply_kmeans_clust(df, centers = 4, max_iterations = 6)
+
+plot(dfc)
 
 }
