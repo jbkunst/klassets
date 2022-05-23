@@ -529,7 +529,6 @@ sim_quasianscombe_set_6 <- function(df,
                                     b1_factor = -1,
                                     residual_factor = 0.25){
 
-
   # pars
   modlm <- lm(y ~ x, data = df)
   b <- coefficients(modlm)
@@ -537,7 +536,6 @@ sim_quasianscombe_set_6 <- function(df,
   n <- length(e)
 
   group <- sort(rep(1:groups, length.out = n))
-  group
 
   df <- df |>
     mutate(y6 = b[1] + b[2] * b1_factor * .data$x + e*residual_factor)
@@ -545,13 +543,12 @@ sim_quasianscombe_set_6 <- function(df,
   # plot(df |> dplyr::select(x, y))
   # plot(df |> dplyr::select(x, y = y6))
 
-
   # kind of _rotate_ in groups
   f_to_optim <- function(value = 1.2){
 
     y6_new <- pull(df, .data$y6)
 
-    values <- sort(rep(-1:1, length.out = n)) * value
+    values <- sort(rep(seq(-1, 1, length.out = groups), length.out = n)) * value
 
     # table(group, values)
 
@@ -565,7 +562,7 @@ sim_quasianscombe_set_6 <- function(df,
 
   value <- suppressWarnings(optim(0, f_to_optim)$par)
 
-  values <- sort(rep(-1:1, length.out = n)) * value
+  values <- values <- sort(rep(seq(-1, 1, length.out = groups), length.out = n)) * value
 
   df <- df |>
     mutate(y6 = .data$y6 + values)
@@ -582,6 +579,8 @@ sim_quasianscombe_set_6 <- function(df,
 
   df <- df |>
     select(x = .data$x, y = .data$y6)
+
+  # plot(df)
 
   class(df) <- c( "klassets_quasianscombe", class(df))
 
