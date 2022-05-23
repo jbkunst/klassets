@@ -72,22 +72,37 @@
 <div class="page-header"><h1 id="klassets">klassets<a class="anchor" aria-label="anchor" href="#klassets"></a>
 </h1></div>
 <!-- badges: start -->
-<p>The goal of klasset is to …</p>
+<p>The <a href="https://jkunst.com/klassets/" class="external-link">klassets</a> package is a collection of functions to simulate data sets to:</p>
+<ul>
+<li>Teach how some Statistics Models and Machine Learning algorithms works.</li>
+<li>Illustrate certain some particular events such as heteroskedasticity or the Simpson’s paradox</li>
+</ul>
+<p><img src="reference/figures/animation_quasi_anscombre.gif" width="100%"></p>
+<p>For example:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jkunst.com/klassets/" class="external-link">klassets</a></span><span class="op">)</span>
+
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_quasianscombe_set_1.html">sim_quasianscombe_set_1</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">500</span>, beta0 <span class="op">=</span> <span class="fl">3</span>, beta1 <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Very similar to the given parameters (3 and 0.5)"</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span>
+
+<span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_quasianscombe_set_2.html">sim_quasianscombe_set_2</a></span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="va">sin</span><span class="op">)</span>
+<span class="va">df6</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_quasianscombe_set_6.html">sim_quasianscombe_set_6</a></span><span class="op">(</span><span class="va">df</span>, groups <span class="op">=</span> <span class="fl">2</span>, b1_factor <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df6</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
+<p>More details in the articles section!</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of klasset from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jbkunst/klasset"</span><span class="op">)</span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
-</h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">klasset</span><span class="op">)</span>
-<span class="co">## basic example code</span></code></pre></div>
+<p>You can install the development version of klassets from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jbkunst/klassets"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -124,7 +139,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/jbkunst/klasset/actions" class="external-link"><img src="https://github.com/jbkunst/klasset/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/jbkunst/klassets/actions" class="external-link"><img src="https://github.com/jbkunst/klassets/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
