@@ -132,7 +132,7 @@ stars.pval <- function(p.value) {
 ```
 
 
-## Visual representation of the data sets
+### Visual representation of the data sets
 
 ```{r, fig.height=9}
 pxy <- ggplot(dfs, aes(x, y)) +
@@ -143,7 +143,7 @@ pxy <- ggplot(dfs, aes(x, y)) +
 pxy
 ```
 
-## Checking Coefficients and its significance
+### Checking Coefficients and its significance
 
 ```{r}
 df_mods <- dfs |> 
