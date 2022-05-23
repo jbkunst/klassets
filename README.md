@@ -23,6 +23,8 @@ For example:
 ``` r
 library(klassets)
 
+set.seed(123)
+
 df <- sim_quasianscombe_set_1(n = 500, beta0 = 3, beta1 = 0.5)
 
 plot(df) +
