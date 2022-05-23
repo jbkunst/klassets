@@ -47,6 +47,10 @@ plot(df2) + plot(df6)
 More details in the articles section or
 `vignette("Quasi-Anscombe-data-sets")`.
 
+Another example of what can be donde with `{klassets}`.
+
+<img src="man/figures/animation_kmeans_iterations.gif" width="100%" />
+
 ## Installation
 
 You can install the development version of klassets from
