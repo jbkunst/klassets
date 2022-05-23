@@ -24,17 +24,16 @@ if(require(showtext)){
 }
 ```
 
-```{r setup}
-library(klassets)
-library(ggplot2)
-```
 
 ## The sets
 
 ### Set 1: The original
 
 ```{r}
-# df <- sim_quasianscombe_set_1()
+library(klassets)
+library(ggplot2)
+
+set.seed(123)
 
 df <- sim_quasianscombe_set_1(n = 100, x_sd = 5)
 

@@ -25,6 +25,7 @@ pkgdown::build_home(preview = TRUE)
 pkgdown::build_reference_index()
 pkgdown::preview_site()
 
+pkgdown::build_articles()
 pkgdown::build_reference()
 
 pkgdown::build_site(preview = TRUE)

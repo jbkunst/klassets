@@ -44,7 +44,8 @@ plot(df2) + plot(df6)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
-More details in the articles section!
+More details in the articles section or
+`vignette("Quasi-Anscombe-data-sets")`.
 
 ## Installation
 

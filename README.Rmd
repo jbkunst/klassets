@@ -61,7 +61,10 @@ df6 <- sim_quasianscombe_set_6(df, groups = 2, b1_factor = -1)
 plot(df2) + plot(df6)
 ```
 
-More details in the articles section!
+
+More details in the articles section or `vignette("Quasi-Anscombe-data-sets")`.
+
+
 
 ## Installation
 
