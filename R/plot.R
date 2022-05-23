@@ -39,24 +39,41 @@ plot.klassets_cluster <- function(x, ...){
 
   pxy <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
-  if("group" %in% names(x)) {
+  if(all(c("group", "cluster") %in% names(x))){
 
     pxy <- pxy +
       ggplot2::geom_point(
-        ggplot2::aes(shape = as.factor(.data$group)),
-        # shape = 21,
+        ggplot2::aes(
+          shape = (.data$group),
+          color = (.data$cluster)
+          ),
+        ...
+        )
+
+  } else if ("group" %in% names(x)) {
+
+    pxy <- pxy +
+      ggplot2::geom_point(
+        ggplot2::aes(shape = (.data$group)),
         color = "gray60",
-        fill = "gray80"
+        fill = "gray80",
+        ...
+
       )
+
+  } else if ("cluster" %in% names(x)) {
+
+    pxy <- pxy +
+      ggplot2::geom_point(
+        ggplot2::aes(color = (.data$cluster)),
+        shape = 21,
+        ...
+        )
 
   } else {
 
     pxy <- pxy +
-      ggplot2::geom_point(
-        shape = 21,
-        color = "gray60",
-        fill = "gray80"
-        )
+      ggplot2::geom_point(shape = 21, color = "gray60", fill = "gray80", ...)
 
   }
 

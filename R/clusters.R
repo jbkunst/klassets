@@ -91,8 +91,11 @@ sim_clusters <- function(n = 1000,
 
   if(add_group_col){
 
-    df <- df |>
-      purrr::map2_df(seq_len_groups, ~ mutate(.x, group = .y, .before = 1))
+    df <- purrr::map2_df(
+      df,
+      seq_len_groups,
+      ~ mutate(.x, group = as.character(.y), .before = 1)
+      )
 
   } else {
 
@@ -106,21 +109,50 @@ sim_clusters <- function(n = 1000,
 
 }
 
-apply_kmeans <- function(df, k = 3){
+#' Apply K-means to `klassets_cluster` object
+#'
+#' @param df A `klassets_cluster` object.
+#' @param k A numeric value to pass to `stats::kmeans` method.
+#' @param ... Extra parameter for `stats::kmeans` function.
+#'
+#'
+#' @examples
+#'
+#' set.seed(123456)
+#'
+#' df <- sim_clusters()
+#'
+#' plot(apply_kmeans_clust(df, k = 4))
+#'
+#' df2 <- sim_clusters(groups = 2, add_group_col = TRUE)
+#'
+#' plot(apply_kmeans_clust(df2, k = 2))
+#'
+#' @importFrom stats kmeans
+#'
+#' @export
+apply_kmeans_clust <- function(df, k = 3, ...){
 
   stopifnot(inherits(df, "klassets_cluster"))
 
   cl <- kmeans(
-    df |> dplyr::select(x, y),
-    centers = k
+    dplyr::select(df, .data$x, .data$y),
+    centers = k,
+    ...
     )
+
+  assignes_cluster <- cl$cluster
+
+  assignes_cluster <- LETTERS[assignes_cluster]
+
+  df <- df |>
+    mutate(cluster = assignes_cluster)
 
   df
 
-
 }
 
-apply_hclust <- function(df){
+apply_hclust_clust <- function(df){
 
   stopifnot(inherits(df, "klassets_cluster"))
 

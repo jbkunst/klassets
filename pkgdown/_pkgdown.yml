@@ -13,3 +13,8 @@ reference:
   desc: Simulation of data set with same regression model.
 - contents:
   - starts_with("sim_quasi")
+- title: Clustering helpers
+  desc: Functions to simulate data for test ans explaing clustering methods and
+    functions to apply some basics algorimths.
+- contents:
+  - contains("clust")
