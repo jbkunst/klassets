@@ -2,7 +2,7 @@
 % Please edit documentation in R/quasianscombe.R
 \name{sim_quasianscombe_set_2}
 \alias{sim_quasianscombe_set_2}
-\title{Generate \emph{quasi} Anscombe data sets Type 2}
+\title{Generate \emph{quasi} Anscombe data sets Type 2: No linear relationship}
 \usage{
 sim_quasianscombe_set_2(
   df,

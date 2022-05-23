@@ -7,3 +7,9 @@ template:
     base_font: {google: "IBM Plex Sans"}
     heading_font: {google: "Josefin Sans"}
     code_font: {google: "Fira Mono"}
+
+reference:
+- title: Simulation of Quasi-Anscombe data sets.
+  desc: Simulation of data set with same regression model.
+- contents:
+  - starts_with("sim_quasi")

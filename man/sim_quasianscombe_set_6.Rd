@@ -2,7 +2,7 @@
 % Please edit documentation in R/quasianscombe.R
 \name{sim_quasianscombe_set_6}
 \alias{sim_quasianscombe_set_6}
-\title{Generate \emph{quasi} Anscombe data sets Type 6}
+\title{Generate \emph{quasi} Anscombe data sets Type 6: Simpson's Paradox}
 \usage{
 sim_quasianscombe_set_6(df, groups = 3, b1_factor = -1, residual_factor = 0.25)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/quasianscombe.R
 \name{sim_quasianscombe_set_5}
 \alias{sim_quasianscombe_set_5}
-\title{Generate \emph{quasi} Anscombe data sets Type 5}
+\title{Generate \emph{quasi} Anscombe data sets Type 5: Heteroskedasticity}
 \usage{
 sim_quasianscombe_set_5(df, fun = identity, residual_factor = 10)
 }

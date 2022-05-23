@@ -2,7 +2,7 @@
 % Please edit documentation in R/quasianscombe.R
 \name{sim_quasianscombe_set_3}
 \alias{sim_quasianscombe_set_3}
-\title{Generate \emph{quasi} Anscombe data sets Type 3}
+\title{Generate \emph{quasi} Anscombe data sets Type 3: Extreme values (a.k.a Outliers)}
 \usage{
 sim_quasianscombe_set_3(
   df,

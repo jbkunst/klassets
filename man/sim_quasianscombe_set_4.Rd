@@ -2,7 +2,7 @@
 % Please edit documentation in R/quasianscombe.R
 \name{sim_quasianscombe_set_4}
 \alias{sim_quasianscombe_set_4}
-\title{Generate \emph{quasi} Anscombe data sets Type 4}
+\title{Generate \emph{quasi} Anscombe data sets Type 4: 2 Clusters}
 \usage{
 sim_quasianscombe_set_4(df, rescale_to = c(0.1, 0.2), prop = 0.15)
 }

@@ -56,7 +56,7 @@ funktion <- function(x){ 2 * sin(x*diff(range(x))) }
 df2_2 <- sim_quasianscombe_set_2(df, fun = funktion)
 ```
 
-### Set 3: Outliers
+### Set 3: Extreme values
 
 ```{r}
 df3_1 <- sim_quasianscombe_set_3(df, prop = 0.1)
@@ -65,7 +65,7 @@ df3_2 <- sim_quasianscombe_set_3(df, prop = 0.1, residual_factor = 0)
 ```
 
 
-### Set 4: Cluster
+### Set 4: Clusters
 
 ```{r}
 df4_1 <- sim_quasianscombe_set_4(df, prop = 0.25)

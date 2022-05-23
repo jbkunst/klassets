@@ -106,9 +106,17 @@ sim_clusters <- function(n = 1000,
 
 }
 
-apply_kmeans <- function(df){
+apply_kmeans <- function(df, k = 3){
 
   stopifnot(inherits(df, "klassets_cluster"))
+
+  cl <- kmeans(
+    df |> dplyr::select(x, y),
+    centers = k
+    )
+
+  df
+
 
 }
 

@@ -62,7 +62,7 @@ sim_quasianscombe_set_1 <- function(n = 100,
 
 
 
-#' Generate _quasi_ Anscombe data sets Type 2
+#' Generate _quasi_ Anscombe data sets Type 2: No linear relationship
 #'
 #' Data sets _Type 2_ shows how a no linear realtionship between `x` and `y` can
 #' lead in the same regression model (in terms of parameter values) of
@@ -186,7 +186,7 @@ sim_quasianscombe_set_2 <- function(df,
 }
 
 
-#' Generate _quasi_ Anscombe data sets Type 3
+#' Generate _quasi_ Anscombe data sets Type 3: Extreme values (a.k.a Outliers)
 #'
 #' Data sets _Type 3_ get some outliers but conserving the $x$ mean and
 #' the same coefficients -but different significance- of the adjusted linear
@@ -284,7 +284,7 @@ sim_quasianscombe_set_3 <- function(df,
 }
 
 
-#' Generate _quasi_ Anscombe data sets Type 4
+#' Generate _quasi_ Anscombe data sets Type 4: 2 Clusters
 #'
 #' Data sets _Type 4_ recreate two cluster keeping the coefficient of the original
 #' regression model.
@@ -399,7 +399,7 @@ sim_quasianscombe_set_4 <- function(df, rescale_to = c(.10, .20), prop = 0.15){
 
 }
 
-#' Generate _quasi_ Anscombe data sets Type 5
+#' Generate _quasi_ Anscombe data sets Type 5: Heteroskedasticity
 #'
 #' Data sets _Type 5_ recreates the phenomenon of heteroskedasticity in
 #' the residuals.
@@ -495,7 +495,7 @@ sim_quasianscombe_set_5 <- function(df, fun = identity, residual_factor = 10){
 }
 
 
-#' Generate _quasi_ Anscombe data sets Type 6
+#' Generate _quasi_ Anscombe data sets Type 6: Simpson's Paradox
 #'
 #' Data sets _Type 6_ recreates the phenomenon of Simpon's paradox.
 #'

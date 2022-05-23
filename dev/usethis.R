@@ -17,6 +17,12 @@ usethis::edit_git_ignore()
 
 pkgdown::init_site()
 pkgdown::build_home(preview = TRUE)
+
+pkgdown::build_reference_index()
+pkgdown::preview_site()
+
+pkgdown::build_reference()
+
 pkgdown::build_site(preview = TRUE)
 
 
