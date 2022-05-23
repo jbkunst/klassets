@@ -54,7 +54,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sim_clusters</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, groups <span class="op">=</span> <span class="fl">3</span>, props <span class="op">=</span> <span class="cn">NULL</span>, add_group_col <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sim_clusters</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, groups <span class="op">=</span> <span class="fl">3</span>, props <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -65,8 +65,6 @@
 <dd><p>An integer</p></dd>
 <dt>props</dt>
 <dd><p>A vector of probabilties with length <code>groups</code>.</p></dd>
-<dt>add_group_col</dt>
-<dd><p>A logical value.</p></dd>
 </dl></div>
 
     <div class="section level2">
@@ -78,13 +76,6 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="sim_clusters-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123456</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">sim_clusters</span><span class="op">(</span>add_group_col <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="sim_clusters-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
