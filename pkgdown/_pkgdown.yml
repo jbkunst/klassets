@@ -1,3 +1,9 @@
+url: https://jkunst.com/klassets/
+
+authors:
+  Joshua Kunst:
+    href: https://jkunst.com
+
 template:
   bootstrap: 5
   bslib:
@@ -7,6 +13,8 @@ template:
     base_font: {google: "IBM Plex Sans"}
     heading_font: {google: "Josefin Sans"}
     code_font: {google: "Fira Mono"}
+
+
 
 reference:
 - title: Simulation of Quasi-Anscombe data sets.
