@@ -3,7 +3,7 @@ library(klassets)
 library(ggplot2)
 library(gganimate)
 
-theme_set(theme_minimal(base_size = 12))
+theme_set(theme_minimal(base_size = 10))
 
 if (require(showtext)) {
   sysfonts::font_add_google("IBM Plex Sans", "plex")
@@ -31,9 +31,10 @@ gga <- p +
   facet_null() +
   # then animate
   labs(
-    title = "Iteration {closest_state}",
-    caption = "Frame {frame} of {nframes}"
+    title = "Iteration {closest_state}"
+    # caption = "Frame {frame} of {nframes}"
   ) +
+  theme(legend.position = "bottom", legend.key.width = unit(1,"cm")) +
   ease_aes("cubic-in-out") +
   # shadow_wake(wake_length = 0.2, alpha = 0.1) +
   transition_states(iteration, transition_length = 2, state_length = 1)

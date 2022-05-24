@@ -122,9 +122,9 @@ plot.klassets_kmiterations <- function(x, ...){
       alpha = 1,
       shape = 21,
     ) +
-    ggplot2::labs(shape = "(Original) Group") +
-    ggplot2::scale_color_manual(values = colors, name = "(Assigned) Cluster", na.value = "gray70") +
-    ggplot2::scale_fill_manual(values = colors, name = "(Assigned) Cluster", na.value = "gray70") +
+    ggplot2::labs(shape = "Original\nGroup") +
+    ggplot2::scale_color_manual(values = colors, name = "Assigned\nCluster", na.value = "gray70") +
+    ggplot2::scale_fill_manual(values = colors, name = "Assigned\nCluster", na.value = "gray70") +
     ggplot2::facet_wrap(dplyr::vars(.data$iteration)) +
     labs()
 
