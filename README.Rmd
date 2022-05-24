@@ -83,7 +83,7 @@ You can install the development version of klassets from [GitHub](https://github
 remotes::install_github("jbkunst/klassets")
 ```
 
-## Why _Klassets_?
+## Why the name Klassets?
 
 Just a weird merge for Class/Klass and sets.
 

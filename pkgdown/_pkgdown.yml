@@ -4,15 +4,27 @@ authors:
   Joshua Kunst:
     href: https://jkunst.com
 
+
+# https://github.com/rstudio/bslib/blob/a4946a4/inst/lib/bs4/scss/_variables.scss
 template:
   bootstrap: 5
   bslib:
     primary: "#0054AD"
     border-radius: 0.5rem
     btn-border-radius: 0.25rem
-    base_font: {google: "IBM Plex Sans"}
+
+    base_font:    {google: "IBM Plex Sans"}
+    code_font:    {google: "Fira Mono"}
     heading_font: {google: "Josefin Sans"}
-    code_font: {google: "Fira Mono"}
+
+#     heading_font:
+#       face:
+#         family: "Josefin Sans"
+#         weight: "400"
+#         src: "url(https://fonts.gstatic.com/s/josefinsans/v24/Qw3aZQNVED7rKGKxtqIqX5EUDXx4.woff2) format('woff2')"
+
+    headings-line-height: 5rem
+    headings-margin-bottom: -1rem
 
 reference:
 - title: Simulation of Quasi-Anscombe data sets.

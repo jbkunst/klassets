@@ -67,7 +67,7 @@ You can install the development version of klassets from
 remotes::install_github("jbkunst/klassets")
 ```
 
-## Why *Klassets*?
+## Why the name Klassets?
 
 Just a weird merge for Class/Klass and sets.
 
