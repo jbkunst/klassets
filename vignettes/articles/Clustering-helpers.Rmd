@@ -37,7 +37,7 @@ library(klassets)
 
 set.seed(123)
 
-df <- sim_group_for_clusters(n = 500, groups = 3)
+df <- sim_groups_for_clusters(n = 500, groups = 3)
 
 plot(df)
 ```
