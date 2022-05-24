@@ -43,7 +43,9 @@ plot(df)
 ```
 
 
-## Apply some cluster algorithm
+## Apply cluster algorithms
+
+### `stats::kmeans`
 
 You can apply the `stats::kmeans` using `apply_statskmeans_clust`.
 
@@ -52,6 +54,8 @@ dfc1 <- apply_statskmeans_clust(df, centers = 2)
 
 plot(dfc1)
 ```
+
+### K-means: Basic {klassets} implementation
 
 Or use a basic kmeans impementation with:
 
@@ -74,10 +78,8 @@ kmi <- kmeans_iterations(df, centers = 2, max_iteration = 6)
 plot(kmi)
 ```
 
-## `gganimate` package.
-
-The object result from `kmeans_iterations` have the classification in every step
-and the center positions:
+Now we can use `gganimate` package using object result from `kmeans_iterations` 
+due have the classification for every point in every step:
 
 ```{r}
 kmi
@@ -86,7 +88,8 @@ kmi
 So you can take the output of this function data and use `gganimate`.
 
 ```{r, echo=FALSE}
-knitr::include_graphics(here::here("man/figures/animation_kmeans_iterations.gif"))
+try(knitr::include_graphics(here::here("man/figures/animation_kmeans_iterations.gif")))
+try(knitr::include_graphics(here::here("reference/figures/animation_kmeans_iterations.gif")), silent = TRUE)
 ```
 
 The code used in that animation can be found in the package using:
