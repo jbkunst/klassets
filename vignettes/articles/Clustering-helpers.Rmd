@@ -1,5 +1,5 @@
 ---
-title: "Clustering-helpers"
+title: "Clustering helpers"
 editor_options: 
   chunk_output_type: console
 ---
