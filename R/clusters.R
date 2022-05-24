@@ -217,7 +217,7 @@ kmeans_iterations <- function(df,
 
   # data_hist |> dplyr::count(cluster)
 
-  kmi <- list(data_hist = data_hist, center_hist = center_hist)
+  kmi <- list(points = data_hist, centers = center_hist)
 
   class(kmi) <- c("klassets_kmiterations", class(kmi))
 
@@ -254,7 +254,7 @@ apply_kmeans_clust <- function(df, centers = 3, ...){
 
   kmi <- kmeans_iterations(df, centers = centers, ...)
 
-  cls <- kmi$data_hist |>
+  cls <- kmi$points |>
     dplyr::filter(.data$iteration == max(.data$iteration)) |>
     pull(.data$cluster)
 

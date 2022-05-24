@@ -89,15 +89,15 @@ plot.klassets_cluster <- function(x, ...){
 #' @export
 plot.klassets_kmiterations <- function(x, ...){
 
-  data_hist <- x$data_hist
+  dpoints <- x$points
 
-  center_hist <- x$center_hist
+  dcenters <- x$centers
 
-  k <- center_hist |>
+  k <- dcenters |>
     dplyr::count(.data$cluster) |>
     nrow()
 
-  # ggplot(center_hist, aes(cx, cy)) +
+  # ggplot(dcenters, aes(cx, cy)) +
   #   geom_point() +
   #   geom_path(aes(group = cluster))
 
@@ -110,13 +110,13 @@ plot.klassets_kmiterations <- function(x, ...){
 
   p <- ggplot2::ggplot() +
     ggplot2::geom_point(
-      data = data_hist,
+      data = dpoints,
       ggplot2::aes(.data$x, .data$y, group = .data$id, color = .data$cluster, shape = .data$group),
       size = 3,
       alpha = 0.5
     ) +
     ggplot2::geom_point(
-      data = center_hist,
+      data = dcenters,
       ggplot2::aes(.data$cx, .data$cy, group = .data$cluster, fill = .data$cluster),
       size = 6,
       alpha = 1,
