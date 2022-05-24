@@ -14,7 +14,7 @@ if (require(showtext)) {
 # data --------------------------------------------------------------------
 set.seed(124)
 
-df <- sim_clusters(n = 2000, groups = 6)
+df <- sim_groups_for_clusters(n = 2000, groups = 6)
 
 plot(df)
 
