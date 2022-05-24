@@ -26,6 +26,7 @@ Suggests:
     broom,
     gganimate,
     gifski,
+    here,
     rmarkdown,
     showtext,
     tidyr,
