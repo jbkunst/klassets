@@ -85,17 +85,7 @@ due have the classification for every point in every step:
 kmi
 ```
 
-So you can take the output of this function data and use `gganimate`.
-
-```{r, echo=FALSE}
-try(knitr::include_graphics(here::here("man/figures/animation_kmeans_iterations.gif")))
-```
-
-```{r, echo=FALSE}
-try(knitr::include_graphics("/reference/figures/animation_kmeans_iterations.gif"), silent = TRUE)
-```
-
-The code used in that animation can be found in the package using:
+So you can take the output of this function data and use `gganimate` to make the animation using in the `klassets` home page.  The code used in that animation can be found in the package using:
 
 ```{r}
 system.file("animation_kmeans_iterations.R", package = "klassets")
