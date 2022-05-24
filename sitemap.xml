@@ -10,6 +10,9 @@
     <loc>https://jkunst.com/klassets/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://jkunst.com/klassets/articles/Clustering-helpers.html</loc>
+  </url>
+  <url>
     <loc>https://jkunst.com/klassets/articles/Quasi-Anscombe-data-sets.html</loc>
   </url>
   <url>
@@ -34,7 +37,7 @@
     <loc>https://jkunst.com/klassets/reference/kmeans_iterations.html</loc>
   </url>
   <url>
-    <loc>https://jkunst.com/klassets/reference/sim_clusters.html</loc>
+    <loc>https://jkunst.com/klassets/reference/sim_group_for_clusters.html</loc>
   </url>
   <url>
     <loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_1.html</loc>
