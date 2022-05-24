@@ -61,13 +61,18 @@ df6 <- sim_quasianscombe_set_6(df, groups = 2, b1_factor = -1)
 plot(df2) + plot(df6)
 ```
 
-More details in the articles section or `vignette("Quasi-Anscombe-data-sets")`.
-
 Another example of what can be donde with `{klassets}`.
 
 ```{r, echo=FALSE}
 knitr::include_graphics("man/figures/animation_kmeans_iterations.gif")
 ```
+
+## Where to start
+
+You can check:
+
+- `vignette("Quasi-Anscombe-data-sets")` to know more about `sim_quasianscombe_set*` functions family.
+- `vignette("Clustering-helpers")` to check some helper for clustering.
 
 ## Installation
 
@@ -82,3 +87,8 @@ remotes::install_github("jbkunst/klassets")
 
 Just a weird merge for Class/Klass and sets.
 
+## Inspiration/Similar Ideas
+
+- https://jumpingrivers.github.io/datasauRus/
+- https://eliocamp.github.io/metamer/
+- http://www.econometricsbysimulation.com/2019/03/the-importance-of-graphing-your-data.html This is almost the same, but the approach it's different. 

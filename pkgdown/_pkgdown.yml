@@ -7,14 +7,14 @@ authors:
 template:
   bootstrap: 5
   bslib:
+    bg: "white"
+    fg: "#2b2d2f"
     primary: "#0054AD"
     border-radius: 0.5rem
     btn-border-radius: 0.25rem
     base_font: {google: "IBM Plex Sans"}
     heading_font: {google: "Josefin Sans"}
     code_font: {google: "Fira Mono"}
-
-
 
 reference:
 - title: Simulation of Quasi-Anscombe data sets.

@@ -13,7 +13,7 @@ kmeans_iterations(
 )
 }
 \arguments{
-\item{df}{A object from \code{sim_clusters}.}
+\item{df}{A object from \code{sim_group_for_clusters}.}
 
 \item{centers}{How many clusters}
 
@@ -30,7 +30,7 @@ Generate intermediate iterations when performing K-means
 
 set.seed(12)
 
-df <- sim_clusters(n = 200, groups = 3)
+df <- sim_group_for_clusters(n = 200, groups = 3)
 
 plot(df)
 

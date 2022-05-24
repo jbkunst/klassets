@@ -1,0 +1,98 @@
+---
+title: "Clustering-helpers"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  gganimate = list(nframes = 50)
+)
+
+library(ggplot2)
+
+theme_set(theme_minimal(base_size = 21))
+
+if(require(showtext)){
+ 
+  sysfonts::font_add_google("IBM Plex Sans", "plex")
+  showtext::showtext_auto()
+   
+}
+```
+
+## Generating data set 
+
+The main function is `sim_group_for_clusters`, you need to define:
+
+- A number of observations to draw.
+- A number of groups
+- And set a seed if you want to replicate your results.
+
+```{r setup}
+library(klassets)
+
+set.seed(123)
+
+df <- sim_group_for_clusters(n = 500, groups = 3)
+
+plot(df)
+```
+
+
+## Apply some cluster algorithm
+
+You can apply the `stats::kmeans` using `apply_statskmeans_clust`.
+
+```{r}
+dfc1 <- apply_statskmeans_clust(df, centers = 2)
+
+plot(dfc1)
+```
+
+Or use a basic kmeans impementation with:
+
+```{r}
+set.seed(234)
+
+dfc2 <- apply_kmeans_clust(df, centers = 2, max_iteration = 6)
+
+plot(dfc2)
+```
+
+What is the benefit? In the second one use a helper function `kmeans_iterations`
+to keep the iteration and see how the algorithm converges.
+
+```{r}
+set.seed(234)
+
+kmi <- kmeans_iterations(df, centers = 2, max_iteration = 6)
+
+plot(kmi)
+```
+
+## `gganimate` package.
+
+The object result from `kmeans_iterations` have the classification in every step
+and the center positions:
+
+```{r}
+kmi
+```
+
+So you can take the output of this function data and use `gganimate`.
+
+```{r, echo=FALSE}
+knitr::include_graphics(here::here("man/figures/animation_kmeans_iterations.gif"))
+```
+
+The code used in that animation can be found in the package using:
+
+```{r}
+system.file("animation_kmeans_iterations.R", package = "klassets")
+```
+
+

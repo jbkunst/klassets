@@ -44,12 +44,18 @@ plot(df2) + plot(df6)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
-More details in the articles section or
-`vignette("Quasi-Anscombe-data-sets")`.
-
 Another example of what can be donde with `{klassets}`.
 
 <img src="man/figures/animation_kmeans_iterations.gif" width="100%" />
+
+## Where to start
+
+You can check:
+
+-   `vignette("Quasi-Anscombe-data-sets")` to know more about
+    `sim_quasianscombe_set*` functions family.
+-   `vignette("Clustering-helpers")` to check some helper for
+    clustering.
 
 ## Installation
 
@@ -64,3 +70,10 @@ remotes::install_github("jbkunst/klassets")
 ## Why *Klassets*?
 
 Just a weird merge for Class/Klass and sets.
+
+## Inspiration/Similar Ideas
+
+-   <https://jumpingrivers.github.io/datasauRus/>
+-   <https://eliocamp.github.io/metamer/>
+-   <http://www.econometricsbysimulation.com/2019/03/the-importance-of-graphing-your-data.html>
+    This is almost the same, but the approach it’s different.

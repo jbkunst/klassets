@@ -21,7 +21,7 @@ Posdef <- function (n, ev = runif(n, 0, 10)) {
 #'
 #' set.seed(123456)
 #'
-#' df <- sim_clusters()
+#' df <- sim_group_for_clusters()
 #'
 #' plot(df)
 #'
@@ -31,9 +31,9 @@ Posdef <- function (n, ev = runif(n, 0, 10)) {
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble as_tibble
 #' @export
-sim_clusters <- function(n = 1000,
-                         groups = 3,
-                         props = NULL) {
+sim_group_for_clusters <- function(n = 1000,
+                                   groups = 3,
+                                   props = NULL) {
 
   stopifnot(
     as.integer(n) == n,
@@ -103,7 +103,7 @@ sim_clusters <- function(n = 1000,
 
 #' Generate intermediate iterations when performing K-means
 #'
-#' @param df A object from `sim_clusters`.
+#' @param df A object from `sim_group_for_clusters`.
 #' @param centers How many clusters
 #' @param tolerance A value to indicating early stop.
 #' @param max_iterations Max iterations to calculate.
@@ -112,7 +112,7 @@ sim_clusters <- function(n = 1000,
 #'
 #' set.seed(12)
 #'
-#' df <- sim_clusters(n = 200, groups = 3)
+#' df <- sim_group_for_clusters(n = 200, groups = 3)
 #'
 #' plot(df)
 #'
@@ -237,7 +237,7 @@ kmeans_iterations <- function(df,
 #'
 #' set.seed(12)
 #'
-#' df <- sim_clusters(n = 200, groups = 3)
+#' df <- sim_group_for_clusters(n = 200, groups = 3)
 #'
 #' plot(df)
 #'
@@ -276,7 +276,7 @@ apply_kmeans_clust <- function(df, centers = 3, ...){
 #'
 #' set.seed(12)
 #'
-#' df <- sim_clusters(n = 200, groups = 3)
+#' df <- sim_group_for_clusters(n = 200, groups = 3)
 #'
 #' plot(df)
 #'
