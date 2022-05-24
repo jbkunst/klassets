@@ -132,7 +132,7 @@
 <p>The object result from <code>kmeans_iterations</code> have the classification in every step and the center positions:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">kmi</span>
-<span class="co">#&gt; $data_hist</span>
+<span class="co">#&gt; $points</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,988 × 6</span></span>
 <span class="co">#&gt;    iteration    id group      x     y cluster</span>
 <span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span>
@@ -148,7 +148,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         1    10 1     -<span style="color: #BB0000;">0.695</span>  8.74 <span style="color: #BB0000;">NA</span>     </span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 2,978 more rows</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $center_hist</span>
+<span class="co">#&gt; $centers</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 4</span></span>
 <span class="co">#&gt;    iteration cluster     cx    cy</span>
 <span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
