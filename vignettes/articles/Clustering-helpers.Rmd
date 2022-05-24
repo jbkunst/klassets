@@ -89,6 +89,9 @@ So you can take the output of this function data and use `gganimate`.
 
 ```{r, echo=FALSE}
 try(knitr::include_graphics(here::here("man/figures/animation_kmeans_iterations.gif")))
+```
+
+```{r, echo=FALSE}
 try(knitr::include_graphics("/reference/figures/animation_kmeans_iterations.gif"), silent = TRUE)
 ```
 
