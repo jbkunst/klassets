@@ -24,6 +24,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Binary-classification.html">Binary classification</a>
     <a class="dropdown-item" href="../articles/Clustering-helpers.html">Clustering helpers</a>
     <a class="dropdown-item" href="../articles/Quasi-Anscombe-data-sets.html">Quasi Anscombe data sets</a>
   </div>
@@ -66,6 +67,9 @@
 <dd><p>Order of values of x and y.</p></dd>
 <dt>stepwise</dt>
 <dd><p>A logical value to indicate to perform stepwise.</p></dd>
+<dt>verbose</dt>
+<dd><p>A logical value to incdicate to show the trace of thet
+stepwise procedure.</p></dd>
 </dl></div>
 
     <div class="section level2">
@@ -78,21 +82,15 @@
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="apply_logistic_regression-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "klassets_response_xy" "tbl_df"               "tbl"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "data.frame"          </span>
+<span class="r-in"><span class="va">df_reg_log</span> <span class="op">&lt;-</span> <span class="fu">apply_logistic_regression</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">apply_logistic_regression</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_reg_log</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="apply_logistic_regression-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "klassets_response_xy_logistic_regression"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "tbl_df"                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "tbl"                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "data.frame"                              </span>
+<span class="r-in"><span class="va">df_reg_log_3</span> <span class="op">&lt;-</span> <span class="fu">apply_logistic_regression</span><span class="op">(</span><span class="va">df</span>, order <span class="op">=</span> <span class="fl">3</span>, stepwise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘metR’</span>
-<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_reg_log_3</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="apply_logistic_regression-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
