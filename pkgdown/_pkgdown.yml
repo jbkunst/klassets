@@ -4,8 +4,6 @@ authors:
   Joshua Kunst:
     href: https://jkunst.com
 
-
-
 template:
   bootstrap: 5
   bslib:
@@ -24,8 +22,6 @@ template:
 #         family: "Josefin Sans"
 #         weight: "400"
 #         src: "url(https://fonts.gstatic.com/s/josefinsans/v24/Qw3aZQNVED7rKGKxtqIqX5EUDXx4.woff2) format('woff2')"
-
-
 
 reference:
 - title: Simulation of Quasi-Anscombe data sets.
