@@ -28,6 +28,7 @@ if(require(showtext)){
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/jbkunst/klassets/workflows/R-CMD-check/badge.svg)](https://github.com/jbkunst/klassets/actions)
+[![Github stars](https://img.shields.io/github/stars/jbkunst/klassets.svg?style=social&label=Github)](https://github.com/jbkunst/klassets)
 <!-- badges: end -->
 
 The `{klassets}` package is a collection of functions to simulate data sets to:

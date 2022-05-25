@@ -15,6 +15,11 @@ usethis::use_github_action("pkgdown")
 usethis::use_readme_rmd()
 
 usethis::use_github_actions_badge()
+usethis::use_badge(
+  badge_name = "Github stars",
+  href = "https://github.com/jbkunst/klassets",
+  src = "https://img.shields.io/github/stars/jbkunst/klassets.svg?style=social&label=Github"
+)
 
 # add docs folder to Rbuilignore to test
 usethis::edit_r_buildignore()
