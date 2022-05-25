@@ -33,7 +33,11 @@ reference:
 - contents:
   - starts_with("sim_quasi")
 - title: Clustering helpers
-  desc: Functions to simulate data for test ans explaing clustering methods and
+  desc: Functions to simulate data for test and explain clustering methods and
     functions to apply some basics algorimths.
 - contents:
   - matches("clust|kmeans")
+- title: Binary classification
+  desc: Functions to simulate data for test ans explaing classifiers algorimths.
+- contents:
+  - matches("logistic_regression|response_xy")
