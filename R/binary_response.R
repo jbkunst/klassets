@@ -56,41 +56,65 @@ sim_response_xy <- function(n = 100,
 #'
 #' set.seed(123)
 #'
-#' df <- sim_response_xy(n = 500)
+#' df <- sim_response_xy(n = 500, relationship = function(x, y) x**2 > y)
 #'
-#' df <- apply_logistic_regression(df)
+#' plot(df)
 #'
-#' df
+#' df_reg_log <- apply_logistic_regression(df)
+#'
+#' plot(df_reg_log)
+#'
+#' df_reg_log_3 <- apply_logistic_regression(df, order = 3, stepwise = TRUE)
+#'
+#' plot(df_reg_log_3)
 #'
 #' @importFrom stats binomial
 #' @export
-apply_logistic_regression <- function(df, order = 1, stepwise = FALSE){
+apply_logistic_regression <- function(df,
+                                      order = 1,
+                                      stepwise = FALSE,
+                                      verbose = FALSE){
+  # df <- sim_response_xy(n = 500)
+  # order <- 3
+  # stepwise <- TRUE
+  # verbose <- TRUE
+
+  df <- add_power_varaibles_to_data_frame(df, order = order)
+
+  mod <- glm(response ~ .,  family = binomial, data = df)
+
+  if(stepwise) mod <- step(mod, trace = verbose)
+
+  df <- df |>
+    dplyr::mutate(
+      prediction = predict(mod, newdata = df, type = "response")
+      ) |>
+    dplyr::select(.data$response, .data$x, .data$y, .data$prediction)
+
+  # Mmm...
+  class(df) <- setdiff(class(df), "klassets_response_xy")
+  class(df) <- c("klassets_response_xy_logistic_regression", class(df))
+
+  attr(df, "model") <- mod
+  attr(df, "order") <- order
+
+  df
+
+}
+
+add_power_varaibles_to_data_frame <- function(df, order = 1){
 
   if(order > 1) {
 
     pwr <- function(x, p) { x**p }
 
-    fns <- purrr::map(
-      2:order, ~ purrr::partial(pwr, p = .x)
-      ) |>
+    fns <- purrr::map(2:order, ~ purrr::partial(pwr, p = .x)) |>
       purrr::set_names(stringr::str_c(2:order))
 
     df <- dplyr::mutate(df, dplyr::across(.data$x:.data$y, .fns = fns))
 
   }
 
-  mod <- glm(response ~ .,  family = binomial, data = df)
-
-  if(stepwise) mod <- step(mod)
-
-  mod
-
-  df <- df |>
-    dplyr::mutate(prediction = predict(mod, newdata = df)) |>
-    dplyr::select(.data$response, .data$x, .data$y, .data$prediction)
-
   df
 
 }
-
-

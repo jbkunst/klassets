@@ -138,7 +138,7 @@ plot.klassets_response_xy <- function(x, ...){
   p <- ggplot2::ggplot(x, ggplot2::aes(.data$x, .data$y)) +
     ggplot2::geom_point(
       ggplot2::aes(color = factor(.data$response), shape = factor(.data$response)),
-      size = 3
+      size = 2
     ) +
     ggplot2::scale_shape_manual(
       name = NULL,
@@ -151,5 +151,68 @@ plot.klassets_response_xy <- function(x, ...){
     ggplot2::theme(legend.key.width = ggplot2::unit(2, "cm"))
 
   p
+
+}
+
+#' @export
+plot.klassets_response_xy_logistic_regression <- function(x, length_grid = 100, ...){
+
+  # x <- apply_logistic_regression(sim_response_xy(n = 500), order = 2)
+  # length_grid <-  100
+
+  # p <- klassets:::plot.klassets_response_xy(x)
+
+  xseq <- pretty(pull(x, .data$x))
+  yseq <- pretty(pull(x, .data$y))
+
+  dfgrid <- tidyr::crossing(
+    x = seq(min(xseq), max(xseq), length.out = length_grid),
+    y = seq(min(xseq), max(xseq), length.out = length_grid)
+    )
+
+  dfgrid <- add_power_varaibles_to_data_frame(dfgrid, attr(x, "order"))
+
+  predictions <- predict(attr(x, "model"), newdata = dfgrid, type = "response")
+
+  dfgrid <- dfgrid |>
+    dplyr::mutate(prediction = predictions)
+
+  ggplot2::ggplot(data = dfgrid) +
+    metR::geom_contour_fill(
+    # ggplot2::geom_contour_filled(
+      ggplot2::aes(.data$x, .data$y, z = .data$prediction),
+      bins = 100
+      ) +
+    metR::geom_text_contour(
+      ggplot2::aes(.data$x, .data$y, z = .data$prediction),
+      stroke = 0.2
+    ) +
+    # metR::scale_fill_divergent(
+    #   name = expression("P(·|x,y)"),
+    #   midpoint = 0.5,
+    #   breaks = seq(0, 1, by = 0.25),
+    #   limits = c(0, 1)
+    # ) +
+    ggplot2::scale_fill_gradient2(
+      name = expression("P(·|x,y)"),
+      midpoint = 0.5,
+      breaks = seq(0, 1, by = 0.25),
+      limits = c(0, 1),
+      high = scales::muted("blue"),
+      low =  scales::muted("red")
+    ) +
+
+    ggplot2::geom_point(
+      ggplot2::aes(.data$x, .data$y, color = factor(.data$response), shape = factor(.data$response)),
+      data = x,
+      size = 2
+    ) +
+    ggplot2::scale_shape_manual(name = NULL, values = c(4, 1)) +
+    ggplot2::scale_color_manual(
+      name = NULL,
+      values = c(scales::muted("red"), scales::muted("blue"))
+    )
+
+
 
 }

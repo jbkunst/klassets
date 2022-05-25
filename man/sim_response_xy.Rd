@@ -31,7 +31,7 @@ Generate data sets to apply a binary classifier or logistic regression
 
 set.seed(123)
 
-df <- sim_response_xy()
+df <- sim_response_xy(n = 500)
 
 df
 
