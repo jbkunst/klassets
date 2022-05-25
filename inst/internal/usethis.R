@@ -7,6 +7,7 @@ usethis::use_mit_license()
 
 usethis::use_github_action_check_standard()
 
+usethis::use_code_of_conduct()
 
 # pkgdown -----------------------------------------------------------------
 usethis::use_github_action("pkgdown")

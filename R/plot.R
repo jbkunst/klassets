@@ -131,3 +131,25 @@ plot.klassets_kmiterations <- function(x, ...){
   p
 
 }
+
+#' @export
+plot.klassets_response_xy <- function(x, ...){
+
+  p <- ggplot2::ggplot(x, ggplot2::aes(.data$x, .data$y)) +
+    ggplot2::geom_point(
+      ggplot2::aes(color = factor(.data$response), shape = factor(.data$response)),
+      size = 3
+    ) +
+    ggplot2::scale_shape_manual(
+      name = NULL,
+      values = c(4, 1)
+      ) +
+    ggplot2::scale_color_manual(
+      name = NULL,
+      values = c(scales::muted("red"), scales::muted("blue"))
+      ) +
+    ggplot2::theme(legend.key.width = ggplot2::unit(2, "cm"))
+
+  p
+
+}
