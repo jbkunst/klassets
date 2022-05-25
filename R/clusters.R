@@ -32,8 +32,8 @@ Posdef <- function (n, ev = runif(n, 0, 10)) {
 #' @importFrom tibble as_tibble
 #' @export
 sim_groups_for_clusters <- function(n = 1000,
-                                   groups = 3,
-                                   props = NULL) {
+                                    groups = 3,
+                                    props = NULL) {
 
   stopifnot(
     as.integer(n) == n,
@@ -129,7 +129,7 @@ kmeans_iterations <- function(df,
                               tolerance = 10e-6,
                               max_iterations = 15,
                               verbose = FALSE
-                              ){
+){
 
   stopifnot(inherits(df, "klassets_cluster"))
 

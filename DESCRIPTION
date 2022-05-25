@@ -16,6 +16,7 @@ Imports:
     forcats,
     ggplot2,
     MASS,
+    metR,
     purrr,
     rlang,
     scales,

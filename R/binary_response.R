@@ -51,6 +51,8 @@ sim_response_xy <- function(n = 100,
 #' @param df A object from `sim_response_xy`.
 #' @param order Order of values of x and y.
 #' @param stepwise A logical value to indicate to perform stepwise.
+#' @param verbose A logical value to incdicate to show the trace of thet
+#'   stepwise procedure.
 #'
 #' @examples
 #'
@@ -68,7 +70,7 @@ sim_response_xy <- function(n = 100,
 #'
 #' plot(df_reg_log_3)
 #'
-#' @importFrom stats binomial
+#' @importFrom stats binomial glm predict step
 #' @export
 apply_logistic_regression <- function(df,
                                       order = 1,

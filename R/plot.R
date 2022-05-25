@@ -194,7 +194,7 @@ plot.klassets_response_xy_logistic_regression <- function(x, length_grid = 100, 
     #   limits = c(0, 1)
     # ) +
     ggplot2::scale_fill_gradient2(
-      name = expression("P(·|x,y)"),
+      name = expression("P( |x,y)"),
       midpoint = 0.5,
       breaks = seq(0, 1, by = 0.25),
       limits = c(0, 1),
@@ -212,7 +212,5 @@ plot.klassets_response_xy_logistic_regression <- function(x, length_grid = 100, 
       name = NULL,
       values = c(scales::muted("red"), scales::muted("blue"))
     )
-
-
 
 }

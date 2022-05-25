@@ -1,0 +1,72 @@
+---
+title: "Binary classification"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  gganimate = list(nframes = 50)
+)
+
+library(ggplot2)
+
+theme_set(theme_minimal(base_size = 21))
+
+if(require(showtext)){
+ 
+  sysfonts::font_add_google("IBM Plex Sans", "plex")
+  showtext::showtext_auto()
+   
+}
+```
+
+## Generating data set 
+
+The main function is `sim_response_xy`, you need to define:
+
+- A number of observations to simulate.
+- Distributions to sample $x$ and $y$. For example `purrr::partial(runif, min = -1, max = 1)`.
+- A gunction  to define the relation between the reponse and the $x$ and $y$, for example
+`function(x, y) x > y` This function must return a logical value.
+- A number to define the noise in the generated data.
+
+```{r setup}
+library(klassets)
+
+set.seed(123)
+
+df <- sim_response_xy(n = 500)
+
+df
+
+plot(df)
+
+df2 <- sim_response_xy(
+  n = 500, 
+  x_dist = purrr::partial(runif, min = -1, max = 1),
+  relationship = function(x, y)  x**2 - 0.5 > y,
+  noise = 0.1
+  )
+
+plot(df2)
+```
+
+
+## Apply classification algorithms
+
+### Logistic Regression
+
+```{r}
+df2_lr <- apply_logistic_regression(df2, order = 3, stepwise = TRUE)
+
+df2_lr
+
+plot(df2_lr)
+```
+
+
+

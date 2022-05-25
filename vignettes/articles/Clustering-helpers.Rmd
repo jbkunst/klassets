@@ -26,10 +26,10 @@ if(require(showtext)){
 
 ## Generating data set 
 
-The main function is `sim_group_for_clusters`, you need to define:
+The main function is `sim_groups_for_clusters`, you need to define:
 
 - A number of observations to draw.
-- A number of groups
+- A number of groups. = = = 
 - And set a seed if you want to replicate your results.
 
 ```{r setup}

@@ -12,6 +12,9 @@ apply_logistic_regression(df, order = 1, stepwise = FALSE, verbose = FALSE)
 \item{order}{Order of values of x and y.}
 
 \item{stepwise}{A logical value to indicate to perform stepwise.}
+
+\item{verbose}{A logical value to incdicate to show the trace of thet
+stepwise procedure.}
 }
 \description{
 Apply Logistic regression to \code{klassets_response_xy} object
@@ -24,13 +27,12 @@ df <- sim_response_xy(n = 500, relationship = function(x, y) x**2 > y)
 
 plot(df)
 
-class(df)
+df_reg_log <- apply_logistic_regression(df)
 
-df <- apply_logistic_regression(df)
+plot(df_reg_log)
 
-class(df)
+df_reg_log_3 <- apply_logistic_regression(df, order = 3, stepwise = TRUE)
 
-plot(df)
-
+plot(df_reg_log_3)
 
 }
