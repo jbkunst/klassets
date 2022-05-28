@@ -50,7 +50,7 @@ plot(df)
 You can apply the `stats::kmeans` using `apply_statskmeans_clust`.
 
 ```{r}
-dfc1 <- apply_statskmeans_clust(df, centers = 2)
+dfc1 <- apply_statskmeans(df, centers = 2)
 
 plot(dfc1)
 ```
@@ -62,7 +62,7 @@ Or use a basic kmeans impementation with:
 ```{r}
 set.seed(234)
 
-dfc2 <- apply_kmeans_clust(df, centers = 2, max_iteration = 6)
+dfc2 <- apply_kmeans(df, centers = 2, max_iteration = 6)
 
 plot(dfc2)
 ```
