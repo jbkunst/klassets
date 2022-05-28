@@ -10,7 +10,6 @@ if (require(showtext)) {
   showtext::showtext_auto()
 }
 
-
 # data --------------------------------------------------------------------
 set.seed(124)
 

@@ -1,6 +1,8 @@
 # setup -------------------------------------------------------------------
 library(klassets)
 library(ggplot2)
+library(gganimate)
+library(stringr)
 
 theme_set(theme_minimal(base_size = 15))
 
@@ -76,10 +78,8 @@ dfs <- dfs |>
   tidyr::unnest(cols = c(value))
 
 
-# animation ---------------------------------------------------------------
-library(gganimate)
-library(stringr)
 
+# plot --------------------------------------------------------------------
 dfs <- dfs |>
   mutate(
     set2 = set,
@@ -101,13 +101,15 @@ gxy <- ggplot(dfs, aes(x, y)) +
 gxy
 
 
+# animate -----------------------------------------------------------------
 gga <- gxy +
   facet_null() +
   # then animate
   labs(
     title = "The importance of visualization and residual analysis",
     subtitle = "{closest_state}",
-    caption = "Quasi Anscombe sets\n(Same regression coefficients)") +
+    caption = "Quasi Anscombe sets\n(Same regression coefficients)"
+    ) +
   ease_aes("cubic-in-out") +
   # shadow_wake(wake_length = 0.01, alpha = 0.1) +
   transition_states(set2, transition_length = 2, state_length = 1)

@@ -49,6 +49,9 @@ usethis::use_package("MASS")
 usethis::use_package("forcats")
 usethis::use_package("viridisLite")
 usethis::use_package("metR")
+usethis::use_package("partykit")
+usethis::use_package("parttree") # Remotes!!
+
 
 usethis::use_package("tidyr", type = "Suggests")
 usethis::use_package("broom", type = "Suggests")

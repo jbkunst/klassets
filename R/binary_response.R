@@ -23,7 +23,8 @@
 #' @importFrom tibble as_tibble
 #' @export
 sim_response_xy <- function(n = 100,
-                            x_dist = purrr::partial(rnorm, mean = 0, sd = 1),
+                            # x_dist = purrr::partial(rnorm, mean = 0, sd = 1),
+                            x_dist = purrr::partial(runif, min = -1, max = 1),
                             y_dist = x_dist,
                             relationship = function(x, y) x > y,
                             noise = 0.2){
@@ -37,6 +38,7 @@ sim_response_xy <- function(n = 100,
     df,
     response = relationship(.data$x, .data$y),
     response = ifelse(runif(n) < noise, !.data$response, .data$response),
+    response = factor(.data$response, levels = c("FALSE", "TRUE")),
     .before = 1
     )
 
@@ -81,16 +83,14 @@ apply_logistic_regression <- function(df,
   # stepwise <- TRUE
   # verbose <- TRUE
 
-  df <- add_power_varaibles_to_data_frame(df, order = order)
+  df <- add_power_variables_to_data_frame(df, order = order)
 
   mod <- glm(response ~ .,  family = binomial, data = df)
 
   if(stepwise) mod <- step(mod, trace = verbose)
 
   df <- df |>
-    dplyr::mutate(
-      prediction = predict(mod, newdata = df, type = "response")
-      ) |>
+    dplyr::mutate(prediction = predict(mod, newdata = df, type = "response")) |>
     dplyr::select(.data$response, .data$x, .data$y, .data$prediction)
 
   # Mmm...
@@ -104,7 +104,100 @@ apply_logistic_regression <- function(df,
 
 }
 
-add_power_varaibles_to_data_frame <- function(df, order = 1){
+#' Apply tree to `klassets_response_xy` object
+#'
+#' @param df A object from `sim_response_xy`.
+#' @param maxdepth Max depth of the tree. Same used in `partykit::ctree_control`.
+#' @param alpha Alpha value, same used in `partykit::ctree_control`
+#' @param type Type of prediction, one of "prob, response, node.
+#' @param ... Options for `partykit::ctree_control`.
+#'
+#' @examples
+#'
+#' set.seed(123)
+#'
+#' df <- sim_response_xy(n = 1000, relationship = function(x, y) x**2 > sin(y))
+#'
+#' plot(df)
+#'
+#' # default type = "prob"
+#' df_tree_prob <- apply_tree(df)
+#' df_tree_prob
+#'
+#' df_tree_resp <- apply_tree(df, type = "response")
+#' df_tree_resp
+#'
+#' df_tree_node <- apply_tree(df, type = "node")
+#' df_tree_node
+#'
+#' plot(df_tree_prob)
+#' plot(df_tree_resp)
+#' plot(df_tree_node)
+#'
+#' @importFrom partykit ctree
+#' @export
+apply_tree <- function(df, maxdepth = Inf, alpha = 0.05, type = "prob", ...){
+
+  mod <- partykit::ctree(
+    response ~ .,
+    data = df,
+    control = partykit::ctree_control(maxdepth = maxdepth, alpha = alpha, ...)
+    )
+
+  # type <- "node"
+  # type <- "response"
+  # type <- "prob"
+
+  predictions <- partykit::predict.party(mod, type = type)
+
+  if(type == "prob"){
+    predictions <- predictions[, 1]
+  }
+
+  df <- dplyr::mutate(df, prediction = predictions)
+
+  # Mmm...
+  class(df) <- setdiff(class(df), "klassets_response_xy")
+  class(df) <- c("klassets_response_xy_tree", class(df))
+
+  attr(df, "type")  <- type
+  attr(df, "model") <- mod
+
+  df
+
+}
+
+#' @importFrom class knn
+apply_knn <- function(df, neighbours = 10, type = "prob"){
+
+  preds <- class::knn(
+    train = dplyr::select(df, .data$x, .data$y) |> as.matrix(),
+    test  = dplyr::select(df, .data$x, .data$y) |> as.matrix(),
+    cl    = dplyr::select(df, .data$response)  |> as.matrix(),
+    k     = neighbours,
+    prob  = TRUE
+  )
+
+  if(type == "prob"){
+    predictions <- attr(preds, "prob")
+  } else {
+    predictions <- as.factor(preds)
+  }
+
+  df <- dplyr::mutate(df, prediction = predictions)
+
+  # Mmm...
+  class(df) <- setdiff(class(df), "klassets_response_xy")
+  class(df) <- c("klassets_response_xy_knn", class(df))
+
+  attr(df, "neighbours") <- neighbours
+  attr(df, "type")       <- type
+
+  df
+
+}
+
+add_power_variables_to_data_frame <- function(df, order = 1){
 
   if(order > 1) {
 
@@ -118,5 +211,22 @@ add_power_varaibles_to_data_frame <- function(df, order = 1){
   }
 
   df
+
+}
+
+create_grid_from_data_frame <- function(df, length_seq = 100){
+
+  stopifnot("x" %in% names(df))
+  stopifnot("y" %in% names(df))
+
+  xseq <- pretty(dplyr::pull(df, .data$x))
+  yseq <- pretty(dplyr::pull(df, .data$y))
+
+  dfgrid <- tidyr::crossing(
+    x = seq(min(xseq), max(xseq), length.out = length_seq),
+    y = seq(min(xseq), max(xseq), length.out = length_seq)
+  )
+
+  dfgrid
 
 }

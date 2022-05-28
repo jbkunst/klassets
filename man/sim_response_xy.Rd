@@ -6,7 +6,7 @@
 \usage{
 sim_response_xy(
   n = 100,
-  x_dist = purrr::partial(rnorm, mean = 0, sd = 1),
+  x_dist = purrr::partial(runif, min = -1, max = 1),
   y_dist = x_dist,
   relationship = function(x, y) x > y,
   noise = 0.2

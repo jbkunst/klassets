@@ -4,7 +4,7 @@
 #' @export
 plot.klassets_quasianscombe <- function(x, add_lm = TRUE, ...){
 
-  pxy <- ggplot2::ggplot(x, ggplot2::aes_string("x", "y"))  +
+  p <- ggplot2::ggplot(x, ggplot2::aes_string("x", "y"))  +
     ggplot2::geom_point(
       shape = 21,
       color = "gray60",
@@ -20,7 +20,7 @@ plot.klassets_quasianscombe <- function(x, add_lm = TRUE, ...){
     b0 <- round(b[1], 2)
     b1 <- round(b[2], 2)
 
-    pxy <- pxy +
+    p <- p +
       ggplot2::geom_smooth(
         method = "lm", se = FALSE,
         color = "gray40", formula = y ~ x
@@ -29,19 +29,18 @@ plot.klassets_quasianscombe <- function(x, add_lm = TRUE, ...){
 
   }
 
-  pxy
-
+  p
 
 }
 
 #' @export
 plot.klassets_cluster <- function(x, ...){
 
-  pxy <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
+  p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
   if(all(c("group", "cluster") %in% names(x))){
 
-    pxy <- pxy +
+    p <- p +
       ggplot2::geom_point(
         ggplot2::aes(
           shape = .data$group,
@@ -56,7 +55,7 @@ plot.klassets_cluster <- function(x, ...){
 
   } else if ("group" %in% names(x)) {
 
-    pxy <- pxy +
+    p <- p +
       ggplot2::geom_point(
         ggplot2::aes(shape = .data$group),
         color = "gray60",
@@ -67,7 +66,7 @@ plot.klassets_cluster <- function(x, ...){
 
   } else if ("cluster" %in% names(x)) {
 
-    pxy <- pxy +
+    p <- p +
       ggplot2::geom_point(
         ggplot2::aes(color = .data$cluster),
         shape = 21,
@@ -77,12 +76,12 @@ plot.klassets_cluster <- function(x, ...){
 
   } else {
 
-    pxy <- pxy +
+    p <- p +
       ggplot2::geom_point(shape = 21, color = "gray60", fill = "gray80", ...)
 
   }
 
-  pxy
+  p
 
 }
 
@@ -135,82 +134,222 @@ plot.klassets_kmiterations <- function(x, ...){
 #' @export
 plot.klassets_response_xy <- function(x, ...){
 
-  p <- ggplot2::ggplot(x, ggplot2::aes(.data$x, .data$y)) +
-    ggplot2::geom_point(
-      ggplot2::aes(color = factor(.data$response), shape = factor(.data$response)),
-      size = 2
-    ) +
-    ggplot2::scale_shape_manual(
-      name = NULL,
-      values = c(4, 1)
-      ) +
-    ggplot2::scale_color_manual(
-      name = NULL,
-      values = c(scales::muted("red"), scales::muted("blue"))
-      ) +
-    ggplot2::theme(legend.key.width = ggplot2::unit(2, "cm"))
+  p <- ggplot2::ggplot() +
+    ggproto_point_response_xy_color_shape(x)
 
-  p
+  addorn_ggplot(p)
 
 }
 
 #' @export
-plot.klassets_response_xy_logistic_regression <- function(x, length_grid = 100, ...){
+plot.klassets_response_xy_logistic_regression <- function(x, length_seq = 100, ...){
 
   # x <- apply_logistic_regression(sim_response_xy(n = 500), order = 2)
   # length_grid <-  100
 
-  # p <- klassets:::plot.klassets_response_xy(x)
+  dfgrid <- create_grid_from_data_frame(x, length_seq = length_seq)
 
-  xseq <- pretty(pull(x, .data$x))
-  yseq <- pretty(pull(x, .data$y))
-
-  dfgrid <- tidyr::crossing(
-    x = seq(min(xseq), max(xseq), length.out = length_grid),
-    y = seq(min(xseq), max(xseq), length.out = length_grid)
-    )
-
-  dfgrid <- add_power_varaibles_to_data_frame(dfgrid, attr(x, "order"))
+  dfgrid <- add_power_variables_to_data_frame(dfgrid, attr(x, "order"))
 
   predictions <- predict(attr(x, "model"), newdata = dfgrid, type = "response")
 
-  dfgrid <- dfgrid |>
-    dplyr::mutate(prediction = predictions)
+  dfgrid <- dplyr::mutate(dfgrid, prediction = predictions)
 
-  ggplot2::ggplot(data = dfgrid) +
-    metR::geom_contour_fill(
-    # ggplot2::geom_contour_filled(
-      ggplot2::aes(.data$x, .data$y, z = .data$prediction),
-      bins = 100
-      ) +
-    metR::geom_text_contour(
-      ggplot2::aes(.data$x, .data$y, z = .data$prediction),
-      stroke = 0.2
-    ) +
-    # metR::scale_fill_divergent(
-    #   name = expression("P(·|x,y)"),
-    #   midpoint = 0.5,
-    #   breaks = seq(0, 1, by = 0.25),
-    #   limits = c(0, 1)
-    # ) +
+  p <- ggplot2::ggplot() +
+
+    ggproto_contour_fill(dfgrid) +
+
+    ggproto_text_contour(dfgrid) +
+
+    ggproto_point_response_xy_color_shape(x) +
+
     ggplot2::scale_fill_gradient2(
-      name = expression("P( |x,y)"),
-      midpoint = 0.5,
+      name = "Model", midpoint = 0.5, breaks = seq(0, 1, by = 0.25), limits = c(0, 1),
+      high = scales::muted("blue"), low =  scales::muted("red")
+    )
+
+  p
+
+  addorn_ggplot(p)
+
+}
+
+#' @importFrom parttree geom_parttree
+#' @export
+plot.klassets_response_xy_tree <- function(x, ...){
+
+  # df <- sim_response_xy(n = 1000, relationship = function(x, y) x**2 > sin(y))
+  # plot(df)
+  #
+  # t <- "prob"
+  # t <- "response"
+  # t <- "node"
+  #
+  # x <- apply_tree(df, type = t)
+
+  type  <- attr(x, "type")
+
+  ptree <- partree2(attr(x, "model"))
+
+  ptree <- dplyr::mutate(ptree, type = .data[[type]])
+
+  scale_fill <- switch(type,
+    prob = ggplot2::scale_fill_gradient2(
+      name = "Model", midpoint = 0.5,
       breaks = seq(0, 1, by = 0.25),
       limits = c(0, 1),
       high = scales::muted("blue"),
       low =  scales::muted("red")
+    ),
+
+    node = ggplot2::scale_fill_viridis_d("Node"),
+
+    response = ggplot2::scale_fill_manual(
+      name = "Model",
+      values = c(scales::muted("blue"), scales::muted("red"))
+    )
+  )
+
+  p <- ggplot2::ggplot() +
+
+    ggplot2::geom_rect(
+      data = ptree,
+      ggplot2::aes(
+        xmin = .data$xmin, xmax = .data$xmax,
+        ymin = .data$ymin, ymax = .data$ymax,
+        fill = .data$type
+        # fill = .data$node
+        # fill = .data$prob
+        # fill = .data$response
+      ),
+      alpha = 0.2,
+      color = "gray70",
+      size = 0.1
     ) +
 
-    ggplot2::geom_point(
-      ggplot2::aes(.data$x, .data$y, color = factor(.data$response), shape = factor(.data$response)),
-      data = x,
-      size = 2
-    ) +
-    ggplot2::scale_shape_manual(name = NULL, values = c(4, 1)) +
-    ggplot2::scale_color_manual(
-      name = NULL,
-      values = c(scales::muted("red"), scales::muted("blue"))
+    ggproto_point_response_xy_color_shape(x) +
+
+    scale_fill
+
+  p
+
+  addorn_ggplot(p)
+
+}
+
+#' @export
+plot.klassets_response_xy_knn <- function(x, length_seq = 100, ...){
+
+  # x <- apply_knn(sim_response_xy(n = 1000), neighbours = 100)
+  # length_seq <-  200
+
+  dfgrid <- create_grid_from_data_frame(x, length_seq = length_seq)
+
+  preds <- class::knn(
+    train = dplyr::select(x, .data$x, .data$y) |> as.matrix(),
+    test  = dplyr::select(dfgrid, .data$x, .data$y) |> as.matrix(),
+    cl    = dplyr::select(x, .data$response)  |> as.matrix(),
+    k     = attr(x, "neighbours"),
+    prob  = TRUE
+  )
+
+  if(attr(x, "type") == "prob"){
+    predictions <- attr(preds, "prob")
+  } else {
+    predictions <- as.logical(preds)
+  }
+
+  if(attr(x, "type") == "prob") {
+
+    predictions <- scales::rescale(as.vector(predictions), to = c(0.01, .99))
+
+    dfgrid <- mutate(dfgrid, prediction = scales::rescale(as.vector(predictions), to = c(0, 1)))
+
+    # return(plot_pred_field(x, dfgrid))
+
+  }
+
+  p <- ggplot2::ggplot() +
+
+    ggproto_contour_fill(dfgrid) +
+
+    ggproto_point_response_xy_color_shape(x) +
+
+    ggplot2::scale_fill_gradient2(
+      name = "Model", midpoint = 0.5, breaks = seq(0, 1, by = 0.25), limits = c(0, 1),
+      high = scales::muted("blue"), low =  scales::muted("red")
     )
+
+  addorn_ggplot(p)
+
+
+
+}
+
+ggproto_point_response_xy_color_shape <- function(x){
+
+  ggplot2::geom_point(
+    data = x,
+    ggplot2::aes(
+      .data$x, .data$y,
+      color = .data$response, shape = .data$response
+      ),
+    size = 2
+    )
+
+}
+
+ggproto_contour_fill <- function(dfgrid, bins = 100, ...) {
+
+  # ggplot2::geom_contour_filled(
+  metR::geom_contour_fill(
+    data = dfgrid,
+    ggplot2::aes(.data$x, .data$y, z = .data$prediction),
+    bins = bins,
+    ...
+    )
+
+}
+
+ggproto_text_contour <- function(dfgrid){
+
+  metR::geom_text_contour(
+    data = dfgrid,
+    ggplot2::aes(.data$x, .data$y, z = .data$prediction),
+    stroke = 0.2
+  )
+}
+
+addorn_ggplot <- function(p){
+
+  p +
+    ggplot2::scale_shape_manual(
+      name = NULL, values = c(4, 1)
+      ) +
+    ggplot2::scale_color_manual(
+      name = NULL, values = c(scales::muted("red"), scales::muted("blue"))
+      )
+
+}
+
+partree2 <- function(tree) {
+
+  # tree <- attr(x, "model")
+  tree_distinct <- tibble(
+    response = partykit::predict.party(tree, type = "response"),
+    node     = partykit::predict.party(tree, type = "node"),
+    prob     = partykit::predict.party(tree, type = "prob")[, 2]
+  ) |>
+    dplyr::distinct(.data$response, .data$node, .data$prob)
+
+  ptree <- dplyr::left_join(
+    tree_distinct,
+    parttree::parttree(tree),
+    by = c("response", "node")
+  )
+
+  ptree <- dplyr::mutate(ptree, node = factor(.data$node))
+
+  ptree
 
 }
