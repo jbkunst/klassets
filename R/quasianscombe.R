@@ -4,15 +4,11 @@
 #' then apply a linear transformation using `beta0` and `beta1` and finally
 #' adding a normal distributed noise using `error_sd` creating `y` values.
 #'
-#' This is the _typical_ example when regression analysis is taught.
+#' This is the _typical first_ example when regression analysis is taught.
 #'
-#' @param n n, default value: 100
-#' @param beta0 beta0, default value: 3,
-#' @param beta1 beta1, default value: 0.5
-#' @param error_sd error_sd, default value: 0.1
-#' @param x_mean x_mean, default value: 5
-#' @param x_sd x_sd, default value: 1
-#' @param x_dist x_dist, default value: "norm"
+#' Thei
+#'
+#' @inheritParams sim_xy
 #'
 #' @examples
 #'
@@ -26,9 +22,7 @@
 #'
 #' plot(sim_quasianscombe_set_1(n = 1000))
 #'
-#' plot(sim_quasianscombe_set_1(error_sd = 0))
-#'
-#' plot(sim_quasianscombe_set_1(x_sd = 0))
+#' plot(sim_quasianscombe_set_1(n = 1000, beta0 = 0, beta1 = 1, x_dist = runif))
 #'
 #' @importFrom tibble tibble
 #' @importFrom stats coefficients lm rnorm runif
@@ -36,32 +30,17 @@
 sim_quasianscombe_set_1 <- function(n = 100,
                                     beta0 = 3,
                                     beta1 = 0.5,
-                                    error_sd = 0.5,
-                                    x_mean = 5,
-                                    x_sd = 1,
-                                    x_dist = "norm"
-                                    ){
+                                    x_dist = purrr::partial(rnorm, mean = 5, sd = 1),
+                                    error_dist = purrr::partial(rnorm, sd = 0.5)){
 
-  # set.seed(seed)
+  df <- sim_xy(n, beta0, beta1, x_dist, error_dist)
 
-  x <- sort(rnorm(n = n, mean = x_mean, sd = x_sd))
-
-  if(x_dist == "unif"){
-    x <- sort(runif(n, min = min(x), max = max(x)))
-  }
-
-  e <- rnorm(n, sd = error_sd)
-
-  y <- beta0 + beta1 * x + e
-
-  df <- tibble::tibble(x, y)
-
-  class(df) <- c( "klassets_quasianscombe", class(df))
+  class(df) <- setdiff(class(df), "klassets_xy")
+  class(df) <- c("klassets_quasianscombe", class(df))
 
   df
 
 }
-
 
 
 #' Generate _quasi_ Anscombe data sets Type 2: No linear relationship

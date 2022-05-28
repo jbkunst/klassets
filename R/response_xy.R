@@ -1,4 +1,4 @@
-#' Generate data sets to apply a binary classifier or logistic regression
+#' Generate data sets to apply a binary classifiers
 #'
 #' @param n An intenger
 #' @param x_dist A random number generation function.
@@ -104,7 +104,7 @@ apply_logistic_regression <- function(df,
 
 }
 
-#' Apply tree to `klassets_response_xy` object
+#' Apply classification tree to `klassets_response_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
 #' @param maxdepth Max depth of the tree. Same used in `partykit::ctree_control`.
@@ -121,13 +121,13 @@ apply_logistic_regression <- function(df,
 #' plot(df)
 #'
 #' # default type = "prob"
-#' df_tree_prob <- apply_tree(df)
+#' df_tree_prob <- apply_classification_tree(df)
 #' df_tree_prob
 #'
-#' df_tree_resp <- apply_tree(df, type = "response")
+#' df_tree_resp <- apply_classification_tree(df, type = "response")
 #' df_tree_resp
 #'
-#' df_tree_node <- apply_tree(df, type = "node")
+#' df_tree_node <- apply_classification_tree(df, type = "node")
 #' df_tree_node
 #'
 #' plot(df_tree_prob)
@@ -136,7 +136,7 @@ apply_logistic_regression <- function(df,
 #'
 #' @importFrom partykit ctree
 #' @export
-apply_tree <- function(df, maxdepth = Inf, alpha = 0.05, type = "prob", ...){
+apply_classification_tree <- function(df, maxdepth = Inf, alpha = 0.05, type = "prob", ...){
 
   mod <- partykit::ctree(
     response ~ .,
@@ -158,7 +158,7 @@ apply_tree <- function(df, maxdepth = Inf, alpha = 0.05, type = "prob", ...){
 
   # Mmm...
   class(df) <- setdiff(class(df), "klassets_response_xy")
-  class(df) <- c("klassets_response_xy_tree", class(df))
+  class(df) <- c("klassets_response_xy_classification_tree", class(df))
 
   attr(df, "type")  <- type
   attr(df, "model") <- mod
@@ -194,39 +194,5 @@ apply_knn <- function(df, neighbours = 10, type = "prob"){
   attr(df, "type")       <- type
 
   df
-
-}
-
-add_power_variables_to_data_frame <- function(df, order = 1){
-
-  if(order > 1) {
-
-    pwr <- function(x, p) { x**p }
-
-    fns <- purrr::map(2:order, ~ purrr::partial(pwr, p = .x)) |>
-      purrr::set_names(stringr::str_c(2:order))
-
-    df <- dplyr::mutate(df, dplyr::across(.data$x:.data$y, .fns = fns))
-
-  }
-
-  df
-
-}
-
-create_grid_from_data_frame <- function(df, length_seq = 100){
-
-  stopifnot("x" %in% names(df))
-  stopifnot("y" %in% names(df))
-
-  xseq <- pretty(dplyr::pull(df, .data$x))
-  yseq <- pretty(dplyr::pull(df, .data$y))
-
-  dfgrid <- tidyr::crossing(
-    x = seq(min(xseq), max(xseq), length.out = length_seq),
-    y = seq(min(xseq), max(xseq), length.out = length_seq)
-  )
-
-  dfgrid
 
 }

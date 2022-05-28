@@ -243,12 +243,12 @@ kmeans_iterations <- function(df,
 #'
 #' set.seed(124)
 #'
-#' dfc <- apply_kmeans_clust(df, centers = 4, max_iterations = 6)
+#' dfc <- apply_kmeans(df, centers = 4, max_iterations = 6)
 #'
 #' plot(dfc)
 #'
 #' @export
-apply_kmeans_clust <- function(df, centers = 3, ...){
+apply_kmeans <- function(df, centers = 3, ...){
 
   stopifnot(inherits(df, "klassets_cluster"))
 
@@ -282,13 +282,13 @@ apply_kmeans_clust <- function(df, centers = 3, ...){
 #'
 #' set.seed(124)
 #'
-#' dfc <- apply_statskmeans_clust(df, centers = 4)
+#' dfc <- apply_statskmeans(df, centers = 4)
 #'
 #' plot(dfc)
 #'
 #' @importFrom stats kmeans
 #' @export
-apply_statskmeans_clust <- function(df, centers = 3, ...){
+apply_statskmeans <- function(df, centers = 3, ...){
 
   stopifnot(inherits(df, "klassets_cluster"))
 

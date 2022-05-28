@@ -8,26 +8,22 @@ sim_quasianscombe_set_1(
   n = 100,
   beta0 = 3,
   beta1 = 0.5,
-  error_sd = 0.5,
-  x_mean = 5,
-  x_sd = 1,
-  x_dist = "norm"
+  x_dist = purrr::partial(rnorm, mean = 5, sd = 1),
+  error_dist = purrr::partial(rnorm, sd = 0.5)
 )
 }
 \arguments{
-\item{n}{n, default value: 100}
+\item{n}{Number of observations}
 
 \item{beta0}{beta0, default value: 3,}
 
 \item{beta1}{beta1, default value: 0.5}
 
-\item{error_sd}{error_sd, default value: 0.1}
+\item{x_dist}{A random number generation function. Default is a \code{rnorm}
+with mean 5 and sd 1.}
 
-\item{x_mean}{x_mean, default value: 5}
-
-\item{x_sd}{x_sd, default value: 1}
-
-\item{x_dist}{x_dist, default value: "norm"}
+\item{error_dist}{A random number generation function. Default is a \code{rnorm}
+with mean 0 and sd 0.5.}
 }
 \description{
 This function generate a data set \emph{Type 1}  creating first a \code{x} a random vector
@@ -35,7 +31,9 @@ then apply a linear transformation using \code{beta0} and \code{beta1} and final
 adding a normal distributed noise using \code{error_sd} creating \code{y} values.
 }
 \details{
-This is the \emph{typical} example when regression analysis is taught.
+This is the \emph{typical first} example when regression analysis is taught.
+
+Thei
 }
 \examples{
 
@@ -49,8 +47,6 @@ plot(df, add_lm = FALSE)
 
 plot(sim_quasianscombe_set_1(n = 1000))
 
-plot(sim_quasianscombe_set_1(error_sd = 0))
-
-plot(sim_quasianscombe_set_1(x_sd = 0))
+plot(sim_quasianscombe_set_1(n = 1000, beta0 = 0, beta1 = 1, x_dist = runif))
 
 }
