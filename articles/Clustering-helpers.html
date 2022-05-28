@@ -109,7 +109,7 @@
 </h3>
 <p>You can apply the <code><a href="https://rdrr.io/r/stats/kmeans.html" class="external-link">stats::kmeans</a></code> using <code>apply_statskmeans_clust</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dfc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_statskmeans_clust.html">apply_statskmeans_clust</a></span><span class="op">(</span><span class="va">df</span>, centers <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">dfc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_statskmeans.html">apply_statskmeans</a></span><span class="op">(</span><span class="va">df</span>, centers <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dfc1</span><span class="op">)</span></code></pre></div>
 <p><img src="Clustering-helpers_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
@@ -121,7 +121,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
 
-<span class="va">dfc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_kmeans_clust.html">apply_kmeans_clust</a></span><span class="op">(</span><span class="va">df</span>, centers <span class="op">=</span> <span class="fl">2</span>, max_iteration <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
+<span class="va">dfc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_kmeans.html">apply_kmeans</a></span><span class="op">(</span><span class="va">df</span>, centers <span class="op">=</span> <span class="fl">2</span>, max_iteration <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dfc2</span><span class="op">)</span></code></pre></div>
 <p><img src="Clustering-helpers_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>

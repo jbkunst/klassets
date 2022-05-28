@@ -66,33 +66,30 @@ adding a normal distributed noise using <code>error_sd</code> creating <code>y</
   n <span class="op">=</span> <span class="fl">100</span>,
   beta0 <span class="op">=</span> <span class="fl">3</span>,
   beta1 <span class="op">=</span> <span class="fl">0.5</span>,
-  error_sd <span class="op">=</span> <span class="fl">0.5</span>,
-  x_mean <span class="op">=</span> <span class="fl">5</span>,
-  x_sd <span class="op">=</span> <span class="fl">1</span>,
-  x_dist <span class="op">=</span> <span class="st">"norm"</span>
+  x_dist <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">rnorm</span>, mean <span class="op">=</span> <span class="fl">5</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  error_dist <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">rnorm</span>, sd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>n</dt>
-<dd><p>n, default value: 100</p></dd>
+<dd><p>Number of observations</p></dd>
 <dt>beta0</dt>
 <dd><p>beta0, default value: 3,</p></dd>
 <dt>beta1</dt>
 <dd><p>beta1, default value: 0.5</p></dd>
-<dt>error_sd</dt>
-<dd><p>error_sd, default value: 0.1</p></dd>
-<dt>x_mean</dt>
-<dd><p>x_mean, default value: 5</p></dd>
-<dt>x_sd</dt>
-<dd><p>x_sd, default value: 1</p></dd>
 <dt>x_dist</dt>
-<dd><p>x_dist, default value: "norm"</p></dd>
+<dd><p>A random number generation function. Default is a <code>rnorm</code>
+with mean 5 and sd 1.</p></dd>
+<dt>error_dist</dt>
+<dd><p>A random number generation function. Default is a <code>rnorm</code>
+with mean 0 and sd 0.5.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This is the <em>typical</em> example when regression analysis is taught.</p>
+    <p>This is the <em>typical first</em> example when regression analysis is taught.</p>
+<p>Thei</p>
     </div>
 
     <div class="section level2">
@@ -125,11 +122,8 @@ adding a normal distributed noise using <code>error_sd</code> creating <code>y</
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_1</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="sim_quasianscombe_set_1-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_1</span><span class="op">(</span>error_sd <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_1</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, beta0 <span class="op">=</span> <span class="fl">0</span>, beta1 <span class="op">=</span> <span class="fl">1</span>, x_dist <span class="op">=</span> <span class="va">runif</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="sim_quasianscombe_set_1-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sim_quasianscombe_set_1</span><span class="op">(</span>x_sd <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="sim_quasianscombe_set_1-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
