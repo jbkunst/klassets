@@ -35,7 +35,7 @@ library(ggplot2)
 
 set.seed(123)
 
-df <- sim_quasianscombe_set_1(n = 100, x_sd = 5)
+df <- sim_quasianscombe_set_1(n = 100, beta1 = 2)
 
 plot(df) +
   # xlim(0, NA) +
