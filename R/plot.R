@@ -37,12 +37,13 @@ plot.klassets_quasianscombe <- function(x, add_lm = TRUE, ...){
 
 }
 
+#' @importFrom stats qnorm
 #' @export
 plot.klassets_xy_linear_model <- function(x, length_seq = 100, alpha = 0.05, ...){
 
   # x <- apply_linear_model(sim_xy())
 
-  dfgrid <- create_grid_from_data_frame(df, length_seq = length_seq)
+  dfgrid <- create_grid_from_data_frame(x, length_seq = length_seq)
 
   dfgrid <- add_power_variables_to_data_frame(dfgrid, order = attr(x, "order")) |>
     dplyr::select(-dplyr::matches("y")) |>
@@ -50,14 +51,14 @@ plot.klassets_xy_linear_model <- function(x, length_seq = 100, alpha = 0.05, ...
 
   predictions <- predict(attr(x, "model"), newdata = dfgrid, se = TRUE)
 
-  q <- qnorm(1 - alpha/2)
+  q <- stats::qnorm(1 - alpha/2)
 
   dfgrid <- dfgrid |>
     dplyr::mutate(
       fit = predictions$fit,
       se  = predictions$se,
-      low = fit - se * q,
-      high = fit + se * q
+      low = .data$fit - .data$se * q,
+      high = .data$fit + .data$se * q
       )
 
   ggplot2::ggplot() +
