@@ -36,4 +36,4 @@ reference:
 - title: Binary classification
   desc: Functions to simulate data for test ans explaing classifiers algorimths.
 - contents:
-  - matches("logistic_regression|response_xy")
+  - matches("logistic_regression|response_xy|tree")
