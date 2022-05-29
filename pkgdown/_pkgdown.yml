@@ -37,14 +37,14 @@ reference:
   - apply_statskmeans
   - kmeans_iterations
 - title: Binary classification
-  desc: Functions to simulate data for test ans explaing classifiers algorimths.
+  desc: Functions to simulate data for test and explaing classifiers algorimths.
 - contents:
   - sim_response_xy
   - apply_logistic_regression
   - apply_classification_tree
   - apply_knn
 - title: Regression
-  desc: Functions to simulate data for test ans explaing regression algorimths.
+  desc: Functions to simulate data for test and explaing regression algorimths.
 - contents:
   - sim_xy
   - apply_linear_model
