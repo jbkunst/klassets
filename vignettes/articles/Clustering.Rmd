@@ -26,7 +26,7 @@ if(require(showtext)){
 
 ## Generating data set 
 
-The main function is `sim_groups_for_clusters`, you need to define:
+The main function is `sim_groups`, you need to define:
 
 - A number of observations to draw.
 - A number of groups. = = = 
@@ -37,7 +37,7 @@ library(klassets)
 
 set.seed(123)
 
-df <- sim_groups_for_clusters(n = 500, groups = 3)
+df <- sim_groups(n = 500, groups = 3)
 
 plot(df)
 ```
