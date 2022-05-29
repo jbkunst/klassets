@@ -6,3 +6,4 @@
 ^vignettes/articles$
 ^pkgdown/
 ^README\.Rmd$
+^cran-comments\.md$
