@@ -37,10 +37,10 @@ plot(apply_knn(df, neighbours = 10))
 
 plot(apply_knn(df, neighbours = 200))
 
-plot(apply_knn(df, neighbours = 3, type = "reponse"))
+plot(apply_knn(df, neighbours = 3, type = "response"))
 
-plot(apply_knn(df, neighbours = 10, type = "reponse"))
+plot(apply_knn(df, neighbours = 10, type = "response"))
 
-plot(apply_knn(df, neighbours = 200, type = "reponse"))
+plot(apply_knn(df, neighbours = 200, type = "response"))
 
 }
