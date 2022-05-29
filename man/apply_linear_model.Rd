@@ -13,8 +13,8 @@ apply_linear_model(df, order = 1, stepwise = FALSE, verbose = FALSE)
 
 \item{stepwise}{A logical value to indicate to perform stepwise.}
 
-\item{verbose}{A logical value to incdicate to show the trace of thet
-stepwise procedure.#'}
+\item{verbose}{A logical value to indicate to show the trace of the
+stepwise procedure.}
 }
 \description{
 Apply Linear model to \code{klassets_xy} object

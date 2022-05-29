@@ -46,7 +46,7 @@ plot(df) +
 ### Set 4: No linear relationship
 
 ```{r}
-func <- function(x) { 2 * x^2  }
+func <- function(x) 1.5 * x^2
 
 df2_1 <- sim_quasianscombe_set_2(df, residual_factor = 0, fun = func)
 

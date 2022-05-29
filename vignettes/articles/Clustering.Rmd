@@ -1,5 +1,5 @@
 ---
-title: "Clustering helpers"
+title: "Clustering"
 editor_options: 
   chunk_output_type: console
 ---
@@ -57,7 +57,7 @@ plot(dfc1)
 
 ### K-means: Basic {klassets} implementation
 
-Or use a basic kmeans impementation with:
+Or use a basic K-means implementation with:
 
 ```{r}
 set.seed(234)

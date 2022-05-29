@@ -2,7 +2,7 @@
 % Please edit documentation in R/response_xy.R
 \name{sim_response_xy}
 \alias{sim_response_xy}
-\title{Generate data sets to apply a binary classifiers}
+\title{Generate data sets to apply binary classifiers}
 \usage{
 sim_response_xy(
   n = 100,
@@ -25,7 +25,7 @@ the response. A function f(x, y) need return a logical value.}
 \item{noise}{A number between 0 and 1.}
 }
 \description{
-Generate data sets to apply a binary classifiers
+Generate data sets to apply binary classifiers
 }
 \examples{
 

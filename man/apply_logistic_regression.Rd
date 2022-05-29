@@ -13,7 +13,7 @@ apply_logistic_regression(df, order = 1, stepwise = FALSE, verbose = FALSE)
 
 \item{stepwise}{A logical value to indicate to perform stepwise.}
 
-\item{verbose}{A logical value to incdicate to show the trace of thet
+\item{verbose}{A logical value to indicate to show the trace of the
 stepwise procedure.}
 }
 \description{

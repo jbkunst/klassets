@@ -2,7 +2,7 @@
 % Please edit documentation in R/xy.R
 \name{sim_xy}
 \alias{sim_xy}
-\title{Generate data sets to apply a regression methods}
+\title{Generate data sets to apply regression methods}
 \usage{
 sim_xy(
   n = 100,
@@ -26,7 +26,7 @@ with mean 5 and sd 1.}
 with mean 0 and sd 0.5.}
 }
 \description{
-Generate data sets to apply a regression methods
+Generate data sets to apply regression methods
 }
 \examples{
 

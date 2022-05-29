@@ -1,4 +1,4 @@
-#' Generate data sets to apply a binary classifiers
+#' Generate data sets to apply binary classifiers
 #'
 #' @param n An intenger
 #' @param x_dist A random number generation function.
@@ -53,7 +53,7 @@ sim_response_xy <- function(n = 100,
 #' @param df A object from `sim_response_xy`.
 #' @param order Order of values of x and y.
 #' @param stepwise A logical value to indicate to perform stepwise.
-#' @param verbose A logical value to incdicate to show the trace of thet
+#' @param verbose A logical value to indicate to show the trace of the
 #'   stepwise procedure.
 #'
 #' @examples

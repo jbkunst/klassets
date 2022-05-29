@@ -273,9 +273,9 @@ sim_quasianscombe_set_3 <- function(df,
 #' This function will:
 #' - Disorder the order of `x` values.
 #' - Rescale the `x` value to specific original quantiles.
-#' - Then take a porportion of value and traslate to left keeppping the original
+#' - Then take a proportion of value and translate to left keeping the original
 #' mean of `x`.
-#' - Finally add some value to the associated `y` value and substract to the
+#' - Finally add some value to the associated `y` value and subtract to the
 #' complement group to have the same regression model in terms of coefficients.
 #'
 #' @param df A data frame from `sim_quasianscombe_set_1` (or similar).
@@ -481,7 +481,7 @@ sim_quasianscombe_set_5 <- function(df, fun = identity, residual_factor = 10){
 #' Data sets _Type 6_ recreates the phenomenon of Simpon's paradox.
 #'
 #' This function will take `x` vector and separate `groups` groups to apply
-#' a local model with a modified regresion using the `b1_factor` factor.
+#' a local model with a modified regression using the `b1_factor` factor.
 #'
 #' The residual will be multiply with a value between 0 and 1 to make the visual
 #' effect greater.

@@ -243,7 +243,7 @@ plot.klassets_response_xy_classification_tree <- function(x, length_seq = 100, .
 plot.klassets_response_xy_knn <- function(x, length_seq = 100, ...){
 
   # df <- sim_response_xy(n = 1000)
-  # x <- apply_knn(df, neighbours = 200, type = "reponse")
+  # x <- apply_knn(df, neighbours = 200, type = "response")
   # x <- apply_knn(df, neighbours = 20, type = "prob")
   # length_seq <-  100
 

@@ -1,4 +1,4 @@
-#' Generate data sets to apply a regression methods
+#' Generate data sets to apply regression methods
 #'
 #' @param n Number of observations
 #' @param beta0 beta0, default value: 3,
@@ -46,8 +46,8 @@ sim_xy <- function(n = 100,
 #' @param df A object from `sim_response_xy`.
 #' @param order Order of predictive variable x.
 #' @param stepwise A logical value to indicate to perform stepwise.
-#' @param verbose A logical value to incdicate to show the trace of thet
-#'   stepwise procedure.#'
+#' @param verbose A logical value to indicate to show the trace of the
+#'   stepwise procedure.
 #'
 #' @examples
 #'

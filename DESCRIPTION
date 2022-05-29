@@ -34,7 +34,9 @@ Suggests:
     patchwork,
     rmarkdown,
     showtext,
+    spelling,
     tidyr,
     transformr
 Remotes: 
   github::grantmcdermott/parttree
+Language: en-US

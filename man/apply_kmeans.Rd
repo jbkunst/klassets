@@ -7,7 +7,7 @@
 apply_kmeans(df, centers = 3, ...)
 }
 \arguments{
-\item{df}{A \code{klassets_cluster} object.}
+\item{df}{A \code{klassets_cluster} object. A object from \code{sim_groups}.}
 
 \item{centers}{A numeric value to pass to \code{kmeans_iterations} function
 The famous k parameter.}
@@ -21,7 +21,7 @@ Apply K-means to \code{klassets_cluster} object
 
 set.seed(12)
 
-df <- sim_groups_for_clusters(n = 200, groups = 3)
+df <- sim_groups(n = 200, groups = 3)
 
 plot(df)
 

@@ -21,7 +21,7 @@ Apply K-means to \code{klassets_cluster} object using \code{stats::kmeans}
 
 set.seed(12)
 
-df <- sim_groups_for_clusters(n = 200, groups = 3)
+df <- sim_groups(n = 200, groups = 3)
 
 plot(df)
 

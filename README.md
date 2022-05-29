@@ -56,8 +56,7 @@ You can check:
 
 -   `vignette("Quasi-Anscombe-data-sets")` to know more about
     `sim_quasianscombe_set*` functions family.
--   `vignette("Clustering-helpers")` to check some helper for
-    clustering.
+-   `vignette("Clustering-helpers")` to see some helpers for clustering.
 
 ## Installation
 

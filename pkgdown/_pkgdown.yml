@@ -32,7 +32,7 @@ reference:
   desc: Functions to simulate data for test and explain clustering methods and
     functions to apply some basics algorimths.
 - contents:
-  - sim_groups_for_clusters
+  - sim_groups
   - apply_kmeans
   - apply_statskmeans
   - kmeans_iterations

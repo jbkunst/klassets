@@ -12,16 +12,16 @@ Posdef <- function (n, ev = runif(n, 0, 10)) {
 }
 
 
-#' Generate data sets to apply a clustering algorithm
+#' Generate data sets to apply clustering algorithms
 #'
-#' @param n An intenger
+#' @param n An integer.
 #' @param groups An integer
-#' @param props A vector of probabilties with length `groups`.
+#' @param props A vector of probabilities with length `groups`.
 #' @examples
 #'
 #' set.seed(123456)
 #'
-#' df <- sim_groups_for_clusters()
+#' df <- sim_groups()
 #'
 #' plot(df)
 #'
@@ -31,7 +31,7 @@ Posdef <- function (n, ev = runif(n, 0, 10)) {
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble as_tibble
 #' @export
-sim_groups_for_clusters <- function(n = 1000,
+sim_groups <- function(n = 1000,
                                     groups = 3,
                                     props = NULL) {
 
@@ -103,8 +103,8 @@ sim_groups_for_clusters <- function(n = 1000,
 
 #' Generate intermediate iterations when performing K-means
 #'
-#' @param df A object from `sim_groups_for_clusters`.
-#' @param centers How many clusters
+#' @param df A object from `sim_groups`.
+#' @param centers How many clusters.
 #' @param tolerance A value to indicating early stop.
 #' @param max_iterations Max iterations to calculate.
 #' @param verbose A logical value, to show or not iterations messages.
@@ -112,7 +112,7 @@ sim_groups_for_clusters <- function(n = 1000,
 #'
 #' set.seed(12)
 #'
-#' df <- sim_groups_for_clusters(n = 200, groups = 3)
+#' df <- sim_groups(n = 200, groups = 3)
 #'
 #' plot(df)
 #'
@@ -228,7 +228,7 @@ kmeans_iterations <- function(df,
 
 #' Apply K-means to `klassets_cluster` object
 #'
-#' @param df A `klassets_cluster` object.
+#' @param df A `klassets_cluster` object. A object from `sim_groups`.
 #' @param centers A numeric value to pass to `kmeans_iterations` function
 #'   The famous k parameter.
 #' @param ... Extra parameters for `kmeans_iterations` function.
@@ -237,7 +237,7 @@ kmeans_iterations <- function(df,
 #'
 #' set.seed(12)
 #'
-#' df <- sim_groups_for_clusters(n = 200, groups = 3)
+#' df <- sim_groups(n = 200, groups = 3)
 #'
 #' plot(df)
 #'
@@ -276,7 +276,7 @@ apply_kmeans <- function(df, centers = 3, ...){
 #'
 #' set.seed(12)
 #'
-#' df <- sim_groups_for_clusters(n = 200, groups = 3)
+#' df <- sim_groups(n = 200, groups = 3)
 #'
 #' plot(df)
 #'

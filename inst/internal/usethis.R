@@ -37,6 +37,11 @@ pkgdown::build_reference()
 pkgdown::build_site(preview = TRUE)
 
 
+
+# some checks -------------------------------------------------------------
+usethis::use_spell_check()
+
+
 # developing package ------------------------------------------------------
 usethis::use_package("tibble")
 usethis::use_package("ggplot2")

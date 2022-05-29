@@ -21,7 +21,7 @@ Data sets \emph{Type 6} recreates the phenomenon of Simpon's paradox.
 }
 \details{
 This function will take \code{x} vector and separate \code{groups} groups to apply
-a local model with a modified regresion using the \code{b1_factor} factor.
+a local model with a modified regression using the \code{b1_factor} factor.
 
 The residual will be multiply with a value between 0 and 1 to make the visual
 effect greater.

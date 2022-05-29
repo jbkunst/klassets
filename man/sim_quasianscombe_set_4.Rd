@@ -22,9 +22,9 @@ This function will:
 \itemize{
 \item Disorder the order of \code{x} values.
 \item Rescale the \code{x} value to specific original quantiles.
-\item Then take a porportion of value and traslate to left keeppping the original
+\item Then take a proportion of value and translate to left keeping the original
 mean of \code{x}.
-\item Finally add some value to the associated \code{y} value and substract to the
+\item Finally add some value to the associated \code{y} value and subtract to the
 complement group to have the same regression model in terms of coefficients.
 }
 }
