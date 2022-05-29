@@ -46,9 +46,9 @@ df
 plot(df)
 
 df2 <- sim_response_xy(
-  n = 500, 
+  n = 1000, 
   x_dist = purrr::partial(runif, min = -1, max = 1),
-  relationship = function(x, y)  x**2 - 0.5 > y,
+  relationship = function(x, y)  sqrt(abs(x)) - x - 0.5 > sin(y),
   noise = 0.1
   )
 
@@ -61,11 +61,52 @@ plot(df2)
 ### Logistic Regression
 
 ```{r}
-df2_lr <- apply_logistic_regression(df2, order = 3, stepwise = TRUE)
+df_lr <- apply_logistic_regression(df2)
 
-df2_lr
+df_lr
 
-plot(df2_lr)
+plot(df_lr)
+```
+
+By defaut the moderl use `order = 1` of the variables, i.e, `response ~ x + y`. We can get a better fit if we increase the order. 
+
+```{r}
+df_lr2 <- apply_logistic_regression(df2, order = 5, stepwise = TRUE)
+
+attr(df_lr2, "model")
+
+plot(df_lr2)
+```
+
+### Classification Tree `partykit::ctree`
+
+```{r}
+df_rt <- apply_classification_tree(df2)
+
+plot(df_rt)
+```
+
+The region are filled with the probability of the respective node. We can 
+specify the type of the prediction using the `type` argument. In the case of `response`.
+
+```{r}
+df_rt_response <- apply_classification_tree(df2, type = "response")
+
+df_rt_response
+
+plot(df_rt_response)
+```
+
+And now for the `node`.
+
+```{r}
+df_rt_node <- apply_classification_tree(df2, type = "node", maxdepth = 3)
+
+df_rt_node
+
+plot(df_rt_node)
+
+plot(attr(df_rt_node, "model"))
 ```
 
 
