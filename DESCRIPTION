@@ -31,6 +31,7 @@ Suggests:
     gganimate,
     gifski,
     here,
+    patchwork,
     rmarkdown,
     showtext,
     tidyr,

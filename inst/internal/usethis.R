@@ -60,6 +60,7 @@ usethis::use_package("transformr", type = "Suggests")
 usethis::use_package("gganimate", type = "Suggests")
 usethis::use_package("gifski", type = "Suggests")
 usethis::use_package("here", type = "Suggests")
+usethis::use_package("patchwork", type = "Suggests")
 
 
 
