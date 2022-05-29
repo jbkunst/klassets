@@ -13,7 +13,7 @@ apply_classification_tree(df, maxdepth = Inf, alpha = 0.05, type = "prob", ...)
 
 \item{alpha}{Alpha value, same used in \code{partykit::ctree_control}}
 
-\item{type}{Type of prediction, one of "prob, response, node.}
+\item{type}{Type of prediction, one of prob, response, node.}
 
 \item{...}{Options for \code{partykit::ctree_control}.}
 }

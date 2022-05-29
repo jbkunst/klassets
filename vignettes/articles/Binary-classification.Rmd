@@ -36,6 +36,8 @@ The main function is `sim_response_xy`, you need to define:
 
 ```{r setup}
 library(klassets)
+library(ggplot2)
+library(patchwork)
 
 set.seed(123)
 
@@ -49,7 +51,7 @@ df2 <- sim_response_xy(
   n = 1000, 
   x_dist = purrr::partial(runif, min = -1, max = 1),
   relationship = function(x, y)  sqrt(abs(x)) - x - 0.5 > sin(y),
-  noise = 0.1
+  noise = 0.15
   )
 
 plot(df2)
@@ -109,5 +111,27 @@ plot(df_rt_node)
 plot(attr(df_rt_node, "model"))
 ```
 
+### K Nearest Neighbours `class::knn`
+
+```{r}
+# defaults to prob
+apply_knn(df2)
+
+apply_knn(df2, type = "response")
+
+plot(apply_knn(df))
+
+neighbours <- c(3, 10, 50, 100)
+
+purrr::map(neighbours, apply_knn, df = df_lr2) |> 
+  purrr::map(plot) |> 
+  purrr::reduce(`+`) +
+  patchwork::plot_layout(guides = "collect")
+
+purrr::map(neighbours, apply_knn, df = df_lr2, type = "response") |> 
+  purrr::map(plot) |> 
+  purrr::reduce(`+`) +
+  patchwork::plot_layout(guides = "collect")
+```
 
 

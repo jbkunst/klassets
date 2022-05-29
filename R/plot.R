@@ -125,7 +125,6 @@ plot.klassets_xy_regression_tree <- function(x, length_seq = 100, alpha = 0.05, 
 
 }
 
-
 #' @export
 plot.klassets_response_xy <- function(x, ...){
 
@@ -180,7 +179,7 @@ plot.klassets_response_xy_classification_tree <- function(x, length_seq = 100, .
   # t <- "response"
   # t <- "node"
   #
-  # x <- apply_tree(df, type = t)
+  # x <- apply_classification_tree(df, type = t)
 
   type  <- attr(x, "type")
 
@@ -243,8 +242,10 @@ plot.klassets_response_xy_classification_tree <- function(x, length_seq = 100, .
 #' @export
 plot.klassets_response_xy_knn <- function(x, length_seq = 100, ...){
 
-  # x <- apply_knn(sim_response_xy(n = 1000), neighbours = 100)
-  # length_seq <-  200
+  # df <- sim_response_xy(n = 1000)
+  # x <- apply_knn(df, neighbours = 200, type = "reponse")
+  # x <- apply_knn(df, neighbours = 20, type = "prob")
+  # length_seq <-  100
 
   dfgrid <- create_grid_from_data_frame(x, length_seq = length_seq)
 
@@ -256,39 +257,53 @@ plot.klassets_response_xy_knn <- function(x, length_seq = 100, ...){
     prob  = TRUE
   )
 
-  if(attr(x, "type") == "prob"){
-    predictions <- attr(preds, "prob")
+  type <- attr(x, "type")
+
+  scale_fill <- switch(
+    type,
+    prob = ggplot2::scale_fill_gradient2(
+      name = "Model", midpoint = 0.5,
+      breaks = seq(0, 1, by = 0.25),
+      limits = c(0, 1),
+      high = scales::muted("blue"),
+      low =  scales::muted("red")
+      ),
+    response = ggplot2::scale_fill_manual(
+      name = "Model",
+      values = c(scales::muted("red"), scales::muted("blue"))
+      )
+    )
+
+  if(type == "prob"){
+
+    probs <- attr(preds, "prob")
+    predictions <- ifelse(preds == TRUE, probs, 1 - probs)
+
   } else {
-    predictions <- as.logical(preds)
-  }
 
-  if(attr(x, "type") == "prob") {
-
-    predictions <- scales::rescale(as.vector(predictions), to = c(0.01, .99))
-
-    dfgrid <- mutate(dfgrid, prediction = scales::rescale(as.vector(predictions), to = c(0, 1)))
-
-    # return(plot_pred_field(x, dfgrid))
+    predictions <- as.factor(preds)
 
   }
+
+  dfgrid <- mutate(dfgrid, prediction = predictions)
 
   p <- ggplot2::ggplot() +
 
-    ggproto_contour_fill(dfgrid) +
+    ggplot2::geom_raster(
+      data = dfgrid,
+      ggplot2::aes(.data$x, .data$y, fill = .data$prediction),
+      alpha = 0.5
+      )  +
 
     ggproto_point_response_xy_color_shape(x) +
 
-    ggplot2::scale_fill_gradient2(
-      name = "Model", midpoint = 0.5, breaks = seq(0, 1, by = 0.25), limits = c(0, 1),
-      high = scales::muted("blue"), low =  scales::muted("red")
-    )
+    scale_fill
+
+  # if(type == "prob") p <- p + ggproto_text_contour(dfgrid)
 
   addorn_ggplot(p)
 
-
-
 }
-
 
 #' @export
 plot.klassets_cluster <- function(x, ...){
@@ -416,10 +431,11 @@ ggproto_point_response_xy_color_shape <- function(x){
 ggproto_contour_fill <- function(dfgrid, bins = 100, ...) {
 
   # ggplot2::geom_contour_filled(
-  metR::geom_contour_fill(
+  # metR::geom_contour_fill(
+  ggplot2::geom_raster(
     data = dfgrid,
-    ggplot2::aes(.data$x, .data$y, z = .data$prediction),
-    bins = bins,
+    ggplot2::aes(.data$x, .data$y, fill = .data$prediction),
+    # bins = bins,
     ...
     )
 

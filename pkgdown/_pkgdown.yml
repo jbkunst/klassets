@@ -32,12 +32,21 @@ reference:
   desc: Functions to simulate data for test and explain clustering methods and
     functions to apply some basics algorimths.
 - contents:
-  - matches("clust|kmeans")
+  - sim_groups_for_clusters
+  - apply_kmeans
+  - apply_statskmeans
+  - kmeans_iterations
 - title: Binary classification
   desc: Functions to simulate data for test ans explaing classifiers algorimths.
 - contents:
-  - matches("sim_response_xy|logistic_regression|response_xy|apply_classification_tree")
+  - sim_response_xy
+  - apply_logistic_regression
+  - apply_classification_tree
+  - apply_knn
 - title: Regression
   desc: Functions to simulate data for test ans explaing regression algorimths.
 - contents:
-  - matches("sim_xy|apply_linear_model|apply_regression_tree")
+  - sim_xy
+  - apply_linear_model
+  - apply_regression_tree
+

@@ -109,7 +109,7 @@ apply_logistic_regression <- function(df,
 #' @param df A object from `sim_response_xy`.
 #' @param maxdepth Max depth of the tree. Same used in `partykit::ctree_control`.
 #' @param alpha Alpha value, same used in `partykit::ctree_control`
-#' @param type Type of prediction, one of "prob, response, node.
+#' @param type Type of prediction, one of prob, response, node.
 #' @param ... Options for `partykit::ctree_control`.
 #'
 #' @examples
@@ -167,8 +167,44 @@ apply_classification_tree <- function(df, maxdepth = Inf, alpha = 0.05, type = "
 
 }
 
+#' Apply K Nearest Neighbours to `klassets_response_xy` object
+#'
+#' @param df A object from `sim_response_xy`.
+#' @param neighbours The neighbours parameter.
+#' @param type Type of prediction, one of prob or response.
+#'
+#' @examples
+#'
+#' set.seed(123)
+#'
+#' df <- sim_response_xy(n = 1000, relationship = function(x, y) x**2 > sin(y))
+#'
+#' plot(df)
+#'
+#' # defaults to prob
+#' apply_knn(df)
+#'
+#' apply_knn(df, type = "response")
+#'
+#' plot(apply_knn(df))
+#'
+#' plot(apply_knn(df, neighbours = 3))
+#'
+#' plot(apply_knn(df, neighbours = 10))
+#'
+#' plot(apply_knn(df, neighbours = 200))
+#'
+#' plot(apply_knn(df, neighbours = 3, type = "response"))
+#'
+#' plot(apply_knn(df, neighbours = 10, type = "response"))
+#'
+#' plot(apply_knn(df, neighbours = 200, type = "response"))
+#'
 #' @importFrom class knn
+#' @export
 apply_knn <- function(df, neighbours = 10, type = "prob"){
+
+  stopifnot(type %in% c("prob", "response"))
 
   preds <- class::knn(
     train = dplyr::select(df, .data$x, .data$y) |> as.matrix(),

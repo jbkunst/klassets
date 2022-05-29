@@ -33,7 +33,7 @@ adding a normal distributed noise using \code{error_sd} creating \code{y} values
 \details{
 This is the \emph{typical first} example when regression analysis is taught.
 
-Thei
+Internally this is the same procedure of \code{sim_xy}.
 }
 \examples{
 
