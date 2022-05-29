@@ -81,16 +81,16 @@ stepwise procedure.#'</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        x     y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  1.68  3.58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  2.92  4.52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  3.13  5.02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  3.40  4.55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  3.74  4.58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  3.77  5.39</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  3.78  5.92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  3.89  5.79</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  3.92  4.82</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  3.94  5.70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  2.98  4.67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  3.25  4.17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  3.66  4.53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  3.70  4.60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  3.71  4.59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  3.73  4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  3.77  4.86</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  3.85  4.53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  3.92  3.84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  3.94  5.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 90 more rows</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">dflm</span> <span class="op">&lt;-</span> <span class="fu">apply_linear_model</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
@@ -99,16 +99,16 @@ stepwise procedure.#'</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        x     y prediction</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  1.68  3.58       3.91</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  2.92  4.52       4.52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  3.13  5.02       4.63</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  3.40  4.55       4.76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  3.74  4.58       4.92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  3.77  5.39       4.94</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  3.78  5.92       4.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  3.89  5.79       5.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  3.92  4.82       5.01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  3.94  5.70       5.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  2.98  4.67       4.31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  3.25  4.17       4.46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  3.66  4.53       4.69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  3.70  4.60       4.71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  3.71  4.59       4.71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  3.73  4.72       4.73</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  3.77  4.86       4.75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  3.85  4.53       4.79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  3.92  3.84       4.83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  3.94  5.98       4.84</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 90 more rows</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dflm</span><span class="op">)</span></span>
@@ -124,16 +124,16 @@ stepwise procedure.#'</p></dd>
 <span class="r-plt img"><img src="apply_linear_model-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">apply_linear_model</span><span class="op">(</span><span class="va">df</span>, order <span class="op">=</span> <span class="fl">5</span>, stepwise <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start:  AIC=-1339.58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Start:  AIC=-1254.71</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y ~ x + x_2 + x_3 + x_4 + x_5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Df Sum of Sq    RSS     AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;none&gt;              258.83 -1339.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - x_5   1     2.387 261.22 -1332.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - x_4   1    20.766 279.60 -1264.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - x_3   1    57.260 316.09 -1141.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - x_2   1    94.389 353.22 -1030.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - x     1    98.222 357.05 -1019.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Df Sum of Sq    RSS      AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;none&gt;              281.76 -1254.71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - x_5   1    14.080 295.84 -1207.94</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - x_4   1    40.925 322.68 -1121.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - x_3   1    79.761 361.52 -1007.44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - x     1   110.750 392.51  -925.20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - x_2   1   112.313 394.07  -921.22</span>
 <span class="r-plt img"><img src="apply_linear_model-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 </code></pre></div>
