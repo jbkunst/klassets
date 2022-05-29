@@ -45,7 +45,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Binary-classification.html">Binary classification</a>
-    <a class="dropdown-item" href="../articles/Clustering-helpers.html">Clustering helpers</a>
+    <a class="dropdown-item" href="../articles/Clustering.html">Clustering</a>
     <a class="dropdown-item" href="../articles/Quasi-Anscombe-data-sets.html">Quasi Anscombe data sets</a>
   </div>
 </li>
@@ -88,7 +88,7 @@
 <ul>
 <li>A number of observations to simulate.</li>
 <li>Distributions to sample <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. For example <code>purrr::partial(runif, min = -1, max = 1)</code>.</li>
-<li>A gunction to define the relation between the reponse and the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, for example <code>function(x, y) x &gt; y</code> This function must return a logical value.</li>
+<li>A function to define the relation between the response and the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, for example <code>function(x, y) x &gt; y</code> This function must return a logical value.</li>
 <li>A number to define the noise in the generated data.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -157,7 +157,7 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_lr</span><span class="op">)</span></code></pre></div>
 <p><img src="Binary-classification_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<p>By defaut the moderl use <code>order = 1</code> of the variables, i.e, <code>response ~ x + y</code>. We can get a better fit if we increase the order.</p>
+<p>By default the model use <code>order = 1</code> of the variables, i.e, <code>response ~ x + y</code>. We can get a better fit if we increase the order.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_lr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_logistic_regression.html">apply_logistic_regression</a></span><span class="op">(</span><span class="va">df2</span>, order <span class="op">=</span> <span class="fl">5</span>, stepwise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 

@@ -3,9 +3,9 @@ pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   Binary-classification: Binary-classification.html
-  Clustering-helpers: Clustering-helpers.html
+  Clustering: Clustering.html
   Quasi-Anscombe-data-sets: Quasi-Anscombe-data-sets.html
-last_built: 2022-05-29T04:07Z
+last_built: 2022-05-29T05:44Z
 urls:
   reference: https://jkunst.com/klassets/reference
   article: https://jkunst.com/klassets/articles

@@ -45,7 +45,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Binary-classification.html">Binary classification</a>
-    <a class="dropdown-item" href="../articles/Clustering-helpers.html">Clustering helpers</a>
+    <a class="dropdown-item" href="../articles/Clustering.html">Clustering</a>
     <a class="dropdown-item" href="../articles/Quasi-Anscombe-data-sets.html">Quasi Anscombe data sets</a>
   </div>
 </li>
@@ -105,7 +105,7 @@
 <h3 id="set-4-no-linear-relationship">Set 4: No linear relationship<a class="anchor" aria-label="anchor" href="#set-4-no-linear-relationship"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">func</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span>  <span class="op">}</span>
+<code class="sourceCode R"><span class="va">func</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">1.5</span> <span class="op">*</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span>
 
 <span class="va">df2_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_2.html">sim_quasianscombe_set_2</a></span><span class="op">(</span><span class="va">df</span>, residual_factor <span class="op">=</span> <span class="fl">0</span>, fun <span class="op">=</span> <span class="va">func</span><span class="op">)</span>
 
@@ -219,8 +219,8 @@
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Original (Intercept)     2.74    0.276       9.93 1.74<span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span> ***  </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Original x               2.04    0.053<span style="text-decoration: underline;">3</span>     38.3  1.01<span style="color: #949494;">e</span><span style="color: #BB0000;">-60</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Set 2 v1 (Intercept)     2.74    1.56        1.76 8.23<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> .    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Set 2 v1 x               2.04    0.302       6.77 9.71<span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span> ***  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Set 2 v1 (Intercept)     2.74    1.18        2.33 2.20<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> *    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Set 2 v1 x               2.04    0.228       8.97 2.11<span style="color: #949494;">e</span><span style="color: #BB0000;">-14</span> ***  </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Set 2 v2 (Intercept)     2.74    0.898       3.05 2.94<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span> **   </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Set 2 v2 x               2.04    0.174      11.8  1.95<span style="color: #949494;">e</span><span style="color: #BB0000;">-20</span> ***  </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Set 3 v1 (Intercept)     2.74    1.15        2.37 1.97<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> *    </span>
