@@ -201,7 +201,7 @@ plot.klassets_response_xy_classification_tree <- function(x, length_seq = 100, .
 
     response = ggplot2::scale_fill_manual(
       name = "Model",
-      values = c(scales::muted("blue"), scales::muted("red"))
+      values = c(scales::muted("red"), scales::muted("blue"))
     )
   )
 
@@ -214,9 +214,9 @@ plot.klassets_response_xy_classification_tree <- function(x, length_seq = 100, .
         ymin = .data$ymin, ymax = .data$ymax,
         fill = .data$type
       ),
-      alpha = 0.2,
+      alpha = 0.25,
       color = "gray70",
-      size = 0.1
+      size = 0.5
     ) +
 
     ggproto_point_response_xy_color_shape(x) +

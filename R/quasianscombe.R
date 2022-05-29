@@ -6,7 +6,7 @@
 #'
 #' This is the _typical first_ example when regression analysis is taught.
 #'
-#' Thei
+#' Internally this is the same procedure of `sim_xy`.
 #'
 #' @inheritParams sim_xy
 #'
