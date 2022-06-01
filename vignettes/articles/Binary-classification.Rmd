@@ -41,20 +41,21 @@ library(patchwork)
 
 set.seed(123)
 
-df <- sim_response_xy(n = 500)
+df_default <- sim_response_xy(n = 500)
 
-df
+df_default
 
-plot(df)
+plot(df_default)
 
-df2 <- sim_response_xy(
-  n = 1000, 
+df <- sim_response_xy(
+  n = 500, 
   x_dist = purrr::partial(runif, min = -1, max = 1),
-  relationship = function(x, y)  sqrt(abs(x)) - x - 0.5 > sin(y),
+  # relationship = function(x, y) sqrt(abs(x)) - x - 0.5 > sin(y),
+  relationship = function(x, y) sin(x*pi) > sin(y*pi),
   noise = 0.15
   )
 
-plot(df2)
+plot(df)
 ```
 
 
@@ -63,7 +64,7 @@ plot(df2)
 ### Logistic Regression
 
 ```{r}
-df_lr <- apply_logistic_regression(df2)
+df_lr <- apply_logistic_regression(df)
 
 df_lr
 
@@ -73,26 +74,42 @@ plot(df_lr)
 By default the model use `order = 1` of the variables, i.e, `response ~ x + y`. We can get a better fit if we increase the order. 
 
 ```{r}
-df_lr2 <- apply_logistic_regression(df2, order = 5, stepwise = TRUE)
+df_lr2 <- apply_logistic_regression(df, order = 4, stepwise = TRUE)
 
 attr(df_lr2, "model")
 
 plot(df_lr2)
 ```
 
+Testing various orders.
+
+```{r}
+orders <- c(1, 2, 3, 4)
+
+orders |> 
+  purrr::map(apply_logistic_regression, df = df) |> 
+  purrr::map(plot) |> 
+  purrr::reduce(`+`) +
+  patchwork::plot_layout(guides = "collect") &
+  theme_void() + theme(legend.position = "none")
+```
+
+
 ### Classification Tree `partykit::ctree`
 
 ```{r}
-df_rt <- apply_classification_tree(df2)
+df_rt <- apply_classification_tree(df)
 
 plot(df_rt)
+
+plot(apply_classification_tree(df, alpha = 0.25))
 ```
 
 The region are filled with the probability of the respective node. We can 
 specify the type of the prediction using the `type` argument. In the case of `response`.
 
 ```{r}
-df_rt_response <- apply_classification_tree(df2, type = "response")
+df_rt_response <- apply_classification_tree(df, type = "response")
 
 df_rt_response
 
@@ -102,7 +119,7 @@ plot(df_rt_response)
 And now for the `node`.
 
 ```{r}
-df_rt_node <- apply_classification_tree(df2, type = "node", maxdepth = 3)
+df_rt_node <- apply_classification_tree(df, type = "node", maxdepth = 3)
 
 df_rt_node
 
@@ -115,23 +132,25 @@ plot(attr(df_rt_node, "model"))
 
 ```{r}
 # defaults to prob
-apply_knn(df2)
+apply_knn(df)
 
-apply_knn(df2, type = "response")
+apply_knn(df, type = "response")
 
 plot(apply_knn(df))
 
-neighbours <- c(3, 10, 50, 100)
+neighbours <- c(3, 10, 50, 300)
 
-purrr::map(neighbours, apply_knn, df = df_lr2) |> 
+purrr::map(neighbours, apply_knn, df = df) |> 
   purrr::map(plot) |> 
   purrr::reduce(`+`) +
-  patchwork::plot_layout(guides = "collect")
+  patchwork::plot_layout(guides = "collect") &
+  theme_void() + theme(legend.position = "none")
 
-purrr::map(neighbours, apply_knn, df = df_lr2, type = "response") |> 
+purrr::map(neighbours, apply_knn, df = df, type = "response") |> 
   purrr::map(plot) |> 
   purrr::reduce(`+`) +
-  patchwork::plot_layout(guides = "collect")
+  patchwork::plot_layout(guides = "collect")  &
+  theme_void() + theme(legend.position = "none")
 ```
 
 
