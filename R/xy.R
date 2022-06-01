@@ -132,7 +132,6 @@ apply_linear_model <- function(df, order = 1, stepwise = FALSE, verbose = FALSE)
 #' # default
 #' plot(apply_regression_tree(df))
 #'
-#'
 #' @export
 apply_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 
@@ -178,6 +177,7 @@ apply_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 #'
 #' plot(apply_linear_model_tree(df))
 #'
+#' @importFrom partykit lmtree
 #' @export
 apply_linear_model_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 
