@@ -154,3 +154,53 @@ apply_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 
 }
 
+#' Apply Linear Model tree to `klassets_xy` object
+#'
+#' @param df A object from `sim_response_xy`.
+#' @param ... Options for `partykit::mltree`.
+#'
+#' @examples
+#'
+#' df <- sim_xy()
+#'
+#' df
+#'
+#' dflm <- apply_linear_model_tree(df)
+#'
+#' dflm
+#'
+#' plot(dflm)
+#'
+#' df <- sim_xy(1000)
+#' df <- dplyr::mutate(df, y = y + 10 * sin(x) + sqrt(abs(x)))
+#'
+#' plot(df)
+#'
+#' plot(apply_linear_model_tree(df))
+#'
+#' @export
+apply_linear_model_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
+
+  df <- dplyr::mutate(df, x2 = .data$x)
+
+  mod <- partykit::lmtree(
+    y ~ x | x2, data = df,
+    maxdepth = maxdepth,
+    alpha = alpha,
+    ...
+    )
+
+  df <- dplyr::mutate(df, prediction = predict(mod, newdata = df))
+
+  df <- df |>
+    dplyr::select(.data$x, .data$y, .data$prediction)
+
+  # Mmm...
+  class(df) <- setdiff(class(df), "klassets_xy")
+  class(df) <- c("klassets_xy_linear_model_tree", class(df))
+
+  attr(df, "model") <- mod
+
+  df
+
+}

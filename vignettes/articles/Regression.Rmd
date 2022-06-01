@@ -1,0 +1,137 @@
+---
+title: "Regression"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  gganimate = list(nframes = 50)
+)
+
+library(ggplot2)
+
+theme_set(theme_minimal(base_size = 21))
+
+if(require(showtext)){
+ 
+  sysfonts::font_add_google("IBM Plex Sans", "plex")
+  showtext::showtext_auto()
+   
+}
+```
+
+## Generating data set 
+
+The main function is `sim_xy`, you need to define:
+
+- A number of observations to simulate.
+- Values $beta_0$ and $beta_1$.
+- A distribution to sample $x$. For example `stats::runif` or  `purrr::partial(stats::rnorm, mean = 5, sd = 1)`.
+- A function to sample error values like `purrr::partial(stats::rnorm, sd = 0.5)`.
+
+
+
+```{r setup}
+library(klassets)
+library(ggplot2)
+library(patchwork)
+
+set.seed(123)
+
+df_default <- sim_xy()
+
+df_default
+
+plot(df_default)
+```
+
+It's possible be more compliacted
+
+```{r}
+rar <- purrr::compose(
+  purrr::partial(arima.sim, model = list(ar = .9, ma = .4)),
+  as.numeric, 
+  .dir = "forward"
+  )
+
+df <- sim_xy(
+  n = 1000, 
+  beta0 = 1,
+  beta1 = 1,
+  x_dist = purrr::partial(runif, min = -1, max = 1),
+  error_dist = rar
+  )
+
+plot(df)
+
+df <- dplyr::mutate(df, y = y + 5 * sin(x) + 20 * x**3)
+
+plot(df)
+```
+
+## Apply classification algorithms
+
+### Linear Regression
+
+```{r}
+df_lr <- apply_linear_model(df)
+
+df_lr
+
+plot(df_lr)
+```
+
+By default the model use `order = 1` of the variables, i.e, `response ~ x + y`. We can get a better fit if we increase the order. 
+
+```{r}
+df_lr2 <- apply_linear_model(df, order = 4, stepwise = TRUE)
+
+attr(df_lr2, "model")
+
+plot(df_lr2)
+```
+
+Testing various orders.
+
+```{r}
+orders <- c(1, 2, 3, 4)
+
+orders |> 
+  purrr::map(apply_linear_model, df = df) |> 
+  purrr::map(plot) |> 
+  purrr::reduce(`+`) +
+  patchwork::plot_layout(guides = "collect") &
+  theme_void() + theme(legend.position = "none")
+```
+
+### Regression Tree `partykit::ctree`
+
+```{r}
+df_rt <- apply_regression_tree(df, maxdepth = 2)
+
+plot(df_rt)
+
+plot(attr(df_rt, "model"))
+
+plot(apply_regression_tree(df, maxdepth = 3))
+```
+
+
+### Linear Model Tree `partykit::mltree`
+
+
+```{r}
+df_lmt <- apply_linear_model_tree(df, maxdepth = 2)
+
+plot(df_lmt)
+
+plot(attr(df_lmt, "model"))
+
+plot(apply_linear_model_tree(df, maxdepth = 3))
+```
+
+
