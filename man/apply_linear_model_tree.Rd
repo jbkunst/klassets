@@ -9,7 +9,11 @@ apply_linear_model_tree(df, maxdepth = Inf, alpha = 0.05, ...)
 \arguments{
 \item{df}{A object from \code{sim_response_xy}.}
 
-\item{...}{Options for \code{partykit::mltree}.}
+\item{maxdepth}{Max depth of the tree. Same used in \code{partykit::mob_control}.}
+
+\item{alpha}{Alpha value, same used in \code{partykit::mob_control}}
+
+\item{...}{Addiotional options passed to \code{partykit::mob_control}.}
 }
 \description{
 Apply Linear Model tree to \code{klassets_xy} object

@@ -47,15 +47,13 @@ df_default <- sim_xy()
 df_default
 
 plot(df_default)
-
-df <- sim_xy(n = 1000, x_dist = runif)
-
-plot(df)
 ```
 
 We can modify the data frame to get other types of relationships.
 
 ```{r}
+df <- sim_xy(n = 1000, x_dist = runif)
+
 df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
 
 plot(df)
@@ -64,6 +62,8 @@ plot(df)
 ## Apply classification algorithms
 
 ### Linear Regression
+
+This function uses `stats::lm` to fit a model.
 
 ```{r}
 df_lr <- apply_linear_model(df)
@@ -96,7 +96,10 @@ orders |>
   theme_void() + theme(legend.position = "none")
 ```
 
-### Regression Tree `partykit::ctree`
+### Regression Tree 
+
+Internally the functions uses `partykit::ctree`.
+
 
 ```{r}
 df_rt <- apply_regression_tree(df, maxdepth = 2)
@@ -111,6 +114,7 @@ plot(apply_regression_tree(df))
 
 ### Linear Model Tree `partykit::mltree`
 
+Internally the functions uses `partykit::mltree`.
 
 ```{r}
 df_lmt <- apply_linear_model_tree(df, maxdepth = 3)

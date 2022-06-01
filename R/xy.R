@@ -156,7 +156,9 @@ apply_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 #' Apply Linear Model tree to `klassets_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
-#' @param ... Options for `partykit::mltree`.
+#' @param maxdepth Max depth of the tree. Same used in `partykit::mob_control`.
+#' @param alpha Alpha value, same used in `partykit::mob_control`
+#' @param ... Addiotional options passed to `partykit::mob_control`.
 #'
 #' @examples
 #'
