@@ -88,7 +88,7 @@
 <p>The main function is <code>sim_xy</code>, you need to define:</p>
 <ul>
 <li>A number of observations to simulate.</li>
-<li>Values <span class="math inline">\(beta_0\)</span> and <span class="math inline">\(beta_1\)</span>.</li>
+<li>Values <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</li>
 <li>A distribution to sample <span class="math inline">\(x\)</span>. For example <code><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">stats::runif</a></code> or <code>purrr::partial(stats::rnorm, mean = 5, sd = 1)</code>.</li>
 <li>A function to sample error values like <code>purrr::partial(stats::rnorm, sd = 0.5)</code>.</li>
 </ul>
@@ -119,30 +119,18 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_default</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/setup-1.png" width="700"></p>
-<p>It’s possible be more compliacted</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rar</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/compose.html" class="external-link">compose</a></span><span class="op">(</span>
-  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">arima.sim</span>, model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ar <span class="op">=</span> <span class="fl">.9</span>, ma <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span><span class="op">)</span>,
-  <span class="va">as.numeric</span>, 
-  .dir <span class="op">=</span> <span class="st">"forward"</span>
-  <span class="op">)</span>
+<code class="sourceCode R">
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_xy.html">sim_xy</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, x_dist <span class="op">=</span> <span class="va">runif</span><span class="op">)</span>
 
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_xy.html">sim_xy</a></span><span class="op">(</span>
-  n <span class="op">=</span> <span class="fl">1000</span>, 
-  beta0 <span class="op">=</span> <span class="fl">1</span>,
-  beta1 <span class="op">=</span> <span class="fl">1</span>,
-  x_dist <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">runif</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  error_dist <span class="op">=</span> <span class="va">rar</span>
-  <span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+<p><img src="Regression_files/figure-html/setup-2.png" width="700"></p>
+<p>We can modify the data frame to get other types of relationships.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">df</span>, y <span class="op">=</span> <span class="va">y</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="fl">5</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">df</span>, y <span class="op">=</span> <span class="va">y</span> <span class="op">+</span> <span class="fl">5</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fl">20</span> <span class="op">*</span> <span class="va">x</span><span class="op">**</span><span class="fl">3</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
-<p><img src="Regression_files/figure-html/unnamed-chunk-2-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="apply-classification-algorithms">Apply classification algorithms<a class="anchor" aria-label="anchor" href="#apply-classification-algorithms"></a>
@@ -155,18 +143,18 @@
 
 <span class="va">df_lr</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 3</span></span>
-<span class="co">#&gt;         x     y prediction</span>
-<span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> -<span style="color: #BB0000;">0.999</span> -<span style="color: #BB0000;">22.2</span>      -<span style="color: #BB0000;">16.0</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> -<span style="color: #BB0000;">0.998</span> -<span style="color: #BB0000;">21.8</span>      -<span style="color: #BB0000;">16.0</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> -<span style="color: #BB0000;">0.998</span> -<span style="color: #BB0000;">21.2</span>      -<span style="color: #BB0000;">16.0</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> -<span style="color: #BB0000;">0.995</span> -<span style="color: #BB0000;">20.5</span>      -<span style="color: #BB0000;">16.0</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> -<span style="color: #BB0000;">0.993</span> -<span style="color: #BB0000;">22.1</span>      -<span style="color: #BB0000;">15.9</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> -<span style="color: #BB0000;">0.992</span> -<span style="color: #BB0000;">22.5</span>      -<span style="color: #BB0000;">15.9</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000;">0.992</span> -<span style="color: #BB0000;">21.5</span>      -<span style="color: #BB0000;">15.9</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> -<span style="color: #BB0000;">0.991</span> -<span style="color: #BB0000;">20.0</span>      -<span style="color: #BB0000;">15.9</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> -<span style="color: #BB0000;">0.990</span> -<span style="color: #BB0000;">20.1</span>      -<span style="color: #BB0000;">15.9</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> -<span style="color: #BB0000;">0.986</span> -<span style="color: #BB0000;">20.6</span>      -<span style="color: #BB0000;">15.8</span></span>
+<span class="co">#&gt;           x     y prediction</span>
+<span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 0.000<span style="text-decoration: underline;">465</span>  2.64       5.24</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 0.001<span style="text-decoration: underline;">16</span>   2.24       5.24</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 0.001<span style="text-decoration: underline;">19</span>   2.67       5.24</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 0.002<span style="text-decoration: underline;">48</span>   3.09       5.24</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 0.003<span style="text-decoration: underline;">68</span>   2.36       5.23</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 0.003<span style="text-decoration: underline;">90</span>   3.34       5.23</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 0.004<span style="text-decoration: underline;">11</span>   3.19       5.23</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 0.004<span style="text-decoration: underline;">64</span>   2.60       5.23</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0.004<span style="text-decoration: underline;">84</span>   3.16       5.23</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 0.006<span style="text-decoration: underline;">83</span>   3.45       5.22</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows</span></span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_lr</span><span class="op">)</span></code></pre></div>
@@ -182,7 +170,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt; (Intercept)            x          x_2          x_3          x_4  </span>
-<span class="co">#&gt;      0.7699       6.9169       5.9271      17.4835      -6.4519</span>
+<span class="co">#&gt;       2.932       13.711      -18.046      -16.697       19.801</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_lr2</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
@@ -212,14 +200,14 @@
 <p><img src="Regression_files/figure-html/unnamed-chunk-6-2.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/apply_regression_tree.html">apply_regression_tree</a></span><span class="op">(</span><span class="va">df</span>, maxdepth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/apply_regression_tree.html">apply_regression_tree</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-6-3.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="linear-model-tree-partykitmltree">Linear Model Tree <code>partykit::mltree</code><a class="anchor" aria-label="anchor" href="#linear-model-tree-partykitmltree"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_lmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_linear_model_tree.html">apply_linear_model_tree</a></span><span class="op">(</span><span class="va">df</span>, maxdepth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df_lmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_linear_model_tree.html">apply_linear_model_tree</a></span><span class="op">(</span><span class="va">df</span>, maxdepth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_lmt</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
@@ -229,7 +217,7 @@
 <p><img src="Regression_files/figure-html/unnamed-chunk-7-2.png" width="700"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/apply_linear_model_tree.html">apply_linear_model_tree</a></span><span class="op">(</span><span class="va">df</span>, maxdepth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/apply_linear_model_tree.html">apply_linear_model_tree</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-7-3.png" width="700"></p>
 </div>
 </div>
