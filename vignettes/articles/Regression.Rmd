@@ -29,7 +29,7 @@ if(require(showtext)){
 The main function is `sim_xy`, you need to define:
 
 - A number of observations to simulate.
-- Values $beta_0$ and $beta_1$.
+- Values $\beta_0$ and $\beta_1$.
 - A distribution to sample $x$. For example `stats::runif` or  `purrr::partial(stats::rnorm, mean = 5, sd = 1)`.
 - A function to sample error values like `purrr::partial(stats::rnorm, sd = 0.5)`.
 
@@ -47,28 +47,16 @@ df_default <- sim_xy()
 df_default
 
 plot(df_default)
-```
 
-It's possible be more compliacted
-
-```{r}
-rar <- purrr::compose(
-  purrr::partial(arima.sim, model = list(ar = .9, ma = .4)),
-  as.numeric, 
-  .dir = "forward"
-  )
-
-df <- sim_xy(
-  n = 1000, 
-  beta0 = 1,
-  beta1 = 1,
-  x_dist = purrr::partial(runif, min = -1, max = 1),
-  error_dist = rar
-  )
+df <- sim_xy(n = 1000, x_dist = runif)
 
 plot(df)
+```
 
-df <- dplyr::mutate(df, y = y + 5 * sin(x) + 20 * x**3)
+We can modify the data frame to get other types of relationships.
+
+```{r}
+df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
 
 plot(df)
 ```
@@ -117,7 +105,7 @@ plot(df_rt)
 
 plot(attr(df_rt, "model"))
 
-plot(apply_regression_tree(df, maxdepth = 3))
+plot(apply_regression_tree(df))
 ```
 
 
@@ -125,13 +113,13 @@ plot(apply_regression_tree(df, maxdepth = 3))
 
 
 ```{r}
-df_lmt <- apply_linear_model_tree(df, maxdepth = 2)
+df_lmt <- apply_linear_model_tree(df, maxdepth = 3)
 
 plot(df_lmt)
 
 plot(attr(df_lmt, "model"))
 
-plot(apply_linear_model_tree(df, maxdepth = 3))
+plot(apply_linear_model_tree(df))
 ```
 
 
