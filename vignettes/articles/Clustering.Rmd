@@ -29,8 +29,8 @@ if(require(showtext)){
 The main function is `sim_groups`, you need to define:
 
 - A number of observations to draw.
-- A number of groups. = = = 
-- And set a seed if you want to replicate your results.
+- A number of groups to sample.
+- An optional argument to define the proportion of each group.
 
 ```{r setup}
 library(klassets)
