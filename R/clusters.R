@@ -85,19 +85,11 @@ sim_groups <- function(n = 1000,
     purrr::map(tibble::as_tibble, .name_repair = "minimal") |>
     purrr::map(purrr::set_names, c("x", "y"))
 
-  # if(add_group_col){
-
   df <- purrr::map2_df(
     df,
     seq_len_groups,
     ~ dplyr::mutate(.x, group = as.character(.y), .before = 1)
   )
-
-  # } else {
-  #
-  #   df <- dplyr::bind_rows(df)
-  #
-  # }
 
   class(df) <- c("klassets_cluster", class(df))
 
