@@ -45,7 +45,7 @@ dfgrids <- orders |>
 predictions <- purrr::map2(models, dfgrids, predict, type = "response")
 
 dfgrids <- purrr::map2(dfgrids, predictions, ~ dplyr::mutate(.x, prediction = .y)) |>
-  purrr::map(select, x, y, prediction) |>
+  purrr::map(dplyr::select, x, y, prediction) |>
   purrr::map2_df(orders, ~ dplyr::mutate(.x, order = .y))
 
 
@@ -53,9 +53,8 @@ dfgrids <- purrr::map2(dfgrids, predictions, ~ dplyr::mutate(.x, prediction = .y
 library(ggplot2)
 
 gxy <- ggplot2::ggplot(data = dfgrids) +
-  metR::geom_contour_fill(
-    ggplot2::aes(.data$x, .data$y, z = .data$prediction),
-    bins = 100
+  ggplot2::geom_raster(
+    ggplot2::aes(.data$x, .data$y, fill = .data$prediction)
   ) +
   metR::geom_text_contour(
     ggplot2::aes(.data$x, .data$y, z = .data$prediction),
@@ -86,14 +85,6 @@ gxy
 
 gxy +
   ggforce::facet_wrap_paginate(facets = vars(order), ncol = 1, nrow = 1, page = 2)
-
-gxy <- ggplot(data = dfgrids, aes(x, y, z = prediction)) +
-  geom_contour_filled() +
-  scale_fill_brewer(palette = "Spectral") +
-  metR::geom_text_contour(stroke = 0.2) +
-  facet_wrap(vars(order))
-
-gxy
 
 # animate -----------------------------------------------------------------
 gga <- gxy +
