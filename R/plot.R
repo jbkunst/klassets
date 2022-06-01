@@ -83,21 +83,24 @@ plot.klassets_xy_linear_model <- function(x, length_seq = 100, alpha = 0.05, ...
 }
 
 #' @export
-plot.klassets_xy_regression_tree <- function(x, length_seq = 100, alpha = 0.05, ...){
+plot.klassets_xy_linear_model_tree <- function(x, length_seq = 100, alpha = 0.05, ...){
 
-  # x <- apply_linear_model(sim_xy())
+  # x <- apply_linear_model_tree(sim_xy())
 
   dfgrid <- tibble::tibble(
-    x = create_seq_from_vector(dplyr::pull(x, .data$x), length_seq = length_seq)
-    )
+    x = create_seq_from_vector(dplyr::pull(x, .data$x), length_seq = length_seq),
+    x2 = x
+  )
 
   predictions <- predict(attr(x, "model"), newdata = dfgrid)
+  nodes       <- predict(attr(x, "model"), newdata = dfgrid, type = "node")
 
   q <- qnorm(1 - alpha/2)
 
   dfgrid <- dfgrid |>
     dplyr::mutate(
       fit = predictions,
+      node = nodes,
       # se  = predictions$se,
       # low = fit - se * q,
       # high = fit + se * q
@@ -114,16 +117,17 @@ plot.klassets_xy_regression_tree <- function(x, length_seq = 100, alpha = 0.05, 
     #   color = "transparent",
     #   alpha = 0.5
     # ) +
-
-
     ggplot2::geom_line(
       data = dfgrid,
-      ggplot2::aes(.data$x, .data$fit),
+      ggplot2::aes(.data$x, .data$fit, group = .data$node),
       color = "darkred",
       size = 1.0
     )
 
 }
+
+#' @export
+plot.klassets_xy_regression_tree <- plot.klassets_xy_linear_model_tree
 
 #' @export
 plot.klassets_response_xy <- function(x, ...){
