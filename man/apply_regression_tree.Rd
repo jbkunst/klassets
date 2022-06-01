@@ -40,5 +40,4 @@ plot(apply_regression_tree(df, maxdepth = 3))
 # default
 plot(apply_regression_tree(df))
 
-
 }
