@@ -136,7 +136,11 @@ apply_logistic_regression <- function(df,
 #'
 #' @importFrom partykit ctree
 #' @export
-apply_classification_tree <- function(df, maxdepth = Inf, alpha = 0.05, type = "prob", ...){
+apply_classification_tree <- function(df,
+                                      maxdepth = Inf,
+                                      alpha = 0.05,
+                                      type = "prob",
+                                      ...){
 
   mod <- partykit::ctree(
     response ~ .,
