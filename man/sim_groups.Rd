@@ -22,6 +22,10 @@ set.seed(123456)
 
 df <- sim_groups()
 
+df
+
 plot(df)
+
+plot(sim_groups(500, 5))
 
 }
