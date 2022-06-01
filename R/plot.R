@@ -26,6 +26,8 @@ plot.klassets_quasianscombe <- function(x, add_lm = TRUE, ...){
 
     p <- p +
       ggplot2::geom_smooth(
+        data = x,
+        ggplot2::aes(.data$x, .data$y),
         method = "lm", se = FALSE,
         color = "gray40", formula = y ~ x
         ) +
@@ -411,7 +413,7 @@ ggproto_point_xy <- function(x){
 
   ggplot2::geom_point(
     data = x,
-    ggplot2::aes(.data$x, .data$y,),
+    ggplot2::aes(.data$x, .data$y),
     shape = 21,
     color = "gray60",
     fill = "gray80"
