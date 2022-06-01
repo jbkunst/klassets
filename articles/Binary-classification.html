@@ -47,6 +47,7 @@
     <a class="dropdown-item" href="../articles/Binary-classification.html">Binary classification</a>
     <a class="dropdown-item" href="../articles/Clustering.html">Clustering</a>
     <a class="dropdown-item" href="../articles/Quasi-Anscombe-data-sets.html">Quasi Anscombe data sets</a>
+    <a class="dropdown-item" href="../articles/Regression.html">Regression</a>
   </div>
 </li>
       </ul>
@@ -98,9 +99,9 @@
 
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_response_xy.html">sim_response_xy</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>
+<span class="va">df_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_response_xy.html">sim_response_xy</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>
 
-<span class="va">df</span>
+<span class="va">df_default</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 3</span></span>
 <span class="co">#&gt;    response       x        y</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -116,18 +117,19 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> TRUE     -<span style="color: #BB0000;">0.086</span><span style="color: #BB0000; text-decoration: underline;">8</span> -<span style="color: #BB0000;">0.317</span>  </span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows</span></span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_default</span><span class="op">)</span></code></pre></div>
 <p><img src="Binary-classification_files/figure-html/setup-1.png" width="700"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_response_xy.html">sim_response_xy</a></span><span class="op">(</span>
-  n <span class="op">=</span> <span class="fl">1000</span>, 
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_response_xy.html">sim_response_xy</a></span><span class="op">(</span>
+  n <span class="op">=</span> <span class="fl">500</span>, 
   x_dist <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">runif</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  relationship <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span> <span class="op">-</span> <span class="fl">0.5</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>,
+  <span class="co"># relationship = function(x, y) sqrt(abs(x)) - x - 0.5 &gt; sin(y),</span>
+  relationship <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">*</span><span class="va">pi</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">y</span><span class="op">*</span><span class="va">pi</span><span class="op">)</span>,
   noise <span class="op">=</span> <span class="fl">0.15</span>
   <span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
 <p><img src="Binary-classification_files/figure-html/setup-2.png" width="700"></p>
 </div>
 <div class="section level2">
@@ -137,160 +139,175 @@
 <h3 id="logistic-regression">Logistic Regression<a class="anchor" aria-label="anchor" href="#logistic-regression"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_lr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_logistic_regression.html">apply_logistic_regression</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df_lr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_logistic_regression.html">apply_logistic_regression</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
 
 <span class="va">df_lr</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 4</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 4</span></span>
 <span class="co">#&gt;    response       x       y prediction</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> FALSE     0.876   0.707      0.070<span style="text-decoration: underline;">2</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> FALSE     0.976   0.332      0.113 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> FALSE    -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span>  0.467      0.389 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> TRUE     -<span style="color: #BB0000;">0.539</span>  -<span style="color: #BB0000;">0.371</span>      0.870 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> FALSE     0.391   0.335      0.261 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113  -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">2</span>     0.551 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169   0.301      0.357 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> TRUE     -<span style="color: #BB0000;">0.133</span>   0.572      0.362 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>   0.803      0.274 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> FALSE     0.194   0.054<span style="text-decoration: underline;">8</span>     0.457 </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TRUE      0.876  -<span style="color: #BB0000;">0.681</span>       0.885</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> TRUE      0.976  -<span style="color: #BB0000;">0.711</span>       0.899</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> TRUE     -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.702</span>       0.745</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> FALSE    -<span style="color: #BB0000;">0.539</span>   0.028<span style="text-decoration: underline;">9</span>      0.385</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> TRUE      0.391  -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">3</span>      0.637</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113   0.233       0.478</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169  -<span style="color: #BB0000;">0.105</span>       0.614</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> FALSE    -<span style="color: #BB0000;">0.133</span>  -<span style="color: #BB0000;">0.889</span>       0.785</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>  -<span style="color: #BB0000;">0.989</span>       0.807</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> TRUE      0.194  -<span style="color: #BB0000;">0.556</span>       0.760</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows</span></span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_lr</span><span class="op">)</span></code></pre></div>
 <p><img src="Binary-classification_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>By default the model use <code>order = 1</code> of the variables, i.e, <code>response ~ x + y</code>. We can get a better fit if we increase the order.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_lr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_logistic_regression.html">apply_logistic_regression</a></span><span class="op">(</span><span class="va">df2</span>, order <span class="op">=</span> <span class="fl">5</span>, stepwise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df_lr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_logistic_regression.html">apply_logistic_regression</a></span><span class="op">(</span><span class="va">df</span>, order <span class="op">=</span> <span class="fl">4</span>, stepwise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df_lr2</span>, <span class="st">"model"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Call:  glm(formula = response ~ x + y + x_2 + x_4 + y_2 + y_4, family = binomial, </span>
+<span class="co">#&gt; Call:  glm(formula = response ~ x + y + x_3 + y_3, family = binomial, </span>
 <span class="co">#&gt;     data = df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt; (Intercept)            x            y          x_2          x_4          y_2  </span>
-<span class="co">#&gt;      -1.183       -1.891       -2.065        4.818       -3.722        3.881  </span>
-<span class="co">#&gt;         y_4  </span>
-<span class="co">#&gt;      -2.762  </span>
+<span class="co">#&gt; (Intercept)            x            y          x_3          y_3  </span>
+<span class="co">#&gt;      0.1533       3.3121      -4.4480      -3.3786       4.6436  </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Degrees of Freedom: 999 Total (i.e. Null);  993 Residual</span>
-<span class="co">#&gt; Null Deviance:       1378 </span>
-<span class="co">#&gt; Residual Deviance: 942.4     AIC: 956.4</span>
+<span class="co">#&gt; Degrees of Freedom: 499 Total (i.e. Null);  495 Residual</span>
+<span class="co">#&gt; Null Deviance:       690.8 </span>
+<span class="co">#&gt; Residual Deviance: 518   AIC: 528</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_lr2</span><span class="op">)</span></code></pre></div>
 <p><img src="Binary-classification_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p>Testing various orders.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">orders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>
+
+<span class="va">orders</span> |&gt; 
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">apply_logistic_regression</span>, df <span class="op">=</span> <span class="va">df</span><span class="op">)</span> |&gt; 
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span> |&gt; 
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html" class="external-link">reduce</a></span><span class="op">(</span><span class="va">`+`</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">&amp;</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
+<p><img src="Binary-classification_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="classification-tree-partykitctree">Classification Tree <code>partykit::ctree</code><a class="anchor" aria-label="anchor" href="#classification-tree-partykitctree"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_rt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_classification_tree.html">apply_classification_tree</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_rt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_classification_tree.html">apply_classification_tree</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_rt</span><span class="op">)</span></code></pre></div>
-<p><img src="Binary-classification_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<p><img src="Binary-classification_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/apply_classification_tree.html">apply_classification_tree</a></span><span class="op">(</span><span class="va">df</span>, alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="Binary-classification_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>
 <p>The region are filled with the probability of the respective node. We can specify the type of the prediction using the <code>type</code> argument. In the case of <code>response</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_rt_response</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_classification_tree.html">apply_classification_tree</a></span><span class="op">(</span><span class="va">df2</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_rt_response</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_classification_tree.html">apply_classification_tree</a></span><span class="op">(</span><span class="va">df</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span>
 
 <span class="va">df_rt_response</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 4</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 4</span></span>
 <span class="co">#&gt;    response       x       y prediction</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> FALSE     0.876   0.707  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> FALSE     0.976   0.332  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> FALSE    -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span>  0.467  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> TRUE     -<span style="color: #BB0000;">0.539</span>  -<span style="color: #BB0000;">0.371</span>  TRUE      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> FALSE     0.391   0.335  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113  -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">2</span> FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169   0.301  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> TRUE     -<span style="color: #BB0000;">0.133</span>   0.572  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>   0.803  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> FALSE     0.194   0.054<span style="text-decoration: underline;">8</span> FALSE     </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TRUE      0.876  -<span style="color: #BB0000;">0.681</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> TRUE      0.976  -<span style="color: #BB0000;">0.711</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> TRUE     -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.702</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> FALSE    -<span style="color: #BB0000;">0.539</span>   0.028<span style="text-decoration: underline;">9</span> FALSE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> TRUE      0.391  -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">3</span> TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113   0.233  FALSE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169  -<span style="color: #BB0000;">0.105</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> FALSE    -<span style="color: #BB0000;">0.133</span>  -<span style="color: #BB0000;">0.889</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>  -<span style="color: #BB0000;">0.989</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> TRUE      0.194  -<span style="color: #BB0000;">0.556</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows</span></span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_rt_response</span><span class="op">)</span></code></pre></div>
-<p><img src="Binary-classification_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p><img src="Binary-classification_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>And now for the <code>node</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_rt_node</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_classification_tree.html">apply_classification_tree</a></span><span class="op">(</span><span class="va">df2</span>, type <span class="op">=</span> <span class="st">"node"</span>, maxdepth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_rt_node</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_classification_tree.html">apply_classification_tree</a></span><span class="op">(</span><span class="va">df</span>, type <span class="op">=</span> <span class="st">"node"</span>, maxdepth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
 <span class="va">df_rt_node</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 4</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 4</span></span>
 <span class="co">#&gt;    response       x       y prediction</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> FALSE     0.876   0.707          11</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> FALSE     0.976   0.332          11</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> FALSE    -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span>  0.467          11</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> TRUE     -<span style="color: #BB0000;">0.539</span>  -<span style="color: #BB0000;">0.371</span>           5</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> FALSE     0.391   0.335          11</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113  -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">2</span>         11</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169   0.301          11</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> TRUE     -<span style="color: #BB0000;">0.133</span>   0.572          10</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>   0.803          10</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> FALSE     0.194   0.054<span style="text-decoration: underline;">8</span>         11</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TRUE      0.876  -<span style="color: #BB0000;">0.681</span>           4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> TRUE      0.976  -<span style="color: #BB0000;">0.711</span>           4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> TRUE     -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.702</span>           4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> FALSE    -<span style="color: #BB0000;">0.539</span>   0.028<span style="text-decoration: underline;">9</span>          3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> TRUE      0.391  -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">3</span>          4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113   0.233           6</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169  -<span style="color: #BB0000;">0.105</span>           4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> FALSE    -<span style="color: #BB0000;">0.133</span>  -<span style="color: #BB0000;">0.889</span>           4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>  -<span style="color: #BB0000;">0.989</span>           4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> TRUE      0.194  -<span style="color: #BB0000;">0.556</span>           4</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows</span></span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_rt_node</span><span class="op">)</span></code></pre></div>
-<p><img src="Binary-classification_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p><img src="Binary-classification_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df_rt_node</span>, <span class="st">"model"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="Binary-classification_files/figure-html/unnamed-chunk-6-2.png" width="700"></p>
+<p><img src="Binary-classification_files/figure-html/unnamed-chunk-7-2.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="k-nearest-neighbours-classknn">K Nearest Neighbours <code>class::knn</code><a class="anchor" aria-label="anchor" href="#k-nearest-neighbours-classknn"></a>
 </h3>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># defaults to prob</span>
-<span class="fu"><a href="../reference/apply_knn.html">apply_knn</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 4</span></span>
+<span class="fu"><a href="../reference/apply_knn.html">apply_knn</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 4</span></span>
 <span class="co">#&gt;    response       x       y prediction</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> FALSE     0.876   0.707         0.6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> FALSE     0.976   0.332         0.9</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> FALSE    -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span>  0.467         0.9</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> TRUE     -<span style="color: #BB0000;">0.539</span>  -<span style="color: #BB0000;">0.371</span>         1  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> FALSE     0.391   0.335         0.9</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113  -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">2</span>        1  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169   0.301         0.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> TRUE     -<span style="color: #BB0000;">0.133</span>   0.572         0.8</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>   0.803         0.8</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> FALSE     0.194   0.054<span style="text-decoration: underline;">8</span>        0.8</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TRUE      0.876  -<span style="color: #BB0000;">0.681</span>         1  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> TRUE      0.976  -<span style="color: #BB0000;">0.711</span>         1  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> TRUE     -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.702</span>         1  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> FALSE    -<span style="color: #BB0000;">0.539</span>   0.028<span style="text-decoration: underline;">9</span>        0.9</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> TRUE      0.391  -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">3</span>        0.8</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113   0.233         0.8</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169  -<span style="color: #BB0000;">0.105</span>         0.9</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> FALSE    -<span style="color: #BB0000;">0.133</span>  -<span style="color: #BB0000;">0.889</span>         0.8</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>  -<span style="color: #BB0000;">0.989</span>         0.6</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> TRUE      0.194  -<span style="color: #BB0000;">0.556</span>         0.7</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows</span></span>
 
-<span class="fu"><a href="../reference/apply_knn.html">apply_knn</a></span><span class="op">(</span><span class="va">df2</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 4</span></span>
+<span class="fu"><a href="../reference/apply_knn.html">apply_knn</a></span><span class="op">(</span><span class="va">df</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 4</span></span>
 <span class="co">#&gt;    response       x       y prediction</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> FALSE     0.876   0.707  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> FALSE     0.976   0.332  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> FALSE    -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span>  0.467  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> TRUE     -<span style="color: #BB0000;">0.539</span>  -<span style="color: #BB0000;">0.371</span>  TRUE      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> FALSE     0.391   0.335  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113  -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">2</span> FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169   0.301  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> TRUE     -<span style="color: #BB0000;">0.133</span>   0.572  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>   0.803  FALSE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> FALSE     0.194   0.054<span style="text-decoration: underline;">8</span> FALSE     </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TRUE      0.876  -<span style="color: #BB0000;">0.681</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> TRUE      0.976  -<span style="color: #BB0000;">0.711</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> TRUE     -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.702</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> FALSE    -<span style="color: #BB0000;">0.539</span>   0.028<span style="text-decoration: underline;">9</span> FALSE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> TRUE      0.391  -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">3</span> TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> FALSE     0.113   0.233  FALSE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE      0.169  -<span style="color: #BB0000;">0.105</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> FALSE    -<span style="color: #BB0000;">0.133</span>  -<span style="color: #BB0000;">0.889</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> FALSE    -<span style="color: #BB0000;">0.148</span>  -<span style="color: #BB0000;">0.989</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> TRUE      0.194  -<span style="color: #BB0000;">0.556</span>  TRUE      </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows</span></span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/apply_knn.html">apply_knn</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="Binary-classification_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p><img src="Binary-classification_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="va">neighbours</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">10</span>, <span class="fl">50</span>, <span class="fl">100</span><span class="op">)</span>
+<span class="va">neighbours</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">10</span>, <span class="fl">50</span>, <span class="fl">300</span><span class="op">)</span>
 
-<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">neighbours</span>, <span class="va">apply_knn</span>, df <span class="op">=</span> <span class="va">df_lr2</span><span class="op">)</span> |&gt; 
+<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">neighbours</span>, <span class="va">apply_knn</span>, df <span class="op">=</span> <span class="va">df</span><span class="op">)</span> |&gt; 
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span> |&gt; 
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html" class="external-link">reduce</a></span><span class="op">(</span><span class="va">`+`</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span></code></pre></div>
-<p><img src="Binary-classification_files/figure-html/unnamed-chunk-7-2.png" width="700"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">&amp;</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
+<p><img src="Binary-classification_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">neighbours</span>, <span class="va">apply_knn</span>, df <span class="op">=</span> <span class="va">df_lr2</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> |&gt; 
+<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">neighbours</span>, <span class="va">apply_knn</span>, df <span class="op">=</span> <span class="va">df</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> |&gt; 
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span> |&gt; 
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html" class="external-link">reduce</a></span><span class="op">(</span><span class="va">`+`</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span></code></pre></div>
-<p><img src="Binary-classification_files/figure-html/unnamed-chunk-7-3.png" width="700"></p>
+  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span>  <span class="op">&amp;</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
+<p><img src="Binary-classification_files/figure-html/unnamed-chunk-8-3.png" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

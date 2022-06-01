@@ -19,6 +19,9 @@
     <loc>https://jkunst.com/klassets/articles/Quasi-Anscombe-data-sets.html</loc>
   </url>
   <url>
+    <loc>https://jkunst.com/klassets/articles/Regression.html</loc>
+  </url>
+  <url>
     <loc>https://jkunst.com/klassets/articles/index.html</loc>
   </url>
   <url>
@@ -38,6 +41,9 @@
   </url>
   <url>
     <loc>https://jkunst.com/klassets/reference/apply_linear_model.html</loc>
+  </url>
+  <url>
+    <loc>https://jkunst.com/klassets/reference/apply_linear_model_tree.html</loc>
   </url>
   <url>
     <loc>https://jkunst.com/klassets/reference/apply_logistic_regression.html</loc>
