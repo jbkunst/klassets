@@ -46,7 +46,7 @@ plot(df2) + plot(df6)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
-Another example of what can be donde with `{klassets}`.
+Another example of what can be done with `{klassets}`.
 
 <img src="man/figures/animation_kmeans_iterations.gif" width="100%" />
 
@@ -56,7 +56,7 @@ You can check:
 
 -   `vignette("Quasi-Anscombe-data-sets")` to know more about
     `sim_quasianscombe_set*` functions family.
--   `vignette("Clustering-helpers")` to see some helpers for clustering.
+-   `vignette("Clustering")` to see clustering functions.
 
 ## Installation
 
