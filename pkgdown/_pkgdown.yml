@@ -49,4 +49,5 @@ reference:
   - sim_xy
   - apply_linear_model
   - apply_regression_tree
+  - apply_linear_model_tree
 
