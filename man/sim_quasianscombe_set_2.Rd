@@ -6,7 +6,9 @@
 \usage{
 sim_quasianscombe_set_2(
   df,
-  fun = function(x) {     x^2 },
+  fun = function(x) {
+     x^2
+ },
   residual_factor = 0.25
 )
 }
