@@ -434,16 +434,28 @@ ggproto_point_response_xy_color_shape <- function(x){
 
 }
 
-ggproto_contour_fill <- function(dfgrid, bins = 100, ...) {
+ggproto_contour_fill <- function(dfgrid, ...) {
 
-  # ggplot2::geom_contour_filled(
-  # metR::geom_contour_fill(
-  ggplot2::geom_raster(
-    data = dfgrid,
-    ggplot2::aes(.data$x, .data$y, fill = .data$prediction),
-    # bins = bins,
-    ...
+  if(getOption("klassets.geom_contour_fill")){
+
+    # ggplot2::geom_contour_filled
+    proto <- metR::geom_contour_fill(
+      data = dfgrid,
+      ggplot2::aes(.data$x, .data$y, z = .data$prediction),
+      ...
+      )
+
+  } else {
+
+    proto <- ggplot2::geom_raster(
+      data = dfgrid,
+      ggplot2::aes(.data$x, .data$y, fill = .data$prediction),
+      ...
     )
+
+  }
+
+  proto
 
 }
 
