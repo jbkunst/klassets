@@ -41,7 +41,7 @@ sim_xy <- function(n = 100,
 
 }
 
-#' Apply Linear model to `klassets_xy` object
+#' Fit Linear model to `klassets_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
 #' @param order Order of predictive variable x.
@@ -55,7 +55,7 @@ sim_xy <- function(n = 100,
 #'
 #' df
 #'
-#' dflm <- apply_linear_model(df)
+#' dflm <- fit_linear_model(df)
 #'
 #' dflm
 #'
@@ -66,14 +66,14 @@ sim_xy <- function(n = 100,
 #'
 #' plot(df)
 #'
-#' plot(apply_linear_model(df))
+#' plot(fit_linear_model(df))
 #'
-#' plot(apply_linear_model(df, order = 5, stepwise = TRUE, verbose = TRUE))
+#' plot(fit_linear_model(df, order = 5, stepwise = TRUE, verbose = TRUE))
 #'
 #' @importFrom dplyr matches
 #' @importFrom stats lm
 #' @export
-apply_linear_model <- function(df, order = 1, stepwise = FALSE, verbose = FALSE){
+fit_linear_model <- function(df, order = 1, stepwise = FALSE, verbose = FALSE){
 
   # df <- sim_xy(1000)
   # plot(df)
@@ -103,7 +103,7 @@ apply_linear_model <- function(df, order = 1, stepwise = FALSE, verbose = FALSE)
 
 }
 
-#' Apply regression tree to `klassets_xy` object
+#' Fit regression tree to `klassets_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
 #' @param maxdepth Max depth of the tree. Same used in `partykit::ctree_control`.
@@ -116,7 +116,7 @@ apply_linear_model <- function(df, order = 1, stepwise = FALSE, verbose = FALSE)
 #'
 #' df
 #'
-#' dflm <- apply_regression_tree(df)
+#' dflm <- fit_regression_tree(df)
 #'
 #' dflm
 #'
@@ -127,13 +127,13 @@ apply_linear_model <- function(df, order = 1, stepwise = FALSE, verbose = FALSE)
 #'
 #' plot(df)
 #'
-#' plot(apply_regression_tree(df, maxdepth = 3))
+#' plot(fit_regression_tree(df, maxdepth = 3))
 #'
 #' # default
-#' plot(apply_regression_tree(df))
+#' plot(fit_regression_tree(df))
 #'
 #' @export
-apply_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
+fit_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 
   mod <- partykit::ctree(
     y ~ x,
@@ -153,7 +153,7 @@ apply_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 
 }
 
-#' Apply Linear Model tree to `klassets_xy` object
+#' Fit Linear Model tree to `klassets_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
 #' @param maxdepth Max depth of the tree. Same used in `partykit::mob_control`.
@@ -166,7 +166,7 @@ apply_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 #'
 #' df
 #'
-#' dflm <- apply_linear_model_tree(df)
+#' dflm <- fit_linear_model_tree(df)
 #'
 #' dflm
 #'
@@ -177,11 +177,11 @@ apply_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 #'
 #' plot(df)
 #'
-#' plot(apply_linear_model_tree(df))
+#' plot(fit_linear_model_tree(df))
 #'
 #' @importFrom partykit lmtree
 #' @export
-apply_linear_model_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
+fit_linear_model_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 
   df <- dplyr::mutate(df, x2 = .data$x)
 

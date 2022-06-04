@@ -30,11 +30,11 @@ orders <- 1:4
 
 # data
 dflrs <- orders |>
-  purrr::map_df(apply_logistic_regression, df = df, .id = "order")
+  purrr::map_df(fit_logistic_regression, df = df, .id = "order")
 
 # models
 models <- orders |>
-  purrr::map(apply_logistic_regression, df = df) |>
+  purrr::map(fit_logistic_regression, df = df) |>
   purrr::map(attr, "model")
 
 dfgrid <- klassets:::create_grid_from_data_frame(df)

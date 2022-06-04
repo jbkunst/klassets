@@ -59,12 +59,12 @@ plot(df)
 ```
 
 
-## Apply classification algorithms
+## Fit classification algorithms
 
 ### Logistic Regression
 
 ```{r}
-df_lr <- apply_logistic_regression(df)
+df_lr <- fit_logistic_regression(df)
 
 df_lr
 
@@ -74,7 +74,7 @@ plot(df_lr)
 By default the model use `order = 1` of the variables, i.e, `response ~ x + y`. We can get a better fit if we increase the order. 
 
 ```{r}
-df_lr2 <- apply_logistic_regression(df, order = 4, stepwise = TRUE)
+df_lr2 <- fit_logistic_regression(df, order = 4, stepwise = TRUE)
 
 attr(df_lr2, "model")
 
@@ -87,7 +87,7 @@ Testing various orders.
 orders <- c(1, 2, 3, 4)
 
 orders |> 
-  purrr::map(apply_logistic_regression, df = df) |> 
+  purrr::map(fit_logistic_regression, df = df) |> 
   purrr::map(plot) |> 
   purrr::reduce(`+`) +
   patchwork::plot_layout(guides = "collect") &
@@ -98,18 +98,18 @@ orders |>
 ### Classification Tree `partykit::ctree`
 
 ```{r}
-df_rt <- apply_classification_tree(df)
+df_rt <- fit_classification_tree(df)
 
 plot(df_rt)
 
-plot(apply_classification_tree(df, alpha = 0.25))
+plot(fit_classification_tree(df, alpha = 0.25))
 ```
 
 The region are filled with the probability of the respective node. We can 
 specify the type of the prediction using the `type` argument. In the case of `response`.
 
 ```{r}
-df_rt_response <- apply_classification_tree(df, type = "response")
+df_rt_response <- fit_classification_tree(df, type = "response")
 
 df_rt_response
 
@@ -119,7 +119,7 @@ plot(df_rt_response)
 And now for the `node`.
 
 ```{r}
-df_rt_node <- apply_classification_tree(df, type = "node", maxdepth = 3)
+df_rt_node <- fit_classification_tree(df, type = "node", maxdepth = 3)
 
 df_rt_node
 
@@ -132,21 +132,21 @@ plot(attr(df_rt_node, "model"))
 
 ```{r}
 # defaults to prob
-apply_knn(df)
+fit_knn(df)
 
-apply_knn(df, type = "response")
+fit_knn(df, type = "response")
 
-plot(apply_knn(df))
+plot(fit_knn(df))
 
 neighbours <- c(3, 10, 50, 300)
 
-purrr::map(neighbours, apply_knn, df = df) |> 
+purrr::map(neighbours, fit_knn, df = df) |> 
   purrr::map(plot) |> 
   purrr::reduce(`+`) +
   patchwork::plot_layout(guides = "collect") &
   theme_void() + theme(legend.position = "none")
 
-purrr::map(neighbours, apply_knn, df = df, type = "response") |> 
+purrr::map(neighbours, fit_knn, df = df, type = "response") |> 
   purrr::map(plot) |> 
   purrr::reduce(`+`) +
   patchwork::plot_layout(guides = "collect")  &

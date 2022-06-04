@@ -43,14 +43,14 @@ plot(df)
 ```
 
 
-## Apply cluster algorithms
+## Fit cluster algorithms
 
 ### `stats::kmeans`
 
-You can apply the `stats::kmeans` using `apply_statskmeans_clust`.
+You can apply the `stats::kmeans` using `fit_statskmeans_clust`.
 
 ```{r}
-dfc1 <- apply_statskmeans(df, centers = 2)
+dfc1 <- fit_statskmeans(df, centers = 2)
 
 plot(dfc1)
 ```
@@ -62,7 +62,7 @@ Or use a basic K-means implementation with:
 ```{r}
 set.seed(234)
 
-dfc2 <- apply_kmeans(df, centers = 2, max_iteration = 6)
+dfc2 <- fit_kmeans(df, centers = 2, max_iteration = 6)
 
 plot(dfc2)
 ```

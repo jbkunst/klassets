@@ -48,7 +48,7 @@ sim_response_xy <- function(n = 100,
 
 }
 
-#' Apply Logistic regression to `klassets_response_xy` object
+#' Fit Logistic regression to `klassets_response_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
 #' @param order Order of values of x and y.
@@ -64,17 +64,17 @@ sim_response_xy <- function(n = 100,
 #'
 #' plot(df)
 #'
-#' df_reg_log <- apply_logistic_regression(df)
+#' df_reg_log <- fit_logistic_regression(df)
 #'
 #' plot(df_reg_log)
 #'
-#' df_reg_log_3 <- apply_logistic_regression(df, order = 3, stepwise = TRUE)
+#' df_reg_log_3 <- fit_logistic_regression(df, order = 3, stepwise = TRUE)
 #'
 #' plot(df_reg_log_3)
 #'
 #' @importFrom stats binomial glm predict step
 #' @export
-apply_logistic_regression <- function(df,
+fit_logistic_regression <- function(df,
                                       order = 1,
                                       stepwise = FALSE,
                                       verbose = FALSE){
@@ -104,7 +104,7 @@ apply_logistic_regression <- function(df,
 
 }
 
-#' Apply classification tree to `klassets_response_xy` object
+#' Fit classification tree to `klassets_response_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
 #' @param maxdepth Max depth of the tree. Same used in `partykit::ctree_control`.
@@ -121,13 +121,13 @@ apply_logistic_regression <- function(df,
 #' plot(df)
 #'
 #' # default type = "prob"
-#' df_tree_prob <- apply_classification_tree(df)
+#' df_tree_prob <- fit_classification_tree(df)
 #' df_tree_prob
 #'
-#' df_tree_resp <- apply_classification_tree(df, type = "response")
+#' df_tree_resp <- fit_classification_tree(df, type = "response")
 #' df_tree_resp
 #'
-#' df_tree_node <- apply_classification_tree(df, type = "node")
+#' df_tree_node <- fit_classification_tree(df, type = "node")
 #' df_tree_node
 #'
 #' plot(df_tree_prob)
@@ -136,7 +136,7 @@ apply_logistic_regression <- function(df,
 #'
 #' @importFrom partykit ctree
 #' @export
-apply_classification_tree <- function(df,
+fit_classification_tree <- function(df,
                                       maxdepth = Inf,
                                       alpha = 0.05,
                                       type = "prob",
@@ -171,7 +171,7 @@ apply_classification_tree <- function(df,
 
 }
 
-#' Apply K Nearest Neighbours to `klassets_response_xy` object
+#' Fit K Nearest Neighbours to `klassets_response_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
 #' @param neighbours The neighbours parameter.
@@ -186,27 +186,27 @@ apply_classification_tree <- function(df,
 #' plot(df)
 #'
 #' # defaults to prob
-#' apply_knn(df)
+#' fit_knn(df)
 #'
-#' apply_knn(df, type = "response")
+#' fit_knn(df, type = "response")
 #'
-#' plot(apply_knn(df))
+#' plot(fit_knn(df))
 #'
-#' plot(apply_knn(df, neighbours = 3))
+#' plot(fit_knn(df, neighbours = 3))
 #'
-#' plot(apply_knn(df, neighbours = 10))
+#' plot(fit_knn(df, neighbours = 10))
 #'
-#' plot(apply_knn(df, neighbours = 200))
+#' plot(fit_knn(df, neighbours = 200))
 #'
-#' plot(apply_knn(df, neighbours = 3, type = "response"))
+#' plot(fit_knn(df, neighbours = 3, type = "response"))
 #'
-#' plot(apply_knn(df, neighbours = 10, type = "response"))
+#' plot(fit_knn(df, neighbours = 10, type = "response"))
 #'
-#' plot(apply_knn(df, neighbours = 200, type = "response"))
+#' plot(fit_knn(df, neighbours = 200, type = "response"))
 #'
 #' @importFrom class knn
 #' @export
-apply_knn <- function(df, neighbours = 10, type = "prob"){
+fit_knn <- function(df, neighbours = 10, type = "prob"){
 
   stopifnot(type %in% c("prob", "response"))
 

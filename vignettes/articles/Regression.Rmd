@@ -59,14 +59,14 @@ df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
 plot(df)
 ```
 
-## Apply classification algorithms
+## Fit classification algorithms
 
 ### Linear Regression
 
 This function uses `stats::lm` to fit a model.
 
 ```{r}
-df_lr <- apply_linear_model(df)
+df_lr <- fit_linear_model(df)
 
 df_lr
 
@@ -76,7 +76,7 @@ plot(df_lr)
 By default the model use `order = 1` of the variables, i.e, `response ~ x + y`. We can get a better fit if we increase the order. 
 
 ```{r}
-df_lr2 <- apply_linear_model(df, order = 4, stepwise = TRUE)
+df_lr2 <- fit_linear_model(df, order = 4, stepwise = TRUE)
 
 attr(df_lr2, "model")
 
@@ -89,7 +89,7 @@ Testing various orders.
 orders <- c(1, 2, 3, 4)
 
 orders |> 
-  purrr::map(apply_linear_model, df = df) |> 
+  purrr::map(fit_linear_model, df = df) |> 
   purrr::map(plot) |> 
   purrr::reduce(`+`) +
   patchwork::plot_layout(guides = "collect") &
@@ -102,13 +102,13 @@ Internally the functions uses `partykit::ctree`.
 
 
 ```{r}
-df_rt <- apply_regression_tree(df, maxdepth = 2)
+df_rt <- fit_regression_tree(df, maxdepth = 2)
 
 plot(df_rt)
 
 plot(attr(df_rt, "model"))
 
-plot(apply_regression_tree(df))
+plot(fit_regression_tree(df))
 ```
 
 
@@ -117,13 +117,13 @@ plot(apply_regression_tree(df))
 Internally the functions uses `partykit::mltree`.
 
 ```{r}
-df_lmt <- apply_linear_model_tree(df, maxdepth = 3)
+df_lmt <- fit_linear_model_tree(df, maxdepth = 3)
 
 plot(df_lmt)
 
 plot(attr(df_lmt, "model"))
 
-plot(apply_linear_model_tree(df))
+plot(fit_linear_model_tree(df))
 ```
 
 

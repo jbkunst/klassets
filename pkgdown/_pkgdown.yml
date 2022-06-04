@@ -33,21 +33,21 @@ reference:
     functions to apply some basics algorimths.
 - contents:
   - sim_groups
-  - apply_kmeans
-  - apply_statskmeans
+  - fit_kmeans
+  - fit_statskmeans
   - kmeans_iterations
 - title: Binary classification
   desc: Functions to simulate data for test and explaing classifiers algorimths.
 - contents:
   - sim_response_xy
-  - apply_logistic_regression
-  - apply_classification_tree
-  - apply_knn
+  - fit_logistic_regression
+  - fit_classification_tree
+  - fit_knn
 - title: Regression
   desc: Functions to simulate data for test and explaing regression algorimths.
 - contents:
   - sim_xy
-  - apply_linear_model
-  - apply_regression_tree
-  - apply_linear_model_tree
+  - fit_linear_model
+  - fit_regression_tree
+  - fit_linear_model_tree
 

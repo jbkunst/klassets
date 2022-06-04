@@ -222,7 +222,7 @@ kmeans_iterations <- function(df,
 }
 
 
-#' Apply K-means to `klassets_cluster` object
+#' Fit K-means to `klassets_cluster` object
 #'
 #' @param df A `klassets_cluster` object. A object from `sim_groups`.
 #' @param centers A numeric value to pass to `kmeans_iterations` function
@@ -239,12 +239,12 @@ kmeans_iterations <- function(df,
 #'
 #' set.seed(124)
 #'
-#' dfc <- apply_kmeans(df, centers = 4, max_iterations = 6)
+#' dfc <- fit_kmeans(df, centers = 4, max_iterations = 6)
 #'
 #' plot(dfc)
 #'
 #' @export
-apply_kmeans <- function(df, centers = 3, ...){
+fit_kmeans <- function(df, centers = 3, ...){
 
   stopifnot(inherits(df, "klassets_cluster"))
 
@@ -261,7 +261,7 @@ apply_kmeans <- function(df, centers = 3, ...){
 
 }
 
-#' Apply K-means to `klassets_cluster` object using `stats::kmeans`
+#' Fit K-means to `klassets_cluster` object using `stats::kmeans`
 #'
 #' @param df A `klassets_cluster` object.
 #' @param centers A numeric value to pass to `stats::kmeans` method.
@@ -278,13 +278,13 @@ apply_kmeans <- function(df, centers = 3, ...){
 #'
 #' set.seed(124)
 #'
-#' dfc <- apply_statskmeans(df, centers = 4)
+#' dfc <- fit_statskmeans(df, centers = 4)
 #'
 #' plot(dfc)
 #'
 #' @importFrom stats kmeans
 #' @export
-apply_statskmeans <- function(df, centers = 3, ...){
+fit_statskmeans <- function(df, centers = 3, ...){
 
   stopifnot(inherits(df, "klassets_cluster"))
 
@@ -305,7 +305,7 @@ apply_statskmeans <- function(df, centers = 3, ...){
 
 }
 
-apply_hclust_clust <- function(df){
+fit_hclust_clust <- function(df){
 
   stopifnot(inherits(df, "klassets_cluster"))
 

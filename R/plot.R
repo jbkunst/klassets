@@ -43,7 +43,7 @@ plot.klassets_quasianscombe <- function(x, add_lm = TRUE, ...){
 #' @export
 plot.klassets_xy_linear_model <- function(x, length_seq = 100, alpha = 0.05, ...){
 
-  # x <- apply_linear_model(sim_xy())
+  # x <- fit_linear_model(sim_xy())
 
   dfgrid <- create_grid_from_data_frame(x, length_seq = length_seq)
 
@@ -87,7 +87,7 @@ plot.klassets_xy_linear_model <- function(x, length_seq = 100, alpha = 0.05, ...
 #' @export
 plot.klassets_xy_linear_model_tree <- function(x, length_seq = 100, alpha = 0.05, ...){
 
-  # x <- apply_linear_model_tree(sim_xy())
+  # x <- fit_linear_model_tree(sim_xy())
 
   dfgrid <- tibble::tibble(
     x = create_seq_from_vector(dplyr::pull(x, .data$x), length_seq = length_seq),
@@ -144,7 +144,7 @@ plot.klassets_response_xy <- function(x, ...){
 #' @export
 plot.klassets_response_xy_logistic_regression <- function(x, length_seq = 100, ...){
 
-  # x <- apply_logistic_regression(sim_response_xy(n = 500), order = 2)
+  # x <- fit_logistic_regression(sim_response_xy(n = 500), order = 2)
   # length_grid <-  100
 
   dfgrid <- create_grid_from_data_frame(x, length_seq = length_seq)
@@ -185,7 +185,7 @@ plot.klassets_response_xy_classification_tree <- function(x, length_seq = 100, .
   # t <- "response"
   # t <- "node"
   #
-  # x <- apply_classification_tree(df, type = t)
+  # x <- fit_classification_tree(df, type = t)
 
   type  <- attr(x, "type")
 
@@ -249,8 +249,8 @@ plot.klassets_response_xy_classification_tree <- function(x, length_seq = 100, .
 plot.klassets_response_xy_knn <- function(x, length_seq = 100, ...){
 
   # df <- sim_response_xy(n = 1000)
-  # x <- apply_knn(df, neighbours = 200, type = "response")
-  # x <- apply_knn(df, neighbours = 20, type = "prob")
+  # x <- fit_knn(df, neighbours = 200, type = "response")
+  # x <- fit_knn(df, neighbours = 20, type = "prob")
   # length_seq <-  100
 
   dfgrid <- create_grid_from_data_frame(x, length_seq = length_seq)
