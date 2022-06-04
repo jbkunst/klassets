@@ -31,28 +31,28 @@
     <loc>https://jkunst.com/klassets/index.html</loc>
   </url>
   <url>
-    <loc>https://jkunst.com/klassets/reference/apply_classification_tree.html</loc>
+    <loc>https://jkunst.com/klassets/reference/fit_classification_tree.html</loc>
   </url>
   <url>
-    <loc>https://jkunst.com/klassets/reference/apply_kmeans.html</loc>
+    <loc>https://jkunst.com/klassets/reference/fit_kmeans.html</loc>
   </url>
   <url>
-    <loc>https://jkunst.com/klassets/reference/apply_knn.html</loc>
+    <loc>https://jkunst.com/klassets/reference/fit_knn.html</loc>
   </url>
   <url>
-    <loc>https://jkunst.com/klassets/reference/apply_linear_model.html</loc>
+    <loc>https://jkunst.com/klassets/reference/fit_linear_model.html</loc>
   </url>
   <url>
-    <loc>https://jkunst.com/klassets/reference/apply_linear_model_tree.html</loc>
+    <loc>https://jkunst.com/klassets/reference/fit_linear_model_tree.html</loc>
   </url>
   <url>
-    <loc>https://jkunst.com/klassets/reference/apply_logistic_regression.html</loc>
+    <loc>https://jkunst.com/klassets/reference/fit_logistic_regression.html</loc>
   </url>
   <url>
-    <loc>https://jkunst.com/klassets/reference/apply_regression_tree.html</loc>
+    <loc>https://jkunst.com/klassets/reference/fit_regression_tree.html</loc>
   </url>
   <url>
-    <loc>https://jkunst.com/klassets/reference/apply_statskmeans.html</loc>
+    <loc>https://jkunst.com/klassets/reference/fit_statskmeans.html</loc>
   </url>
   <url>
     <loc>https://jkunst.com/klassets/reference/index.html</loc>

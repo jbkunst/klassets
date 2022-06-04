@@ -129,14 +129,14 @@
 <p><img src="Regression_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div class="section level2">
-<h2 id="apply-classification-algorithms">Apply classification algorithms<a class="anchor" aria-label="anchor" href="#apply-classification-algorithms"></a>
+<h2 id="fit-classification-algorithms">Fit classification algorithms<a class="anchor" aria-label="anchor" href="#fit-classification-algorithms"></a>
 </h2>
 <div class="section level3">
 <h3 id="linear-regression">Linear Regression<a class="anchor" aria-label="anchor" href="#linear-regression"></a>
 </h3>
 <p>This function uses <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm</a></code> to fit a model.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_lr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_linear_model.html">apply_linear_model</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df_lr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_linear_model.html">fit_linear_model</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
 
 <span class="va">df_lr</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 3</span></span>
@@ -158,7 +158,7 @@
 <p><img src="Regression_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>By default the model use <code>order = 1</code> of the variables, i.e, <code>response ~ x + y</code>. We can get a better fit if we increase the order.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_lr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_linear_model.html">apply_linear_model</a></span><span class="op">(</span><span class="va">df</span>, order <span class="op">=</span> <span class="fl">4</span>, stepwise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df_lr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_linear_model.html">fit_linear_model</a></span><span class="op">(</span><span class="va">df</span>, order <span class="op">=</span> <span class="fl">4</span>, stepwise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df_lr2</span>, <span class="st">"model"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -176,7 +176,7 @@
 <code class="sourceCode R"><span class="va">orders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>
 
 <span class="va">orders</span> |&gt; 
-  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">apply_linear_model</span>, df <span class="op">=</span> <span class="va">df</span><span class="op">)</span> |&gt; 
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">fit_linear_model</span>, df <span class="op">=</span> <span class="va">df</span><span class="op">)</span> |&gt; 
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span> |&gt; 
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html" class="external-link">reduce</a></span><span class="op">(</span><span class="va">`+`</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">&amp;</span>
@@ -188,7 +188,7 @@
 </h3>
 <p>Internally the functions uses <code><a href="https://rdrr.io/pkg/partykit/man/ctree.html" class="external-link">partykit::ctree</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_rt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_regression_tree.html">apply_regression_tree</a></span><span class="op">(</span><span class="va">df</span>, maxdepth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df_rt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_regression_tree.html">fit_regression_tree</a></span><span class="op">(</span><span class="va">df</span>, maxdepth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_rt</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
@@ -198,7 +198,7 @@
 <p><img src="Regression_files/figure-html/unnamed-chunk-6-2.png" width="700"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/apply_regression_tree.html">apply_regression_tree</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/fit_regression_tree.html">fit_regression_tree</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-6-3.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -206,7 +206,7 @@
 </h3>
 <p>Internally the functions uses <code>partykit::mltree</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_lmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_linear_model_tree.html">apply_linear_model_tree</a></span><span class="op">(</span><span class="va">df</span>, maxdepth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df_lmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_linear_model_tree.html">fit_linear_model_tree</a></span><span class="op">(</span><span class="va">df</span>, maxdepth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_lmt</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
@@ -216,7 +216,7 @@
 <p><img src="Regression_files/figure-html/unnamed-chunk-7-2.png" width="700"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/apply_linear_model_tree.html">apply_linear_model_tree</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/fit_linear_model_tree.html">fit_linear_model_tree</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-7-3.png" width="700"></p>
 </div>
 </div>
