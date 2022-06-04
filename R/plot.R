@@ -142,10 +142,13 @@ plot.klassets_response_xy <- function(x, ...){
 }
 
 #' @export
-plot.klassets_response_xy_logistic_regression <- function(x, length_seq = 100, ...){
+plot.klassets_response_xy_logistic_regression <- function(x,
+                                                          length_seq = 100,
+                                                          bins = 100, ...){
 
   # x <- fit_logistic_regression(sim_response_xy(n = 500), order = 2)
   # length_grid <-  100
+  # bins <-  100
 
   dfgrid <- create_grid_from_data_frame(x, length_seq = length_seq)
 
@@ -157,7 +160,7 @@ plot.klassets_response_xy_logistic_regression <- function(x, length_seq = 100, .
 
   p <- ggplot2::ggplot() +
 
-    ggproto_contour_fill(dfgrid) +
+    ggproto_contour_fill(dfgrid, bins = bins) +
 
     ggproto_text_contour(dfgrid) +
 
@@ -434,7 +437,7 @@ ggproto_point_response_xy_color_shape <- function(x){
 
 }
 
-ggproto_contour_fill <- function(dfgrid, ...) {
+ggproto_contour_fill <- function(dfgrid, bins = 100, ...) {
 
   if(getOption("klassets.geom_contour_fill")){
 
@@ -442,6 +445,7 @@ ggproto_contour_fill <- function(dfgrid, ...) {
     proto <- metR::geom_contour_fill(
       data = dfgrid,
       ggplot2::aes(.data$x, .data$y, z = .data$prediction),
+      bins = bins,
       ...
       )
 
