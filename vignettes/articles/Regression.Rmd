@@ -112,7 +112,7 @@ plot(fit_regression_tree(df))
 ```
 
 
-### Linear Model Tree `partykit::mltree`
+### Linear Model Tree
 
 Internally the functions uses `partykit::mltree`.
 
@@ -126,7 +126,7 @@ plot(attr(df_lmt, "model"))
 plot(fit_linear_model_tree(df))
 ```
 
-### Random Forest `partykit::cforest`
+### Random Forest
 
 Internally the functions uses `partykit::cforest`.
 
