@@ -105,8 +105,7 @@
 <h2 id="fit-cluster-algorithms">Fit cluster algorithms<a class="anchor" aria-label="anchor" href="#fit-cluster-algorithms"></a>
 </h2>
 <div class="section level3">
-<h3 id="statskmeans">
-<code>stats::kmeans</code><a class="anchor" aria-label="anchor" href="#statskmeans"></a>
+<h3 id="k-means-statskmeans">K-means <code>stats::kmeans</code><a class="anchor" aria-label="anchor" href="#k-means-statskmeans"></a>
 </h3>
 <p>You can apply the <code><a href="https://rdrr.io/r/stats/kmeans.html" class="external-link">stats::kmeans</a></code> using <code>fit_statskmeans_clust</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -116,26 +115,35 @@
 <p><img src="Clustering_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div class="section level3">
+<h3 id="hierarchical-clustering-statshclust">Hierarchical Clustering <code>stats::hclust</code><a class="anchor" aria-label="anchor" href="#hierarchical-clustering-statshclust"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfhc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_hclust.html">fit_hclust</a></span><span class="op">(</span><span class="va">df</span>, k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dfhc</span><span class="op">)</span></code></pre></div>
+<p><img src="Clustering_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+</div>
+<div class="section level3">
 <h3 id="k-means-basic-klassets-implementation">K-means: Basic {klassets} implementation<a class="anchor" aria-label="anchor" href="#k-means-basic-klassets-implementation"></a>
 </h3>
 <p>Or use a basic K-means implementation with:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
 
 <span class="va">dfc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_kmeans.html">fit_kmeans</a></span><span class="op">(</span><span class="va">df</span>, centers <span class="op">=</span> <span class="fl">2</span>, max_iteration <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dfc2</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p><img src="Clustering_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>What is the benefit? In the second one use a helper function <code>kmeans_iterations</code> to keep the iteration and see how the algorithm converges.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
 
 <span class="va">kmi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kmeans_iterations.html">kmeans_iterations</a></span><span class="op">(</span><span class="va">df</span>, centers <span class="op">=</span> <span class="fl">2</span>, max_iteration <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">kmi</span><span class="op">)</span></code></pre></div>
-<p><img src="Clustering_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<p><img src="Clustering_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Now we can use <code>gganimate</code> package using object result from <code>kmeans_iterations</code> due have the classification for every point in every step:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">kmi</span>
 <span class="co">#&gt; $points</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,988 × 6</span></span>
@@ -173,7 +181,7 @@
 <span class="co">#&gt; attr(,"class")</span>
 <span class="co">#&gt; [1] "klassets_kmiterations" "list"</span></code></pre></div>
 <p>So you can take the output of this function data and use <code>gganimate</code> to make the animation using in the <code>klassets</code> home page. The code used in that animation can be found in the package using:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"animation_kmeans_iterations.R"</span>, package <span class="op">=</span> <span class="st">"klassets"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "/home/runner/work/_temp/Library/klassets/animation_kmeans_iterations.R"</span></code></pre></div>
 </div>
