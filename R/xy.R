@@ -245,7 +245,7 @@ fit_regression_random_forest <- function(df,
                                          ntree = 500L,
                                          maxdepth = Inf,
                                          alpha = 0.05,
-                                         trace = TRUE,
+                                         trace = FALSE,
                                          ...){
 
   mod <- partykit::cforest(
