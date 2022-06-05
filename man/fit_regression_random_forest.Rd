@@ -9,7 +9,7 @@ fit_regression_random_forest(
   ntree = 500L,
   maxdepth = Inf,
   alpha = 0.05,
-  trace = TRUE,
+  trace = FALSE,
   ...
 )
 }
