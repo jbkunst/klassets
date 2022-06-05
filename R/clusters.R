@@ -276,8 +276,6 @@ fit_kmeans <- function(df, centers = 3, ...){
 #'
 #' plot(df)
 #'
-#' set.seed(124)
-#'
 #' dfc <- fit_statskmeans(df, centers = 4)
 #'
 #' plot(dfc)
@@ -305,9 +303,45 @@ fit_statskmeans <- function(df, centers = 3, ...){
 
 }
 
-fit_hclust_clust <- function(df){
+
+#' Fit Hierarchical Clustering to `klassets_cluster` object using `stats::hclust`
+#'
+#' @param df A `klassets_cluster` object.
+#' @param k A numeric determine number of clusters. This value is passed to
+#'   `stats::cutree` method.
+#' @param method The agglomeration method to be used.
+#'
+#' @examples
+#'
+#' set.seed(12)
+#'
+#' df <- sim_groups(n = 200, groups = 3)
+#'
+#' plot(df)
+#'
+#' dfhc <- fit_hclust(df, k = 4)
+#'
+#' plot(dfhc)
+#'
+#' @importFrom stats dist hclust cutree
+#' @export
+fit_hclust <- function(df, k = 3, method = "complete"){
 
   stopifnot(inherits(df, "klassets_cluster"))
+
+
+  distances <- dist(dplyr::select(df, .data$x, .data$y))
+
+  hc <- stats::hclust(distances, method = method)
+
+  clust <- stats::cutree(hc, k = k)
+
+  clust <- LETTERS[clust]
+
+  df <- df |>
+    dplyr::mutate(cluster = clust)
+
+  df
 
 }
 

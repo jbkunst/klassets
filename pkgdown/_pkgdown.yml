@@ -34,6 +34,7 @@ reference:
 - contents:
   - sim_groups
   - fit_kmeans
+  - fit_hclust
   - fit_statskmeans
   - kmeans_iterations
 - title: Binary classification

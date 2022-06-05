@@ -25,8 +25,6 @@ df <- sim_groups(n = 200, groups = 3)
 
 plot(df)
 
-set.seed(124)
-
 dfc <- fit_statskmeans(df, centers = 4)
 
 plot(dfc)

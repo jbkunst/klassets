@@ -45,7 +45,7 @@ plot(df)
 
 ## Fit cluster algorithms
 
-### `stats::kmeans`
+### K-means `stats::kmeans`
 
 You can apply the `stats::kmeans` using `fit_statskmeans_clust`.
 
@@ -54,6 +54,15 @@ dfc1 <- fit_statskmeans(df, centers = 2)
 
 plot(dfc1)
 ```
+
+### Hierarchical Clustering `stats::hclust`
+
+```{r}
+dfhc <- fit_hclust(df, k = 2)
+
+plot(dfhc)
+```
+
 
 ### K-means: Basic {klassets} implementation
 
