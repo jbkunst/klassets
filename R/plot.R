@@ -67,13 +67,7 @@ plot.klassets_xy_linear_model <- function(x, length_seq = 100, alpha = 0.05, ...
 
     ggproto_point_xy(x) +
 
-    ggplot2::geom_ribbon(
-      data = dfgrid,
-      ggplot2::aes(.data$x, ymin = .data$low, ymax = .data$high),
-      fill = "gray60",
-      color = "transparent",
-      alpha = 0.5
-    ) +
+    ggproto_ribbon(dfgrid) +
 
     ggplot2::geom_line(
       data = dfgrid,
@@ -112,13 +106,6 @@ plot.klassets_xy_linear_model_tree <- function(x, length_seq = 100, alpha = 0.05
 
     ggproto_point_xy(x) +
 
-    # ggplot2::geom_ribbon(
-    #   data = dfgrid,
-    #   ggplot2::aes(.data$x, ymin = .data$low, ymax = .data$high),
-    #   fill = "gray60",
-    #   color = "transparent",
-    #   alpha = 0.5
-    # ) +
     ggplot2::geom_line(
       data = dfgrid,
       ggplot2::aes(.data$x, .data$fit, group = .data$node),
@@ -130,6 +117,52 @@ plot.klassets_xy_linear_model_tree <- function(x, length_seq = 100, alpha = 0.05
 
 #' @export
 plot.klassets_xy_regression_tree <- plot.klassets_xy_linear_model_tree
+
+#' @export
+plot.klassets_xy_regression_random_forest <- function(x,
+                                                      length_seq = 100,
+                                                      alpha = 0.05,
+                                                      ...){
+
+  dfgrid <- tibble::tibble(
+    x = create_seq_from_vector(dplyr::pull(x, .data$x), length_seq = length_seq)
+  )
+
+  predictions <- predict(attr(x, "model"), newdata = dfgrid)
+
+  # from example cforest
+  # predict quantiles (aka quantile regression forest)
+  fun_quantile <- function(y, w) quantile(rep(y, w), probs = c(alpha/2, 1-alpha/2))
+
+  predictions_q <- predict(
+    attr(x, "model"),
+    newdata = dfgrid,
+    type = "response",
+    FUN = fun_quantile
+    )
+
+  dfgrid <- dfgrid |>
+    dplyr::mutate(
+      fit  = predictions,
+      low  = predictions_q[, 1],
+      high = predictions_q[, 2]
+    )
+
+  ggplot2::ggplot() +
+
+    ggproto_point_xy(x) +
+
+    ggproto_ribbon(dfgrid) +
+
+    ggplot2::geom_line(
+      data = dfgrid,
+      ggplot2::aes(.data$x, .data$fit),
+      color = "darkred",
+      size = 1.0
+    )
+
+
+}
 
 #' @export
 plot.klassets_response_xy <- function(x, ...){
@@ -434,6 +467,18 @@ ggproto_point_response_xy_color_shape <- function(x){
       ),
     size = 2
     )
+
+}
+
+ggproto_ribbon <- function(dfgrid, ...){
+
+  ggplot2::geom_ribbon(
+    data = dfgrid,
+    ggplot2::aes(.data$x, ymin = .data$low, ymax = .data$high),
+    fill = "gray60",
+    color = "transparent",
+    alpha = 0.5
+  )
 
 }
 

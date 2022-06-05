@@ -126,4 +126,17 @@ plot(attr(df_lmt, "model"))
 plot(fit_linear_model_tree(df))
 ```
 
+### Random Forest `partykit::cforest`
+
+Internally the functions uses `partykit::cforest`.
+
+```{r}
+df_rf <- fit_regression_random_forest(df)
+
+plot(df_rf)
+
+# this will be relative similar to `fit_regression_tree` due 
+# we are using 1 tree
+plot(fit_regression_random_forest(df, ntree = 1, maxdepth = Inf))
+```
 

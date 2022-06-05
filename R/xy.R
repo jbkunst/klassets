@@ -206,3 +206,64 @@ fit_linear_model_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
   df
 
 }
+
+
+#' Fit regression random forest to `klassets_xy` object
+#'
+#' @param df A object from `sim_response_xy`.
+#' @param ntree Number of trees to grow for the forest.
+#' @param maxdepth Max depth of the tree. Same used in `partykit::ctree_control`.
+#' @param alpha Alpha value, same used in `partykit::ctree_control`
+#' @param trace A logical indicating if a progress bar shall be printed while the forest grows.
+#' @param ... Options for `partykit::ctree_control`.
+#'
+#' @examples
+#'
+#' df <- sim_xy()
+#'
+#' df
+#'
+#' dflm <- fit_regression_random_forest(df)
+#'
+#' dflm
+#'
+#' plot(dflm)
+#'
+#' df <- sim_xy(1000)
+#' df <- dplyr::mutate(df, y = y + 3 * sin(x) + 5 * sqrt(abs(x)))
+#'
+#' plot(df)
+#'
+#' plot(fit_regression_random_forest(df))
+#'
+#' # default
+#' plot(fit_regression_random_forest(df))
+#'
+#' @importFrom partykit cforest
+#' @export
+fit_regression_random_forest <- function(df,
+                                         ntree = 500L,
+                                         maxdepth = Inf,
+                                         alpha = 0.05,
+                                         trace = TRUE,
+                                         ...){
+
+  mod <- partykit::cforest(
+    y ~ x,
+    data = df,
+    ntree = ntree,
+    trace = trace,
+    control = partykit::ctree_control(maxdepth = maxdepth, alpha = alpha, ...)
+  )
+
+  df <- dplyr::mutate(df, prediction = partykit::predict.cforest(mod))
+
+  # Mmm...
+  class(df) <- setdiff(class(df), "klassets_xy")
+  class(df) <- c("klassets_xy_regression_random_forest", class(df))
+
+  attr(df, "model") <- mod
+
+  df
+
+}
