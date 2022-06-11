@@ -78,20 +78,27 @@
 <p>The <a href="https://jkunst.com/klassets/">klassets</a> package is a collection of functions to simulate data sets to:</p>
 <ul>
 <li>Teach how some Statistics Models and Machine Learning algorithms works.</li>
-<li>Illustrate certain some particular events such as heteroskedasticity or the Simpson’s paradox</li>
+<li>Illustrate certain some particular events such as heteroskedasticity or the Simpson’s paradox.</li>
+<li>Compare the predictions between modelos, for example logistic regression vs decision tree vs <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;k" title="k" alt="k">-Nearest Neighbours.</li>
 </ul>
-<p><img src="reference/figures/animation_quasi_anscombre.gif" width="100%"></p>
-<p>For example:</p>
+<p><img src="reference/figures/animation_quasi_anscombre.gif" width="90%" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level1">
+<h1 id="some-examples">Some examples<a class="anchor" aria-label="anchor" href="#some-examples"></a>
+</h1>
+<div class="section level2">
+<h2 id="dont-forget-to-visualize-the-data">Don’t forget to visualize the data<a class="anchor" aria-label="anchor" href="#dont-forget-to-visualize-the-data"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jkunst.com/klassets/">klassets</a></span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_quasianscombe_set_1.html">sim_quasianscombe_set_1</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">500</span>, beta0 <span class="op">=</span> <span class="fl">3</span>, beta1 <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_quasianscombe_set_1.html">sim_quasianscombe_set_1</a></span><span class="op">(</span>beta0 <span class="op">=</span> <span class="fl">3</span>, beta1 <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Very similar to the given parameters (3 and 0.5)"</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="90%" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span>
 
@@ -99,9 +106,48 @@
 <span class="va">df6</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_quasianscombe_set_6.html">sim_quasianscombe_set_6</a></span><span class="op">(</span><span class="va">df</span>, groups <span class="op">=</span> <span class="fl">2</span>, b1_factor <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df6</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="90%" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level2">
+<h2 id="compare-models-in-a-classifications-task">Compare models in a classifications task<a class="anchor" aria-label="anchor" href="#compare-models-in-a-classifications-task"></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_response_xy.html">sim_response_xy</a></span><span class="op">(</span>relationship <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">*</span><span class="va">pi</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">y</span><span class="op">*</span><span class="va">pi</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">df</span>
+<span class="co">#&gt; # A tibble: 500 × 3</span>
+<span class="co">#&gt;    response       x       y</span>
+<span class="co">#&gt;    &lt;fct&gt;      &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 FALSE    -0.681   0.707 </span>
+<span class="co">#&gt;  2 FALSE    -0.711   0.332 </span>
+<span class="co">#&gt;  3 FALSE    -0.702   0.467 </span>
+<span class="co">#&gt;  4 TRUE      0.0289 -0.371 </span>
+<span class="co">#&gt;  5 TRUE     -0.0143  0.335 </span>
+<span class="co">#&gt;  6 TRUE      0.233  -0.0722</span>
+<span class="co">#&gt;  7 FALSE    -0.105   0.301 </span>
+<span class="co">#&gt;  8 FALSE    -0.889   0.572 </span>
+<span class="co">#&gt;  9 FALSE    -0.989   0.803 </span>
+<span class="co">#&gt; 10 FALSE    -0.556   0.0548</span>
+<span class="co">#&gt; # … with 490 more rows</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="90%" style="display: block; margin: auto;"></p>
+<p>You can fit differents models and see how the predictions are made.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="reference/fit_logistic_regression.html">fit_logistic_regression</a></span><span class="op">(</span><span class="va">df</span>, order <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="reference/fit_classification_tree.html">fit_classification_tree</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span>            <span class="op">+</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="reference/fit_classification_random_forest.html">fit_classification_random_forest</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span>   <span class="op">+</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="reference/fit_knn.html">fit_knn</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span>                            <span class="op">+</span>
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span><span class="st">"Classification Task"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level2">
+<h2 id="how-k-means-works">How <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;K" title="K" alt="K">-means works<a class="anchor" aria-label="anchor" href="#how-k-means-works"></a>
+</h2>
 <p>Another example of what can be done with <a href="https://jkunst.com/klassets/">klassets</a>.</p>
-<p><img src="reference/figures/animation_kmeans_iterations.gif" width="100%"></p>
+<p><img src="reference/figures/animation_kmeans_iterations.gif" width="90%" style="display: block; margin: auto;"></p>
+</div>
 <div class="section level2">
 <h2 id="where-to-start">Where to start<a class="anchor" aria-label="anchor" href="#where-to-start"></a>
 </h2>
@@ -117,18 +163,21 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of klassets from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jbkunst/klassets"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="why-the-name-klassets">Why the name Klassets?<a class="anchor" aria-label="anchor" href="#why-the-name-klassets"></a>
+<h2 id="extra-ifor">Extra Ifor<a class="anchor" aria-label="anchor" href="#extra-ifor"></a>
 </h2>
+<div class="section level3">
+<h3 id="why-the-name-klassets">Why the name Klassets?<a class="anchor" aria-label="anchor" href="#why-the-name-klassets"></a>
+</h3>
 <p>Just a weird merge for Class/Klass and sets.</p>
 </div>
-<div class="section level2">
-<h2 id="inspirationsimilar-ideas">Inspiration/Similar Ideas<a class="anchor" aria-label="anchor" href="#inspirationsimilar-ideas"></a>
-</h2>
+<div class="section level3">
+<h3 id="inspirationsimilar-ideas">Inspiration/Similar Ideas<a class="anchor" aria-label="anchor" href="#inspirationsimilar-ideas"></a>
+</h3>
 <ul>
 <li><a href="https://jumpingrivers.github.io/datasauRus/" class="external-link uri">https://jumpingrivers.github.io/datasauRus/</a></li>
 <li><a href="https://eliocamp.github.io/metamer/" class="external-link uri">https://eliocamp.github.io/metamer/</a></li>
@@ -137,6 +186,8 @@
 </ul>
 </div>
 </div>
+</div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -188,7 +239,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer>
