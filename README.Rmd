@@ -100,6 +100,7 @@ knitr::include_graphics("man/figures/animation_kmeans_iterations.gif")
 You can check:
 
 - `vignette("Quasi-Anscombe-data-sets")` to know more about `sim_quasianscombe_set*` functions family.
+- `vignette("Binary-classification")`/`vignette("Regression")` to see classifiers/regression models/methods.
 - `vignette("Clustering")` to see clustering functions.
 
 ## Installation
