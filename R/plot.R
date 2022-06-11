@@ -51,16 +51,25 @@ plot.klassets_xy_linear_model <- function(x, length_seq = 100, alpha = 0.05, ...
     dplyr::select(-dplyr::matches("y")) |>
     dplyr::distinct()
 
-  predictions <- predict(attr(x, "model"), newdata = dfgrid, se = TRUE)
+  predictions <- predict(
+    attr(x, "model"),
+    newdata = dfgrid,
+    interval = "predict",
+    level = 1 - alpha
+    )
 
-  q <- stats::qnorm(1 - alpha/2)
+  predictions <- tibble::as_tibble(predictions)
+
+  # q <- stats::qnorm(1 - alpha/2)
 
   dfgrid <- dfgrid |>
     dplyr::mutate(
-      fit = predictions$fit,
-      se  = predictions$se,
-      low = .data$fit - .data$se * q,
-      high = .data$fit + .data$se * q
+      fit = predictions[["fit"]],
+      # se  = predictions$se,
+      # low = .data$fit - .data$se * q,
+      # high = .data$fit + .data$se * q
+      low = predictions[["lwr"]],
+      high = predictions[["upr"]]
       )
 
   ggplot2::ggplot() +
@@ -518,7 +527,7 @@ ggproto_ribbon <- function(dfgrid, ...){
     ggplot2::aes(.data$x, ymin = .data$low, ymax = .data$high),
     fill = "gray60",
     color = "transparent",
-    alpha = 0.5
+    alpha = 0.35
   )
 
 }
