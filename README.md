@@ -16,24 +16,30 @@ sets to:
 -   Teach how some Statistics Models and Machine Learning algorithms
     works.
 -   Illustrate certain some particular events such as heteroskedasticity
-    or the Simpson’s paradox
+    or the Simpson’s paradox.
+-   Compare the predictions between modelos, for example logistic
+    regression vs decision tree vs
+    ![k](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;k "k")-Nearest
+    Neighbours.
 
-<img src="man/figures/animation_quasi_anscombre.gif" width="100%" />
+<img src="man/figures/animation_quasi_anscombre.gif" width="90%" style="display: block; margin: auto;" />
 
-For example:
+# Some examples
+
+## Don’t forget to visualize the data
 
 ``` r
 library(klassets)
 
 set.seed(123)
 
-df <- sim_quasianscombe_set_1(n = 500, beta0 = 3, beta1 = 0.5)
+df <- sim_quasianscombe_set_1(beta0 = 3, beta1 = 0.5)
 
 plot(df) +
   ggplot2::labs(subtitle = "Very similar to the given parameters (3 and 0.5)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="90%" style="display: block; margin: auto;" />
 
 ``` r
 library(patchwork)
@@ -44,11 +50,52 @@ df6 <- sim_quasianscombe_set_6(df, groups = 2, b1_factor = -1)
 plot(df2) + plot(df6)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="90%" style="display: block; margin: auto;" />
+
+## Compare models in a classifications task
+
+``` r
+df <- sim_response_xy(relationship = function(x, y) sin(x*pi) > sin(y*pi))
+
+df
+#> # A tibble: 500 × 3
+#>    response       x       y
+#>    <fct>      <dbl>   <dbl>
+#>  1 FALSE    -0.681   0.707 
+#>  2 FALSE    -0.711   0.332 
+#>  3 FALSE    -0.702   0.467 
+#>  4 TRUE      0.0289 -0.371 
+#>  5 TRUE     -0.0143  0.335 
+#>  6 TRUE      0.233  -0.0722
+#>  7 FALSE    -0.105   0.301 
+#>  8 FALSE    -0.889   0.572 
+#>  9 FALSE    -0.989   0.803 
+#> 10 FALSE    -0.556   0.0548
+#> # … with 490 more rows
+
+plot(df)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="90%" style="display: block; margin: auto;" />
+
+You can fit differents models and see how the predictions are made.
+
+``` r
+plot(fit_logistic_regression(df, order = 4)) +
+plot(fit_classification_tree(df))            +
+plot(fit_classification_random_forest(df))   +
+plot(fit_knn(df))                            +
+  plot_annotation("Classification Task") +
+  plot_layout(guides = "collect")
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" />
+
+## How ![K](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;K "K")-means works
 
 Another example of what can be done with `{klassets}`.
 
-<img src="man/figures/animation_kmeans_iterations.gif" width="100%" />
+<img src="man/figures/animation_kmeans_iterations.gif" width="90%" style="display: block; margin: auto;" />
 
 ## Where to start
 
@@ -68,11 +115,13 @@ You can install the development version of klassets from
 remotes::install_github("jbkunst/klassets")
 ```
 
-## Why the name Klassets?
+## Extra Ifor
+
+### Why the name Klassets?
 
 Just a weird merge for Class/Klass and sets.
 
-## Inspiration/Similar Ideas
+### Inspiration/Similar Ideas
 
 -   <https://jumpingrivers.github.io/datasauRus/>
 -   <https://eliocamp.github.io/metamer/>

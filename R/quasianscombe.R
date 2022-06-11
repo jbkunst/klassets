@@ -27,7 +27,7 @@
 #' @importFrom tibble tibble
 #' @importFrom stats coefficients lm rnorm runif
 #' @export
-sim_quasianscombe_set_1 <- function(n = 100,
+sim_quasianscombe_set_1 <- function(n = 500,
                                     beta0 = 3,
                                     beta1 = 0.5,
                                     x_dist = purrr::partial(rnorm, mean = 5, sd = 1),

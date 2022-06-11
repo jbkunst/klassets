@@ -25,8 +25,7 @@ usethis::use_badge(
 usethis::edit_r_buildignore()
 usethis::edit_git_ignore()
 
-{pkgdown::init_site();
-pkgdown::build_home(preview = TRUE)}
+{pkgdown::init_site(); pkgdown::build_home(preview = TRUE)}
 
 pkgdown::build_reference_index()
 pkgdown::preview_site()
@@ -56,6 +55,7 @@ usethis::use_package("viridisLite")
 usethis::use_package("metR")
 usethis::use_package("partykit")
 usethis::use_package("parttree") # Remotes!!
+usethis::use_package("ranger") # Remotes!!
 
 
 usethis::use_package("tidyr", type = "Suggests")

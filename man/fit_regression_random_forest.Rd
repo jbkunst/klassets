@@ -8,23 +8,20 @@ fit_regression_random_forest(
   df,
   ntree = 500L,
   maxdepth = Inf,
-  alpha = 0.05,
   trace = FALSE,
   ...
 )
 }
 \arguments{
-\item{df}{A object from \code{sim_response_xy}.}
+\item{df}{A object from \code{sim_xy}.}
 
 \item{ntree}{Number of trees to grow for the forest.}
 
-\item{maxdepth}{Max depth of the tree. Same used in \code{partykit::ctree_control}.}
-
-\item{alpha}{Alpha value, same used in \code{partykit::ctree_control}}
+\item{maxdepth}{Max depth of each trees.}
 
 \item{trace}{A logical indicating if a progress bar shall be printed while the forest grows.}
 
-\item{...}{Options for \code{partykit::ctree_control}.}
+\item{...}{Options for \code{ranger::ranger}.}
 }
 \description{
 Fit regression random forest to \code{klassets_xy} object
@@ -35,20 +32,17 @@ df <- sim_xy()
 
 df
 
-dflm <- fit_regression_random_forest(df)
+dfrrf <- fit_regression_random_forest(df)
 
-dflm
+dfrrf
 
-plot(dflm)
+plot(dfrrf)
 
 df <- sim_xy(1000)
 df <- dplyr::mutate(df, y = y + 3 * sin(x) + 5 * sqrt(abs(x)))
 
 plot(df)
 
-plot(fit_regression_random_forest(df))
-
-# default
 plot(fit_regression_random_forest(df))
 
 }

@@ -4,16 +4,16 @@
 \alias{fit_classification_tree}
 \title{Fit classification tree to \code{klassets_response_xy} object}
 \usage{
-fit_classification_tree(df, maxdepth = Inf, alpha = 0.05, type = "prob", ...)
+fit_classification_tree(df, type = "prob", maxdepth = Inf, alpha = 0.05, ...)
 }
 \arguments{
 \item{df}{A object from \code{sim_response_xy}.}
 
+\item{type}{Type of prediction, one of prob, response, node.}
+
 \item{maxdepth}{Max depth of the tree. Same used in \code{partykit::ctree_control}.}
 
 \item{alpha}{Alpha value, same used in \code{partykit::ctree_control}}
-
-\item{type}{Type of prediction, one of prob, response, node.}
 
 \item{...}{Options for \code{partykit::ctree_control}.}
 }

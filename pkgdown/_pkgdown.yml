@@ -43,6 +43,7 @@ reference:
   - sim_response_xy
   - fit_logistic_regression
   - fit_classification_tree
+  - fit_classification_random_forest
   - fit_knn
 - title: Regression
   desc: Functions to simulate data for test and explaing regression algorimths.

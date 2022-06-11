@@ -5,7 +5,7 @@
 \title{Generate \emph{quasi} Anscombe data sets Type 1}
 \usage{
 sim_quasianscombe_set_1(
-  n = 100,
+  n = 500,
   beta0 = 3,
   beta1 = 0.5,
   x_dist = purrr::partial(rnorm, mean = 5, sd = 1),

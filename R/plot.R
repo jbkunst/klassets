@@ -72,7 +72,7 @@ plot.klassets_xy_linear_model <- function(x, length_seq = 100, alpha = 0.05, ...
     ggplot2::geom_line(
       data = dfgrid,
       ggplot2::aes(.data$x, .data$fit),
-      color = "darkred",
+      color = scales::muted("red"),
       size = 1.0
     )
 
@@ -109,7 +109,7 @@ plot.klassets_xy_linear_model_tree <- function(x, length_seq = 100, alpha = 0.05
     ggplot2::geom_line(
       data = dfgrid,
       ggplot2::aes(.data$x, .data$fit, group = .data$node),
-      color = "darkred",
+      color = scales::muted("red"),
       size = 1.0
     )
 
@@ -128,18 +128,14 @@ plot.klassets_xy_regression_random_forest <- function(x,
     x = create_seq_from_vector(dplyr::pull(x, .data$x), length_seq = length_seq)
   )
 
-  predictions <- predict(attr(x, "model"), newdata = dfgrid)
-
-  # from example cforest
-  # predict quantiles (aka quantile regression forest)
-  fun_quantile <- function(y, w) quantile(rep(y, w), probs = c(alpha/2, 1-alpha/2))
+  predictions <- predict(attr(x, "model"), data = dfgrid)$predictions
 
   predictions_q <- predict(
     attr(x, "model"),
-    newdata = dfgrid,
-    type = "response",
-    FUN = fun_quantile
-    )
+    data = dfgrid,
+    type = "quantiles",
+    quantiles = c(alpha/2, 1-alpha/2)
+    )$predictions
 
   dfgrid <- dfgrid |>
     dplyr::mutate(
@@ -157,10 +153,9 @@ plot.klassets_xy_regression_random_forest <- function(x,
     ggplot2::geom_line(
       data = dfgrid,
       ggplot2::aes(.data$x, .data$fit),
-      color = "darkred",
+      color = scales::muted("red"),
       size = 1.0
     )
-
 
 }
 
@@ -201,7 +196,7 @@ plot.klassets_response_xy_logistic_regression <- function(x,
 
     ggplot2::scale_fill_gradient2(
       name = "Model", midpoint = 0.5, breaks = seq(0, 1, by = 0.25), limits = c(0, 1),
-      high = scales::muted("blue"), low =  scales::muted("red")
+      high = scales::muted("blue"), low = scales::muted("red")
     )
 
   p
@@ -276,6 +271,52 @@ plot.klassets_response_xy_classification_tree <- function(x, length_seq = 100, .
       ggproto_text_contour(dfgrid, check_overlap = TRUE)
 
   }
+
+  addorn_ggplot(p)
+
+}
+
+#' @export
+plot.klassets_xy_classification_random_forest <- function(x, length_seq = 100, ...){
+
+  dfgrid <- create_grid_from_data_frame(x, length_seq = length_seq)
+
+  predictions <-  predict(attr(x, "mod"), data = dfgrid)
+
+  predictions <- predictions$predictions
+
+  if(attr(x, "type") == "prob"){
+    predictions <- predictions[, 2]
+  }
+
+  dfgrid <- dplyr::mutate(dfgrid, prediction = predictions)
+
+  scale_fill <- switch(
+    attr(x, "type"),
+    prob = ggplot2::scale_fill_gradient2(
+      name = "Model", midpoint = 0.5,
+      breaks = seq(0, 1, by = 0.25),
+      limits = c(0, 1),
+      high = scales::muted("blue"),
+      low =  scales::muted("red")
+    ),
+    response = ggplot2::scale_fill_manual(
+      name = "Model",
+      values = c(scales::muted("red"), scales::muted("blue"))
+    )
+  )
+
+  p <- ggplot2::ggplot() +
+
+    ggplot2::geom_raster(
+      data = dfgrid,
+      ggplot2::aes(.data$x, .data$y, fill = .data$prediction),
+      alpha = 0.5
+    )  +
+
+    ggproto_point_response_xy_color_shape(x) +
+
+    scale_fill
 
   addorn_ggplot(p)
 

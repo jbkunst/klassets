@@ -4,7 +4,7 @@
 \alias{sim_groups}
 \title{Generate data sets to apply clustering algorithms}
 \usage{
-sim_groups(n = 1000, groups = 3, props = NULL)
+sim_groups(n = 500, groups = 3, props = NULL)
 }
 \arguments{
 \item{n}{An integer.}

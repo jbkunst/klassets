@@ -22,7 +22,7 @@
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble as_tibble
 #' @export
-sim_response_xy <- function(n = 100,
+sim_response_xy <- function(n = 500,
                             # x_dist = purrr::partial(rnorm, mean = 0, sd = 1),
                             x_dist = purrr::partial(runif, min = -1, max = 1),
                             y_dist = x_dist,
@@ -75,9 +75,9 @@ sim_response_xy <- function(n = 100,
 #' @importFrom stats binomial glm predict step
 #' @export
 fit_logistic_regression <- function(df,
-                                      order = 1,
-                                      stepwise = FALSE,
-                                      verbose = FALSE){
+                                    order = 1,
+                                    stepwise = FALSE,
+                                    verbose = FALSE){
   # df <- sim_response_xy(n = 500)
   # order <- 3
   # stepwise <- TRUE
@@ -107,9 +107,9 @@ fit_logistic_regression <- function(df,
 #' Fit classification tree to `klassets_response_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
+#' @param type Type of prediction, one of prob, response, node.
 #' @param maxdepth Max depth of the tree. Same used in `partykit::ctree_control`.
 #' @param alpha Alpha value, same used in `partykit::ctree_control`
-#' @param type Type of prediction, one of prob, response, node.
 #' @param ... Options for `partykit::ctree_control`.
 #'
 #' @examples
@@ -137,10 +137,10 @@ fit_logistic_regression <- function(df,
 #' @importFrom partykit ctree
 #' @export
 fit_classification_tree <- function(df,
-                                      maxdepth = Inf,
-                                      alpha = 0.05,
-                                      type = "prob",
-                                      ...){
+                                    type = "prob",
+                                    maxdepth = Inf,
+                                    alpha = 0.05,
+                                    ...){
 
   mod <- partykit::ctree(
     response ~ .,
@@ -171,6 +171,79 @@ fit_classification_tree <- function(df,
 
 }
 
+#' Fit classification random forest to `klassets_response_xy` object
+#'
+#' @param df A object from `sim_response_xy`.
+#' @param type Type of prediction, one of prob, response, node.
+#' @param ntree Number of trees to grow for the forest.
+#' @param maxdepth Max depth of each trees.
+#' @param trace A logical indicating if a progress bar shall be printed while the forest grows.
+#' @param ... Options for `ranger::ranger`.
+#'
+#' @examples
+#'
+#' set.seed(123)
+#'
+#' df <- sim_response_xy(n = 1000, relationship = function(x, y) x**2 > sin(y))
+#'
+#' plot(df)
+#'
+#' dfcrf <- fit_classification_random_forest(df)
+#'
+#' dfcrf
+#'
+#' plot(dfcrf)
+#'
+#' df <- sim_xy(1000)
+#' df <- dplyr::mutate(df, y = y + 3 * sin(x) + 5 * sqrt(abs(x)))
+#'
+#' plot(df)
+#'
+#' plot(fit_regression_random_forest(df))
+#'
+#' # default
+#' plot(fit_regression_random_forest(df))
+#'
+#' @importFrom ranger ranger
+#' @export
+fit_classification_random_forest <- function(df,
+                                             type = "prob",
+                                             ntree = 500L,
+                                             maxdepth = NULL,
+                                             trace = FALSE,
+                                             ...){
+
+  stopifnot(type %in% c("prob", "response"))
+
+  mod <- ranger::ranger(
+    response ~ x + y,
+    data      = df,
+    num.trees = ntree,
+    verbose   = trace,
+    max.depth = maxdepth,
+    probability = if_else(type == "prob", TRUE, FALSE),
+    ...
+  )
+
+  predictions <- ranger::predictions(mod)
+
+  if(type == "prob"){
+    predictions <- predictions[, 2]
+  }
+
+  df <- dplyr::mutate(df, prediction = predictions)
+
+  # Mmm...
+  class(df) <- setdiff(class(df), "klassets_xy")
+  class(df) <- c("klassets_xy_classification_random_forest", class(df))
+
+  attr(df, "type")  <- type
+  attr(df, "model") <- mod
+
+  df
+
+}
+
 #' Fit K Nearest Neighbours to `klassets_response_xy` object
 #'
 #' @param df A object from `sim_response_xy`.
@@ -181,7 +254,7 @@ fit_classification_tree <- function(df,
 #'
 #' set.seed(123)
 #'
-#' df <- sim_response_xy(n = 1000, relationship = function(x, y) x**2 > sin(y))
+#' df <- sim_response_xy(relationship = function(x, y) x**2 > sin(y))
 #'
 #' plot(df)
 #'

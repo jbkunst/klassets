@@ -35,9 +35,7 @@ Posdef <- function (n, ev = runif(n, 0, 10)) {
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble as_tibble
 #' @export
-sim_groups <- function(n = 1000,
-                                    groups = 3,
-                                    props = NULL) {
+sim_groups <- function(n = 500, groups = 3, props = NULL) {
 
   stopifnot(
     as.integer(n) == n,

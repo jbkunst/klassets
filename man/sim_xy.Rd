@@ -5,7 +5,7 @@
 \title{Generate data sets to apply regression methods}
 \usage{
 sim_xy(
-  n = 100,
+  n = 500,
   beta0 = 3,
   beta1 = 0.5,
   x_dist = purrr::partial(rnorm, mean = 5, sd = 1),

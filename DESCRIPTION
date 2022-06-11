@@ -25,7 +25,8 @@ Imports:
     viridisLite,
     class,
     parttree,
-    partykit
+    partykit,
+    ranger
 Suggests: 
     broom,
     gganimate,

@@ -20,7 +20,7 @@ Fit K Nearest Neighbours to \code{klassets_response_xy} object
 
 set.seed(123)
 
-df <- sim_response_xy(n = 1000, relationship = function(x, y) x**2 > sin(y))
+df <- sim_response_xy(relationship = function(x, y) x**2 > sin(y))
 
 plot(df)
 

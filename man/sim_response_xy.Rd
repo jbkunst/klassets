@@ -5,7 +5,7 @@
 \title{Generate data sets to apply binary classifiers}
 \usage{
 sim_response_xy(
-  n = 100,
+  n = 500,
   x_dist = purrr::partial(runif, min = -1, max = 1),
   y_dist = x_dist,
   relationship = function(x, y) x > y,
