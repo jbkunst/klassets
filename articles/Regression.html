@@ -235,6 +235,16 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/fit_regression_random_forest.html">fit_regression_random_forest</a></span><span class="op">(</span><span class="va">df</span>, ntree <span class="op">=</span> <span class="fl">1</span>, maxdepth <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Regression_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
 </div>
+<div class="section level3">
+<h3 id="local-polynomial-regression-fitting-loess">Local Polynomial Regression Fitting (LOESS)<a class="anchor" aria-label="anchor" href="#local-polynomial-regression-fitting-loess"></a>
+</h3>
+<p>Using <code><a href="https://rdrr.io/r/stats/loess.html" class="external-link">stats::loess</a></code>.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_loess</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_loess.html">fit_loess</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df_loess</span><span class="op">)</span></code></pre></div>
+<p><img src="Regression_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
