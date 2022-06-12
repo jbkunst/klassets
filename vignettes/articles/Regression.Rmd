@@ -140,3 +140,15 @@ plot(df_rf)
 plot(fit_regression_random_forest(df, ntree = 1, maxdepth = Inf))
 ```
 
+### Local Polynomial Regression Fitting (LOESS)
+
+Using `stats::loess`.
+
+```{r}
+df_loess <- fit_loess(df)
+
+plot(df_loess)
+```
+
+
+

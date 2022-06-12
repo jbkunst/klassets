@@ -264,3 +264,50 @@ fit_regression_random_forest <- function(df,
   df
 
 }
+
+#' Fit Local polynomial regression to `klassets_xy` object
+#'
+#' @param df A object from `sim_xy`.
+#' @param ... Options for `stats::loess`.
+#'
+#' @examples
+#'
+#' df <- sim_xy()
+#'
+#' df
+#'
+#' dfloess <- fit_loess(df)
+#'
+#' dfloess
+#'
+#' plot(dfloess)
+#'
+#' df <- sim_xy(1000)
+#' df <- dplyr::mutate(df, y = y + 3 * sin(x) + 5 * sqrt(abs(x)))
+#'
+#' plot(df)
+#'
+#' plot(fit_loess(df))
+#'
+#' @importFrom stats loess
+#' @export
+fit_loess <- function(df, ...){
+
+  mod <- stats::loess(
+    y ~ x,
+    data = df,
+    ...
+  )
+
+  df <- dplyr::mutate(df, prediction = predict(mod))
+
+  # Mmm...
+  class(df) <- setdiff(class(df), "klassets_xy")
+  class(df) <- c("klassets_xy_loess", class(df))
+
+  attr(df, "model") <- mod
+
+  df
+
+}
+

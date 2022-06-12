@@ -53,4 +53,5 @@ reference:
   - fit_regression_tree
   - fit_linear_model_tree
   - fit_regression_random_forest
+  - fit_loess
 
