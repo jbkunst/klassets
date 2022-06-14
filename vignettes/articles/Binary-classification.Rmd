@@ -95,7 +95,9 @@ orders |>
 ```
 
 
-### Classification Tree `partykit::ctree`
+### Classification Tree
+
+(`partykit::ctree`)
 
 ```{r}
 df_rt <- fit_classification_tree(df)
@@ -128,7 +130,9 @@ plot(df_rt_node)
 plot(attr(df_rt_node, "model"))
 ```
 
-### K Nearest Neighbours `class::knn`
+### K Nearest Neighbours 
+
+With the `class::knn` implementation.
 
 ```{r}
 # defaults to prob
@@ -153,4 +157,15 @@ purrr::map(neighbours, fit_knn, df = df, type = "response") |>
   theme_void() + theme(legend.position = "none")
 ```
 
+### Random Forest 
+
+Using the `ranger::ranger` function.
+
+```{r}
+df_crf <- fit_classification_random_forest(df)
+
+plot(df_crf)
+
+df_crf
+```
 

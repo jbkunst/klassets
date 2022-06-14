@@ -83,7 +83,6 @@ plot(fit_logistic_regression(df, order = 4)) +
 plot(fit_classification_tree(df))            +
 plot(fit_classification_random_forest(df))   +
 plot(fit_knn(df))                            +
-  plot_annotation("Classification Task") +
   plot_layout(guides = "collect")
 ```
 
