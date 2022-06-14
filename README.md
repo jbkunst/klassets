@@ -85,7 +85,6 @@ plot(fit_logistic_regression(df, order = 4)) +
 plot(fit_classification_tree(df))            +
 plot(fit_classification_random_forest(df))   +
 plot(fit_knn(df))                            +
-  plot_annotation("Classification Task") +
   plot_layout(guides = "collect")
 ```
 
@@ -117,13 +116,11 @@ You can install the development version of klassets from
 remotes::install_github("jbkunst/klassets")
 ```
 
-## Extra Ifor
+## Extra Info(?!)
 
-### Why the name Klassets?
+**Why the name Klassets?** Just a weird merge for Class/Klass and sets.
 
-Just a weird merge for Class/Klass and sets.
-
-### Inspiration/Similar Ideas
+Some inspiration and similar ideas:
 
 -   <https://jumpingrivers.github.io/datasauRus/>
 -   <https://eliocamp.github.io/metamer/>

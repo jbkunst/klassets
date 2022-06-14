@@ -110,13 +110,11 @@ You can install the development version of klassets from [GitHub](https://github
 # install.packages("remotes")
 remotes::install_github("jbkunst/klassets")
 ```
-## Extra Ifor 
+## Extra Info(?!)
 
-### Why the name Klassets?
+**Why the name Klassets?** Just a weird merge for Class/Klass and sets.
 
-Just a weird merge for Class/Klass and sets.
-
-### Inspiration/Similar Ideas
+Some inspiration and similar ideas:
 
 - https://jumpingrivers.github.io/datasauRus/
 - https://eliocamp.github.io/metamer/
