@@ -26,9 +26,8 @@ dfloess
 
 plot(dfloess)
 
-df <- sim_xy(1000)
-df <- dplyr::mutate(df, y = y + 3 * sin(x) + 5 * sqrt(abs(x)))
-
+df <- sim_xy(n = 1000, x_dist = runif)
+df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
 plot(df)
 
 plot(fit_loess(df))

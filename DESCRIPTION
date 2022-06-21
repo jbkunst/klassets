@@ -26,7 +26,8 @@ Imports:
     class,
     parttree,
     partykit,
-    ranger
+    ranger,
+    earth
 Suggests: 
     broom,
     gganimate,
@@ -41,3 +42,5 @@ Suggests:
 Remotes: 
   github::grantmcdermott/parttree
 Language: en-US
+LazyData: true
+LazyDataCompression: xz

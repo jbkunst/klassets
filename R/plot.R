@@ -39,6 +39,33 @@ plot.klassets_quasianscombe <- function(x, add_lm = TRUE, ...){
 
 }
 
+plot.klassets_xy_generic <- function(x, length_seq = 100, alpha = 0.05, ...){
+
+  # x <- fit_linear_model(sim_xy())
+  # x <- fit_loess(sim_xy())
+  # x <- fit_mars(sim_xy())
+
+  dfgrid <- tibble::tibble(
+    x = create_seq_from_vector(dplyr::pull(x, .data$x), length_seq = length_seq)
+  )
+
+  predictions <- predict(attr(x, "model"), newdata = dfgrid)
+
+  dfgrid <- dplyr::mutate(dfgrid, fit = predictions)
+
+  ggplot2::ggplot() +
+
+    ggproto_point_xy(x) +
+
+    ggplot2::geom_line(
+      data = dfgrid,
+      ggplot2::aes(.data$x, .data$fit),
+      color = scales::muted("red"),
+      size = 1.0
+    )
+
+}
+
 #' @importFrom stats qnorm
 #' @export
 plot.klassets_xy_linear_model <- function(x, length_seq = 100, alpha = 0.05, ...){
@@ -169,46 +196,10 @@ plot.klassets_xy_regression_random_forest <- function(x,
 }
 
 #' @export
-plot.klassets_xy_loess <- function(x, length_seq = 100, alpha = 0.05, ...){
+plot.klassets_xy_loess <- plot.klassets_xy_generic
 
-  # x <- fit_linear_model(sim_xy())
-
-  dfgrid <- tibble::tibble(
-    x = create_seq_from_vector(dplyr::pull(x, .data$x), length_seq = length_seq)
-  )
-
-  predictions <- predict(
-    attr(x, "model"),
-    newdata = dfgrid,
-    # interval = "predict",
-    # level = 1 - alpha
-  )
-
-  dfgrid <- dfgrid |>
-    dplyr::mutate(
-      fit = predictions,
-      # se  = predictions$se,
-      # low = .data$fit - .data$se * q,
-      # high = .data$fit + .data$se * q
-      # low = predictions[["lwr"]],
-      # high = predictions[["upr"]]
-    )
-
-  ggplot2::ggplot() +
-
-    ggproto_point_xy(x) +
-
-    # ggproto_ribbon(dfgrid) +
-
-    ggplot2::geom_line(
-      data = dfgrid,
-      ggplot2::aes(.data$x, .data$fit),
-      color = scales::muted("red"),
-      size = 1.0
-    )
-
-}
-
+#' @export
+plot.klassets_xy_mars  <- plot.klassets_xy_generic
 
 #' @export
 plot.klassets_response_xy <- function(x, ...){

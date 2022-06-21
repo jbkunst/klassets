@@ -54,7 +54,7 @@ We can modify the data frame to get other types of relationships.
 ```{r}
 df <- sim_xy(n = 1000, x_dist = runif)
 
-df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
+df <- dplyr::mutate(df, y = y + 2*sin(5 * x) + sin(10 * x))
 
 plot(df)
 ```
@@ -100,15 +100,12 @@ orders |>
 
 Internally the functions uses `partykit::ctree`.
 
-
 ```{r}
-df_rt <- fit_regression_tree(df, maxdepth = 2)
+df_rt <- fit_regression_tree(df)
 
 plot(df_rt)
 
 plot(attr(df_rt, "model"))
-
-plot(fit_regression_tree(df))
 ```
 
 
@@ -117,13 +114,11 @@ plot(fit_regression_tree(df))
 Internally the functions uses `partykit::mltree`.
 
 ```{r}
-df_lmt <- fit_linear_model_tree(df, maxdepth = 3)
+df_lmt <- fit_linear_model_tree(df)
 
 plot(df_lmt)
 
 plot(attr(df_lmt, "model"))
-
-plot(fit_linear_model_tree(df))
 ```
 
 ### Random Forest
@@ -137,7 +132,7 @@ plot(df_rf)
 
 # this will be relative similar to `fit_regression_tree` due 
 # we are using 1 tree
-plot(fit_regression_random_forest(df, ntree = 1, maxdepth = Inf))
+plot(fit_regression_random_forest(df, ntree = 1, maxdepth = 3))
 ```
 
 ### Local Polynomial Regression Fitting (LOESS)
@@ -150,5 +145,14 @@ df_loess <- fit_loess(df)
 plot(df_loess)
 ```
 
+### Multivariate Adaptive Regression Splines (MARS)
+
+Using `earth::earth`.
+
+```{r}
+df_mars <- fit_mars(df)
+
+plot(df_mars)
+```
 
 

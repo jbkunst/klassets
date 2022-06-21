@@ -54,4 +54,12 @@ reference:
   - fit_linear_model_tree
   - fit_regression_random_forest
   - fit_loess
-
+  - fit_mars
+- title: MNIST
+  desc: Functions to fit models to MNIST data and compare predictive measure and
+    importance variable.
+- contents:
+  - mnist_train
+  - mnist_test
+  - mnist_test
+  - mnist_plot_digits

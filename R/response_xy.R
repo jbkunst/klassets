@@ -194,16 +194,6 @@ fit_classification_tree <- function(df,
 #'
 #' plot(dfcrf)
 #'
-#' df <- sim_xy(1000)
-#' df <- dplyr::mutate(df, y = y + 3 * sin(x) + 5 * sqrt(abs(x)))
-#'
-#' plot(df)
-#'
-#' plot(fit_regression_random_forest(df))
-#'
-#' # default
-#' plot(fit_regression_random_forest(df))
-#'
 #' @importFrom ranger ranger
 #' @export
 fit_classification_random_forest <- function(df,

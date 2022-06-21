@@ -1,0 +1,50 @@
+---
+title: "Working on MNIST data"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  gganimate = list(nframes = 50)
+)
+
+library(ggplot2)
+
+theme_set(theme_minimal(base_size = 21))
+
+if(require(showtext)){
+ 
+  sysfonts::font_add_google("IBM Plex Sans", "plex")
+  showtext::showtext_auto()
+   
+}
+```
+
+## Data set 
+
+```{r setup}
+library(klassets)
+
+data("mnist_train")
+
+mnist_train
+
+dim(mnist_train)
+```
+
+You can plot some rows as follows:
+
+```{r}
+mnist_plot_digits(c(1, 3, 40, 55555))
+```
+
+## Fit modelos
+
+### Random Forest
+
+```{r}
+```

@@ -28,7 +28,7 @@ usethis::edit_git_ignore()
 {pkgdown::init_site(); pkgdown::build_home(preview = TRUE)}
 
 pkgdown::build_reference_index()
-pkgdown::preview_site()
+pkgdown::preview_site(path = "reference")
 
 pkgdown::build_articles()
 pkgdown::build_reference()
@@ -56,6 +56,7 @@ usethis::use_package("metR")
 usethis::use_package("partykit")
 usethis::use_package("parttree") # Remotes!!
 usethis::use_package("ranger") # Remotes!!
+usethis::use_package("earth")
 
 
 usethis::use_package("tidyr", type = "Suggests")

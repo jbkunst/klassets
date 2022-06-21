@@ -61,9 +61,8 @@ sim_xy <- function(n = 500,
 #'
 #' plot(dflm)
 #'
-#' df <- sim_xy(1000)
-#' df <- dplyr::mutate(df, y = y + 10 * sin(x) + sqrt(abs(x)))
-#'
+#' df <- sim_xy(n = 1000, x_dist = runif)
+#' df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
 #' plot(df)
 #'
 #' plot(fit_linear_model(df))
@@ -122,9 +121,8 @@ fit_linear_model <- function(df, order = 1, stepwise = FALSE, verbose = FALSE){
 #'
 #' plot(dflm)
 #'
-#' df <- sim_xy(1000)
-#' df <- dplyr::mutate(df, y = y + 10 * sin(x) + sqrt(abs(x)))
-#'
+#' df <- sim_xy(n = 1000, x_dist = runif)
+#' df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
 #' plot(df)
 #'
 #' plot(fit_regression_tree(df, maxdepth = 3))
@@ -172,9 +170,8 @@ fit_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 #'
 #' plot(dflm)
 #'
-#' df <- sim_xy(1000)
-#' df <- dplyr::mutate(df, y = y + 10 * sin(x) + sqrt(abs(x)))
-#'
+#' df <- sim_xy(n = 1000, x_dist = runif)
+#' df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
 #' plot(df)
 #'
 #' plot(fit_linear_model_tree(df))
@@ -228,12 +225,12 @@ fit_linear_model_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 #'
 #' plot(dfrrf)
 #'
-#' df <- sim_xy(1000)
-#' df <- dplyr::mutate(df, y = y + 3 * sin(x) + 5 * sqrt(abs(x)))
-#'
+#' df <- sim_xy(n = 1000, x_dist = runif)
+#' df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
 #' plot(df)
 #'
 #' plot(fit_regression_random_forest(df))
+#' plot(fit_regression_random_forest(df, ntree = 100, maxdepth = 3))
 #'
 #' @importFrom ranger ranger
 #' @export
@@ -282,9 +279,8 @@ fit_regression_random_forest <- function(df,
 #'
 #' plot(dfloess)
 #'
-#' df <- sim_xy(1000)
-#' df <- dplyr::mutate(df, y = y + 3 * sin(x) + 5 * sqrt(abs(x)))
-#'
+#' df <- sim_xy(n = 1000, x_dist = runif)
+#' df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
 #' plot(df)
 #'
 #' plot(fit_loess(df))
@@ -311,3 +307,47 @@ fit_loess <- function(df, ...){
 
 }
 
+#' Fit Multivariate Adaptive Regression Splines to `klassets_xy` object
+#'
+#' @param df A object from `sim_xy`.
+#' @param ... Options for `earth ::earth`.
+#'
+#' @examples
+#'
+#' df <- sim_xy()
+#'
+#' df
+#'
+#' dfmars <- fit_mars(df)
+#'
+#' dfmars
+#'
+#' plot(dfmars)
+#'
+#' df <- sim_xy(n = 1000, x_dist = runif)
+#' df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
+#' plot(df)
+#'
+#' plot(fit_mars(df))
+#'
+#' @importFrom earth earth
+#' @export
+fit_mars <- function(df, ...){
+
+  mod <- earth::earth(
+    y ~ x,
+    data = df,
+    ...
+  )
+
+  df <- dplyr::mutate(df, prediction = as.vector(predict(mod)))
+
+  # Mmm...
+  class(df) <- setdiff(class(df), "klassets_xy")
+  class(df) <- c("klassets_xy_mars", class(df))
+
+  attr(df, "model") <- mod
+
+  df
+
+}
