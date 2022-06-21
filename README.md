@@ -105,6 +105,8 @@ You can check:
 -   `vignette("Binary-classification")`/`vignette("Regression")` to see
     classifiers/regression models/methods.
 -   `vignette("Clustering")` to see clustering functions.
+-   `vignette("MNIST")` to work with this data set to compare models and
+    check some variable importance metrics.
 
 ## Installation
 
