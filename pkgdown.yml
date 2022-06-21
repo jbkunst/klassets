@@ -4,9 +4,10 @@ pkgdown_sha: ~
 articles:
   Binary-classification: Binary-classification.html
   Clustering: Clustering.html
+  MNIST: MNIST.html
   Quasi-Anscombe-data-sets: Quasi-Anscombe-data-sets.html
   Regression: Regression.html
-last_built: 2022-06-14T02:52Z
+last_built: 2022-06-21T16:51Z
 urls:
   reference: https://jkunst.com/klassets/reference
   article: https://jkunst.com/klassets/articles

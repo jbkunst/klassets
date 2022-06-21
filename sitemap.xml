@@ -16,6 +16,9 @@
     <loc>https://jkunst.com/klassets/articles/Clustering.html</loc>
   </url>
   <url>
+    <loc>https://jkunst.com/klassets/articles/MNIST.html</loc>
+  </url>
+  <url>
     <loc>https://jkunst.com/klassets/articles/Quasi-Anscombe-data-sets.html</loc>
   </url>
   <url>
@@ -58,6 +61,9 @@
     <loc>https://jkunst.com/klassets/reference/fit_logistic_regression.html</loc>
   </url>
   <url>
+    <loc>https://jkunst.com/klassets/reference/fit_mars.html</loc>
+  </url>
+  <url>
     <loc>https://jkunst.com/klassets/reference/fit_regression_random_forest.html</loc>
   </url>
   <url>
@@ -71,6 +77,15 @@
   </url>
   <url>
     <loc>https://jkunst.com/klassets/reference/kmeans_iterations.html</loc>
+  </url>
+  <url>
+    <loc>https://jkunst.com/klassets/reference/mnist_plot_digits.html</loc>
+  </url>
+  <url>
+    <loc>https://jkunst.com/klassets/reference/mnist_test.html</loc>
+  </url>
+  <url>
+    <loc>https://jkunst.com/klassets/reference/mnist_train.html</loc>
   </url>
   <url>
     <loc>https://jkunst.com/klassets/reference/sim_groups.html</loc>
