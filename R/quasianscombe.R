@@ -45,7 +45,7 @@ sim_quasianscombe_set_1 <- function(n = 500,
 
 #' Generate _quasi_ Anscombe data sets Type 2: No linear relationship
 #'
-#' Data sets _Type 2_ shows how a no linear realtionship between `x` and `y` can
+#' Data sets _Type 2_ shows how a no linear relationship between `x` and `y` can
 #' lead in the same regression model (in terms of parameter values) of
 #' the _Type 1_.
 #'

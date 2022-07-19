@@ -156,7 +156,7 @@ fit_regression_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 #' @param df A object from `sim_response_xy`.
 #' @param maxdepth Max depth of the tree. Same used in `partykit::mob_control`.
 #' @param alpha Alpha value, same used in `partykit::mob_control`
-#' @param ... Addiotional options passed to `partykit::mob_control`.
+#' @param ... Additional options passed to `partykit::mob_control`.
 #'
 #' @examples
 #'

@@ -1,5 +1,5 @@
 Package: klassets
-Title: Tools to simulate data set to teach Statical Models and ML Algorithms
+Title: Tools to simulate data set to teach Statistical Models and ML Algorithms
 Description: Collection of functions to simulate data sets to teach and explain
   how Machine Learning Algorithms works.
 Version: 0.0.0.9000
@@ -41,6 +41,7 @@ Suggests:
     transformr
 Remotes: 
   github::grantmcdermott/parttree
+  github::jbkunst/celavi
 Language: en-US
 LazyData: true
 LazyDataCompression: xz

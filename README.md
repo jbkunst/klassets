@@ -17,7 +17,7 @@ sets to:
     works.
 -   Illustrate certain some particular events such as heteroskedasticity
     or the Simpson’s paradox.
--   Compare the predictions between modelos, for example logistic
+-   Compare the predictions between models, for example logistic
     regression vs decision tree vs
     ![k](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;k "k")-Nearest
     Neighbours.
@@ -78,7 +78,7 @@ plot(df)
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="90%" style="display: block; margin: auto;" />
 
-You can fit differents models and see how the predictions are made.
+You can fit different models and see how the predictions are made.
 
 ``` r
 plot(fit_logistic_regression(df, order = 4)) +

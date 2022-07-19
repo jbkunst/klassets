@@ -42,7 +42,7 @@ You can plot some rows as follows:
 mnist_plot_digits(c(1, 3, 40, 55555))
 ```
 
-## Fit modelos
+## Fit models
 
 ### Random Forest
 

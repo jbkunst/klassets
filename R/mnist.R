@@ -57,11 +57,19 @@ mnist_plot_digits <- function(ids = NULL){
 
 }
 
-mnist_plot_fit_importance <- function(d){
+mnist_plot_fit_importance <- function(fit_function = ctree, ...){
 
   # d <- ranger::importance(object) |>
   #   enframe() |>
   #   arrange(desc(value))
+
+  fit <- glmnet::glmnet(
+    x = as.matrix(klassets::mnist_train[, -1]),
+    y = klassets::mnist_train[[1]],
+    family = "multinomial"
+  )
+
+  fit
 
   dimp <- d |>
     dplyr::mutate(name = stringr::str_remove(.data$name, "pixel_")) |>

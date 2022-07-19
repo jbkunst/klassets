@@ -1,6 +1,6 @@
 #' Generate data sets to apply binary classifiers
 #'
-#' @param n An intenger
+#' @param n An integer
 #' @param x_dist A random number generation function.
 #' @param y_dist A random number generation function.
 #' @param relationship A function specify the relationship between x, y and

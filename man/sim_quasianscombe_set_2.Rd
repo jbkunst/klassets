@@ -21,7 +21,7 @@ sim_quasianscombe_set_2(
 variance.}
 }
 \description{
-Data sets \emph{Type 2} shows how a no linear realtionship between \code{x} and \code{y} can
+Data sets \emph{Type 2} shows how a no linear relationship between \code{x} and \code{y} can
 lead in the same regression model (in terms of parameter values) of
 the \emph{Type 1}.
 }

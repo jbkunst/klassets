@@ -59,7 +59,7 @@ df <- dplyr::mutate(df, y = y + 2*sin(5 * x) + sin(10 * x))
 plot(df)
 ```
 
-## Fit classification algorithms
+## Fit regression algorithms
 
 ### Linear Regression
 

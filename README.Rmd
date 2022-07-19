@@ -36,7 +36,7 @@ The `{klassets}` package is a collection of functions to simulate data sets to:
 
 - Teach how some Statistics Models and Machine Learning algorithms works.
 - Illustrate certain some particular events such as heteroskedasticity or the Simpson's paradox.
-- Compare the predictions between modelos, for example logistic regression vs decision tree vs $k$-Nearest Neighbours.
+- Compare the predictions between models, for example logistic regression vs decision tree vs $k$-Nearest Neighbours.
 
 ```{r, echo=FALSE}
 knitr::include_graphics("man/figures/animation_quasi_anscombre.gif")
@@ -76,7 +76,7 @@ df
 plot(df)
 ```
 
-You can fit differents models and see how the predictions are made.
+You can fit different models and see how the predictions are made.
 
 ```{r, out.width = "100%"}
 plot(fit_logistic_regression(df, order = 4)) +

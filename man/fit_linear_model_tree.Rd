@@ -13,7 +13,7 @@ fit_linear_model_tree(df, maxdepth = Inf, alpha = 0.05, ...)
 
 \item{alpha}{Alpha value, same used in \code{partykit::mob_control}}
 
-\item{...}{Addiotional options passed to \code{partykit::mob_control}.}
+\item{...}{Additional options passed to \code{partykit::mob_control}.}
 }
 \description{
 Fit Linear Model tree to \code{klassets_xy} object

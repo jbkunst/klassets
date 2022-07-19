@@ -13,7 +13,7 @@ sim_response_xy(
 )
 }
 \arguments{
-\item{n}{An intenger}
+\item{n}{An integer}
 
 \item{x_dist}{A random number generation function.}
 
