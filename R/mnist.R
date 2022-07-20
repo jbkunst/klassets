@@ -27,14 +27,14 @@ getUsefulPredictors <- function(x) {
 #' @export
 mnist_plot_digits <- function(ids = NULL){
 
+  # ids <- sample(1:60000, size = sample(1:20, size = 1))
+
   stopifnot(
     !is.null(ids),
     is.numeric(ids),
     all(dplyr::between(ids, 0, 60000)),
     all(ids == as.integer(ids))
     )
-
-  # ids <- sample(1:60000, size = sample(1:20, size = 1))
 
   data_id_label <- klassets::mnist_train |>
     dplyr::mutate(id = dplyr::row_number(), .before = 1) |>
@@ -57,65 +57,67 @@ mnist_plot_digits <- function(ids = NULL){
 
 }
 
-mnist_plot_fit_importance <- function(fit_function = ctree, ...){
-
-  # d <- ranger::importance(object) |>
-  #   enframe() |>
-  #   arrange(desc(value))
-
-  fit <- glmnet::glmnet(
-    x = as.matrix(klassets::mnist_train[, -1]),
-    y = klassets::mnist_train[[1]],
-    family = "multinomial"
-  )
-
-  fit
-
-  dimp <- d |>
-    dplyr::mutate(name = stringr::str_remove(.data$name, "pixel_")) |>
-    tidyr::separate(.data$name, c("x", "y"), sep = "x") |>
-    dplyr::mutate(
-      x = as.numeric(.data$x),
-      y = as.numeric(.data$y)
-      )
-
-  ggplot2::ggplot(dimp, ggplot2::aes(.data$y, -.data$x)) +
-    ggplot2::geom_tile(ggplot2::aes(fill = .data$value))
-
-}
-
-mnist_fit_classification_tree <- function(maxdepth = 5, ...){
-
-  # ... <- NULL
-
-  model <- partykit::ctree(
-    label ~ .,
-    data = klassets::mnist_train,
-    control = partykit::ctree_control(maxdepth = maxdepth, ...)
-  )
-
-  getUsefulPredictors(model)
-
-  plot(model, gp = grid::gpar(fontsize = 4))
-
-  model
-
-}
-
-mnist_fit_random_forest <- function(max.depth = 5, ...){
-
-  model <- ranger::ranger(
-    label ~ .,
-    data = klassets::mnist_train,
-    max.depth = max.depth,
-    importance = "impurity",
-    ...
-  )
-
-}
-
-mnist_fit_gmb <- function(...){}
-
-mnist_fit_neural_network <- function(...){}
-
-mnist_fit_knn <- function(...){}
+# mnist_plot_fit_importance <- function(fit_function = ctree, ...){
+#
+#   # d <- ranger::importance(object) |>
+#   #   enframe() |>
+#   #   arrange(desc(value))
+#
+#   fit <- glmnet::glmnet(
+#     x = as.matrix(klassets::mnist_train[, -1]),
+#     y = klassets::mnist_train[[1]],
+#     family = "multinomial"
+#   )
+#
+#   fit
+#
+#   dimp <- d |>
+#     dplyr::mutate(name = stringr::str_remove(.data$name, "pixel_")) |>
+#     tidyr::separate(.data$name, c("x", "y"), sep = "x") |>
+#     dplyr::mutate(
+#       x = as.numeric(.data$x),
+#       y = as.numeric(.data$y)
+#       )
+#
+#   ggplot2::ggplot(dimp, ggplot2::aes(.data$y, -.data$x)) +
+#     ggplot2::geom_tile(ggplot2::aes(fill = .data$value))
+#
+# }
+#
+# mnist_fit_classification_tree <- function(maxdepth = 5, ...){
+#
+#   # ... <- NULL
+#
+#   model <- partykit::ctree(
+#     label ~ .,
+#     data = klassets::mnist_train,
+#     control = partykit::ctree_control(maxdepth = maxdepth, ...)
+#   )
+#
+#   getUsefulPredictors(model)
+#
+#   plot(model, gp = grid::gpar(fontsize = 4))
+#
+#   model
+#
+# }
+#
+# mnist_fit_random_forest <- function(max.depth = 5, ...){
+#
+#   # ... <- NULL
+#
+#   model <- ranger::ranger(
+#     label ~ .,
+#     data = klassets::mnist_train,
+#     max.depth = max.depth,
+#     importance = "impurity",
+#     ...
+#   )
+#
+# }
+#
+# mnist_fit_gmb <- function(...){}
+#
+# mnist_fit_neural_network <- function(...){}
+#
+# mnist_fit_knn <- function(...){}
