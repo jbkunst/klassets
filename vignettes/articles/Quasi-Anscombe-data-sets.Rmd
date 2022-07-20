@@ -43,7 +43,7 @@ plot(df) +
   labs(subtitle = "Original data set")
 ```
 
-### Set 4: No linear relationship
+### Set 2: No linear relationship
 
 ```{r}
 func <- function(x) 1.5 * x^2
