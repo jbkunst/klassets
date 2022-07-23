@@ -1,14 +1,14 @@
 # https://stackoverflow.com/a/29384538/829971
-getUsefulPredictors <- function(x) {
-  varid <- partykit::nodeapply(
-    x,
-    ids = partykit::nodeids(x),
-    FUN = function(n)
-      partykit::split_node(n)$varid
-  )
-  varid <- unique(unlist(varid))
-  names(partykit::data_party(x))[varid]
-}
+# getUsefulPredictors <- function(x) {
+#   varid <- partykit::nodeapply(
+#     x,
+#     ids = partykit::nodeids(x),
+#     FUN = function(n)
+#       partykit::split_node(n)$varid
+#   )
+#   varid <- unique(unlist(varid))
+#   names(partykit::data_party(x))[varid]
+# }
 
 #' Plot some digits from train mnist data
 #'

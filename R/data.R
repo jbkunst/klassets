@@ -19,3 +19,19 @@
 #'
 #' @source \url{http://yann.lecun.com/exdb/mnist/}
 "mnist_test"
+
+#' 10,000 observations of ID and year of birth
+#'
+#' A data frame where x is an ID and y is year of birth.
+#'
+#' @format A data frame (klassets class) with 10000 rows and 2 variables.
+#'
+"idyob10k"
+
+#' 1000 observations of ID and year of birth
+#'
+#' A data frame where x is an ID and y is year of birth.
+#'
+#' @format A data frame (klassets class) with 1000 rows and 2 variables.
+#'
+"idyob1k"
