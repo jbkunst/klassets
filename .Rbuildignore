@@ -9,3 +9,5 @@
 ^README\.Rmd$
 ^cran-comments\.md$
 _pkgdown.yml
+^_pkgdown\.yml$
+^pkgdown$

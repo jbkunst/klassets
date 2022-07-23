@@ -40,3 +40,4 @@ docs/*
 # R Environment Variables
 .Renviron
 .Rproj.user
+docs
