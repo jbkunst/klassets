@@ -40,7 +40,7 @@ Suggests:
     tidyr,
     transformr
 Remotes: 
-  github::grantmcdermott/parttree
+  github::grantmcdermott/parttree,
   github::jbkunst/celavi
 Language: en-US
 LazyData: true
