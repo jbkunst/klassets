@@ -4,50 +4,52 @@ authors:
   Joshua Kunst:
     href: https://jkunst.com
 
+lang: en
+
 template:
   bootstrap: 5
   bslib:
     primary: "#0054AD"
     border-radius: 0.5rem
     btn-border-radius: 0.25rem
-    base_font:    {google: "IBM Plex Sans"}
-    code_font:    {google: "Fira Mono"}
-    heading_font: {google: "Josefin Sans"}
-    # https://github.com/rstudio/bslib/blob/a4946a4/inst/lib/bs4/scss/_variables.scss
-    headings-color:  "#333333"
-    headings-line-height: 5rem
-    headings-margin-bottom: -1rem
-#     heading_font:
-#       face:
-#         family: "Josefin Sans"
-#         weight: "400"
-#         src: "url(https://fonts.gstatic.com/s/josefinsans/v24/Qw3aZQNVED7rKGKxtqIqX5EUDXx4.woff2) format('woff2')"
+    base_font:
+      google: "IBM Plex Sans"
+    heading_font:
+      google: "IBM Plex Sans"
+    code_font:
+      google: "Fira Mono"
+    headings-color: "#222222"
+    headings-line-height: 1.2
+    headings-margin-bottom: 0.75rem
+
+navbar:
+  bg: primary
+  type: dark
 
 reference:
-- title: Simulation of Quasi-Anscombe data sets.
-  desc: Simulation of data set with same regression model.
-- contents:
+- title: Simulation of Quasi-Anscombe data sets
+  desc: Functions to simulate data sets with related regression patterns.
+  contents:
   - starts_with("sim_quasi")
 - title: Clustering helpers
-  desc: Functions to simulate data for test and explain clustering methods and
-    functions to apply some basics algorimths.
-- contents:
+  desc: Functions to simulate data and explain clustering algorithms.
+  contents:
   - sim_groups
   - fit_kmeans
   - fit_hclust
   - fit_statskmeans
   - kmeans_iterations
 - title: Binary classification
-  desc: Functions to simulate data for test and explaing classifiers algorimths.
-- contents:
+  desc: Functions to simulate data and explain classification algorithms.
+  contents:
   - sim_response_xy
   - fit_logistic_regression
   - fit_classification_tree
   - fit_classification_random_forest
   - fit_knn
 - title: Regression
-  desc: Functions to simulate data for test and explaing regression algorimths.
-- contents:
+  desc: Functions to simulate data and explain regression algorithms.
+  contents:
   - sim_xy
   - fit_linear_model
   - fit_regression_tree
@@ -56,10 +58,8 @@ reference:
   - fit_loess
   - fit_mars
 - title: MNIST
-  desc: Functions to fit models to MNIST data and compare predictive measure and
-    importance variable.
-- contents:
+  desc: Functions and data sets to fit models to MNIST data and compare predictive performance and variable importance.
+  contents:
   - mnist_train
-  - mnist_test
   - mnist_test
   - mnist_plot_digits
