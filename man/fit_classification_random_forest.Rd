@@ -37,10 +37,12 @@ df <- sim_response_xy(n = 1000, relationship = function(x, y) x**2 > sin(y))
 
 plot(df)
 
-dfcrf <- fit_classification_random_forest(df)
+if (rlang::is_installed("ranger")) {
+  dfcrf <- fit_classification_random_forest(df)
 
-dfcrf
+  dfcrf
 
-plot(dfcrf)
+  plot(dfcrf)
+}
 
 }

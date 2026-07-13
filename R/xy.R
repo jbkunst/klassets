@@ -219,26 +219,32 @@ fit_linear_model_tree <- function(df, maxdepth = Inf, alpha = 0.05, ...){
 #'
 #' df
 #'
-#' dfrrf <- fit_regression_random_forest(df)
+#' if (rlang::is_installed("ranger")) {
+#'   dfrrf <- fit_regression_random_forest(df)
 #'
-#' dfrrf
+#'   dfrrf
 #'
-#' plot(dfrrf)
+#'   plot(dfrrf)
 #'
-#' df <- sim_xy(n = 1000, x_dist = runif)
-#' df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
-#' plot(df)
+#'   df <- sim_xy(n = 1000, x_dist = runif)
+#'   df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
+#'   plot(df)
 #'
-#' plot(fit_regression_random_forest(df))
-#' plot(fit_regression_random_forest(df, ntree = 100, maxdepth = 3))
+#'   plot(fit_regression_random_forest(df))
+#'   plot(fit_regression_random_forest(df, ntree = 100, maxdepth = 3))
+#' }
 #'
-#' @importFrom ranger ranger
 #' @export
 fit_regression_random_forest <- function(df,
                                          ntree = 500L,
                                          maxdepth = Inf,
                                          trace = FALSE,
                                          ...){
+
+  rlang::check_installed(
+    "ranger",
+    reason = "to fit random forest regressions with fit_regression_random_forest()."
+  )
 
   mod <- ranger::ranger(
     y ~ x,
@@ -318,21 +324,27 @@ fit_loess <- function(df, ...){
 #'
 #' df
 #'
-#' dfmars <- fit_mars(df)
+#' if (rlang::is_installed("earth")) {
+#'   dfmars <- fit_mars(df)
 #'
-#' dfmars
+#'   dfmars
 #'
-#' plot(dfmars)
+#'   plot(dfmars)
 #'
-#' df <- sim_xy(n = 1000, x_dist = runif)
-#' df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
-#' plot(df)
+#'   df <- sim_xy(n = 1000, x_dist = runif)
+#'   df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
+#'   plot(df)
 #'
-#' plot(fit_mars(df))
+#'   plot(fit_mars(df))
+#' }
 #'
-#' @importFrom earth earth
 #' @export
 fit_mars <- function(df, ...){
+
+  rlang::check_installed(
+    "earth",
+    reason = "to fit MARS models with fit_mars()."
+  )
 
   mod <- earth::earth(
     y ~ x,

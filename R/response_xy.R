@@ -188,13 +188,14 @@ fit_classification_tree <- function(df,
 #'
 #' plot(df)
 #'
-#' dfcrf <- fit_classification_random_forest(df)
+#' if (rlang::is_installed("ranger")) {
+#'   dfcrf <- fit_classification_random_forest(df)
 #'
-#' dfcrf
+#'   dfcrf
 #'
-#' plot(dfcrf)
+#'   plot(dfcrf)
+#' }
 #'
-#' @importFrom ranger ranger
 #' @export
 fit_classification_random_forest <- function(df,
                                              type = "prob",
@@ -204,6 +205,10 @@ fit_classification_random_forest <- function(df,
                                              ...){
 
   stopifnot(type %in% c("prob", "response"))
+  rlang::check_installed(
+    "ranger",
+    reason = "to fit random forest classifiers with fit_classification_random_forest()."
+  )
 
   mod <- ranger::ranger(
     response ~ x + y,

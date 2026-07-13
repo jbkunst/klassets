@@ -567,7 +567,7 @@ ggproto_ribbon <- function(dfgrid, ...){
 
 ggproto_contour_fill <- function(dfgrid, bins = 100, ...) {
 
-  if(getOption("klassets.geom_contour_fill")){
+  if(getOption("klassets.geom_contour_fill") && rlang::is_installed("metR")){
 
     # ggplot2::geom_contour_filled
     proto <- metR::geom_contour_fill(
@@ -592,6 +592,10 @@ ggproto_contour_fill <- function(dfgrid, bins = 100, ...) {
 }
 
 ggproto_text_contour <- function(dfgrid, stroke = 0.2, ...){
+
+  if(!rlang::is_installed("metR")){
+    return(NULL)
+  }
 
   metR::geom_text_contour(
     data = dfgrid,

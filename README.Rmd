@@ -80,10 +80,14 @@ plot(df)
 You can fit different models and see how the predictions are made.
 
 ```{r, out.width = "100%"}
-plot(fit_logistic_regression(df, order = 4)) +
-plot(fit_classification_tree(df))            +
-plot(fit_classification_random_forest(df))   +
-plot(fit_knn(df))                            +
+p <- plot(fit_logistic_regression(df, order = 4)) +
+  plot(fit_classification_tree(df))
+
+if (rlang::is_installed("ranger")) {
+  p <- p + plot(fit_classification_random_forest(df))
+}
+
+p + plot(fit_knn(df)) +
   plot_layout(guides = "collect")
 ```
 

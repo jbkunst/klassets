@@ -32,17 +32,19 @@ df <- sim_xy()
 
 df
 
-dfrrf <- fit_regression_random_forest(df)
+if (rlang::is_installed("ranger")) {
+  dfrrf <- fit_regression_random_forest(df)
 
-dfrrf
+  dfrrf
 
-plot(dfrrf)
+  plot(dfrrf)
 
-df <- sim_xy(n = 1000, x_dist = runif)
-df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
-plot(df)
+  df <- sim_xy(n = 1000, x_dist = runif)
+  df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
+  plot(df)
 
-plot(fit_regression_random_forest(df))
-plot(fit_regression_random_forest(df, ntree = 100, maxdepth = 3))
+  plot(fit_regression_random_forest(df))
+  plot(fit_regression_random_forest(df, ntree = 100, maxdepth = 3))
+}
 
 }

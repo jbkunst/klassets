@@ -20,16 +20,18 @@ df <- sim_xy()
 
 df
 
-dfmars <- fit_mars(df)
+if (rlang::is_installed("earth")) {
+  dfmars <- fit_mars(df)
 
-dfmars
+  dfmars
 
-plot(dfmars)
+  plot(dfmars)
 
-df <- sim_xy(n = 1000, x_dist = runif)
-df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
-plot(df)
+  df <- sim_xy(n = 1000, x_dist = runif)
+  df <- dplyr::mutate(df, y = y + 2*sin(5 * x))
+  plot(df)
 
-plot(fit_mars(df))
+  plot(fit_mars(df))
+}
 
 }
