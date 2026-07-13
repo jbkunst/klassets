@@ -9,7 +9,7 @@ lang: en
 template:
   bootstrap: 5
   bslib:
-    primary: "#0054AD"
+    primary: "#B7472A"
     border-radius: 0.5rem
     btn-border-radius: 0.25rem
     base_font:
@@ -18,7 +18,7 @@ template:
       google: "IBM Plex Sans"
     code_font:
       google: "Fira Mono"
-    headings-color: "#222222"
+    headings-color: "#3A2A26"
     headings-line-height: 1.2
     headings-margin-bottom: 0.75rem
 
