@@ -1,117 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://jkunst.com/klassets/404.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/articles/Binary-classification.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/articles/Clustering.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/articles/MNIST.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/articles/Quasi-Anscombe-data-sets.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/articles/Regression.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_classification_random_forest.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_classification_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_hclust.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_kmeans.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_knn.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_linear_model.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_linear_model_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_loess.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_logistic_regression.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_mars.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_regression_random_forest.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_regression_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/fit_statskmeans.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/kmeans_iterations.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/mnist_plot_digits.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/mnist_test.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/mnist_train.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/sim_groups.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_1.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_2.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_3.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_4.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_5.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_6.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/sim_response_xy.html</loc>
-  </url>
-  <url>
-    <loc>https://jkunst.com/klassets/reference/sim_xy.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://jkunst.com/klassets/404.html</loc></url>
+<url><loc>https://jkunst.com/klassets/LICENSE-text.html</loc></url>
+<url><loc>https://jkunst.com/klassets/LICENSE.html</loc></url>
+<url><loc>https://jkunst.com/klassets/articles/Binary-classification.html</loc></url>
+<url><loc>https://jkunst.com/klassets/articles/Clustering.html</loc></url>
+<url><loc>https://jkunst.com/klassets/articles/MNIST.html</loc></url>
+<url><loc>https://jkunst.com/klassets/articles/Quasi-Anscombe-data-sets.html</loc></url>
+<url><loc>https://jkunst.com/klassets/articles/Regression.html</loc></url>
+<url><loc>https://jkunst.com/klassets/articles/index.html</loc></url>
+<url><loc>https://jkunst.com/klassets/authors.html</loc></url>
+<url><loc>https://jkunst.com/klassets/index.html</loc></url>
+<url><loc>https://jkunst.com/klassets/news/index.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_classification_random_forest.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_classification_tree.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_hclust.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_kmeans.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_knn.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_linear_model.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_linear_model_tree.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_loess.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_logistic_regression.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_mars.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_regression_random_forest.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_regression_tree.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/fit_statskmeans.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/idyob10k.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/idyob1k.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/index.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/kmeans_iterations.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/mnist_plot_digits.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/mnist_test.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/mnist_train.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/sim_groups.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_1.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_2.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_3.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_4.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_5.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/sim_quasianscombe_set_6.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/sim_response_xy.html</loc></url>
+<url><loc>https://jkunst.com/klassets/reference/sim_xy.html</loc></url>
 </urlset>
+

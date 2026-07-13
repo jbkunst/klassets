@@ -1,14 +1,13 @@
-pandoc: 2.7.3
-pkgdown: 2.0.4
+pandoc: 3.8.3
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
-  Binary-classification: Binary-classification.html
-  Clustering: Clustering.html
-  MNIST: MNIST.html
-  Quasi-Anscombe-data-sets: Quasi-Anscombe-data-sets.html
-  Regression: Regression.html
-last_built: 2022-06-21T16:54Z
+  articles/Binary-classification: Binary-classification.html
+  articles/Clustering: Clustering.html
+  articles/MNIST: MNIST.html
+  articles/Quasi-Anscombe-data-sets: Quasi-Anscombe-data-sets.html
+  articles/Regression: Regression.html
+last_built: 2026-07-13T17:45Z
 urls:
   reference: https://jkunst.com/klassets/reference
   article: https://jkunst.com/klassets/articles
-

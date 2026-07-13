@@ -1,0 +1,289 @@
+# klassets
+
+The [klassets](https://jkunst.com/klassets/) package is a collection of
+functions to simulate data sets to:
+
+- Teach how some Statistics Models and Machine Learning algorithms
+  works.
+- Illustrate certain some particular events such as heteroskedasticity
+  or the Simpson’s paradox.
+- Compare the predictions between models, for example logistic
+  regression vs decision tree vs
+  ![k](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;k "k")-Nearest
+  Neighbours.
+
+![](reference/figures/animation_quasi_anscombre.gif)
+
+# Some examples
+
+## Don’t forget to visualize the data
+
+``` r
+
+library(klassets)
+
+set.seed(123)
+
+df <- sim_quasianscombe_set_1(beta0 = 3, beta1 = 0.5)
+
+plot(df) +
+  ggplot2::labs(subtitle = "Very similar to the given parameters (3 and 0.5)")
+```
+
+![](reference/figures/README-unnamed-chunk-3-1.png)
+
+``` r
+
+library(patchwork)
+
+df2 <- sim_quasianscombe_set_2(df, fun = sin)
+df6 <- sim_quasianscombe_set_6(df, groups = 2, b1_factor = -1)
+
+plot(df2) + plot(df6)
+```
+
+![](reference/figures/README-unnamed-chunk-4-1.png)
+
+## Compare models in a classifications task
+
+``` r
+
+df <- sim_response_xy(relationship = function(x, y) sin(x*pi) > sin(y*pi))
+
+df
+#> # A tibble: 500 × 3
+#>    response       x       y
+#>    <fct>      <dbl>   <dbl>
+#>  1 FALSE    -0.681   0.707 
+#>  2 FALSE    -0.711   0.332 
+#>  3 FALSE    -0.702   0.467 
+#>  4 TRUE      0.0289 -0.371 
+#>  5 TRUE     -0.0143  0.335 
+#>  6 TRUE      0.233  -0.0722
+#>  7 FALSE    -0.105   0.301 
+#>  8 FALSE    -0.889   0.572 
+#>  9 FALSE    -0.989   0.803 
+#> 10 FALSE    -0.556   0.0548
+#> # … with 490 more rows
+
+plot(df)
+```
+
+![](reference/figures/README-unnamed-chunk-5-1.png)
+
+You can fit different models and see how the predictions are made.
+
+``` r
+
+p <- plot(fit_logistic_regression(df, order = 4)) +
+  plot(fit_classification_tree(df))
+
+if (rlang::is_installed("ranger")) {
+  p <- p + plot(fit_classification_random_forest(df))
+}
+
+p + plot(fit_knn(df)) +
+  plot_layout(guides = "collect")
+```
+
+![](reference/figures/README-unnamed-chunk-6-1.png)
+
+## How ![K](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;K "K")-means works
+
+Another example of what can be done with
+[klassets](https://jkunst.com/klassets/).
+
+![](reference/figures/animation_kmeans_iterations.gif)
+
+## Where to start
+
+You can check:
+
+- `vignette("Quasi-Anscombe-data-sets")` to know more about
+  `sim_quasianscombe_set*` functions family.
+- `vignette("Binary-classification")`/`vignette("Regression")` to see
+  classifiers/regression models/methods.
+- `vignette("Clustering")` to see clustering functions.
+- `vignette("MNIST")` to work with this data set to compare models and
+  check some variable importance metrics.
+
+## Installation
+
+You can install the development version of klassets from
+[GitHub](https://github.com/) with:
+
+``` r
+
+# install.packages("remotes")
+remotes::install_github("jbkunst/klassets")
+```
+
+## Extra Info(?!)
+
+**Why the name Klassets?** Just a weird merge for Class/Klass and sets.
+
+Some inspiration and similar ideas:
+
+- <https://jumpingrivers.github.io/datasauRus/>
+- <https://eliocamp.github.io/metamer/>
+- [http://www.econometricsbysimulation.com/2019/03/the-importance-of-graphing-your-data.html](http://www.econometricsbysimulation.com/2019/03/the-importance-of-graphing-your-data.md)
+  This is almost the same, but the approach it’s different.
+
+# Package index
+
+## Simulation of Quasi-Anscombe data sets
+
+Functions to simulate data sets with related regression patterns.
+
+- [`sim_quasianscombe_set_1()`](https://jkunst.com/klassets/reference/sim_quasianscombe_set_1.md)
+  :
+
+  Generate *quasi* Anscombe data sets Type 1
+
+- [`sim_quasianscombe_set_2()`](https://jkunst.com/klassets/reference/sim_quasianscombe_set_2.md)
+  :
+
+  Generate *quasi* Anscombe data sets Type 2: No linear relationship
+
+- [`sim_quasianscombe_set_3()`](https://jkunst.com/klassets/reference/sim_quasianscombe_set_3.md)
+  :
+
+  Generate *quasi* Anscombe data sets Type 3: Extreme values (a.k.a
+  Outliers)
+
+- [`sim_quasianscombe_set_4()`](https://jkunst.com/klassets/reference/sim_quasianscombe_set_4.md)
+  :
+
+  Generate *quasi* Anscombe data sets Type 4: 2 Clusters
+
+- [`sim_quasianscombe_set_5()`](https://jkunst.com/klassets/reference/sim_quasianscombe_set_5.md)
+  :
+
+  Generate *quasi* Anscombe data sets Type 5: Heteroskedasticity
+
+- [`sim_quasianscombe_set_6()`](https://jkunst.com/klassets/reference/sim_quasianscombe_set_6.md)
+  :
+
+  Generate *quasi* Anscombe data sets Type 6: Simpson's Paradox
+
+## Clustering helpers
+
+Functions to simulate data and explain clustering algorithms.
+
+- [`sim_groups()`](https://jkunst.com/klassets/reference/sim_groups.md)
+  : Generate data sets to apply clustering algorithms
+
+- [`fit_kmeans()`](https://jkunst.com/klassets/reference/fit_kmeans.md)
+  :
+
+  Fit K-means to `klassets_cluster` object
+
+- [`fit_hclust()`](https://jkunst.com/klassets/reference/fit_hclust.md)
+  :
+
+  Fit Hierarchical Clustering to `klassets_cluster` object using
+  [`stats::hclust`](https://rdrr.io/r/stats/hclust.html)
+
+- [`fit_statskmeans()`](https://jkunst.com/klassets/reference/fit_statskmeans.md)
+  :
+
+  Fit K-means to `klassets_cluster` object using
+  [`stats::kmeans`](https://rdrr.io/r/stats/kmeans.html)
+
+- [`kmeans_iterations()`](https://jkunst.com/klassets/reference/kmeans_iterations.md)
+  : Generate intermediate iterations when performing K-means
+
+## Binary classification
+
+Functions to simulate data and explain classification algorithms.
+
+- [`sim_response_xy()`](https://jkunst.com/klassets/reference/sim_response_xy.md)
+  : Generate data sets to apply binary classifiers
+
+- [`fit_logistic_regression()`](https://jkunst.com/klassets/reference/fit_logistic_regression.md)
+  :
+
+  Fit Logistic regression to `klassets_response_xy` object
+
+- [`fit_classification_tree()`](https://jkunst.com/klassets/reference/fit_classification_tree.md)
+  :
+
+  Fit classification tree to `klassets_response_xy` object
+
+- [`fit_classification_random_forest()`](https://jkunst.com/klassets/reference/fit_classification_random_forest.md)
+  :
+
+  Fit classification random forest to `klassets_response_xy` object
+
+- [`fit_knn()`](https://jkunst.com/klassets/reference/fit_knn.md) :
+
+  Fit K Nearest Neighbours to `klassets_response_xy` object
+
+## Regression
+
+Functions to simulate data and explain regression algorithms.
+
+- [`sim_xy()`](https://jkunst.com/klassets/reference/sim_xy.md) :
+  Generate data sets to apply regression methods
+
+- [`fit_linear_model()`](https://jkunst.com/klassets/reference/fit_linear_model.md)
+  :
+
+  Fit Linear model to `klassets_xy` object
+
+- [`fit_regression_tree()`](https://jkunst.com/klassets/reference/fit_regression_tree.md)
+  :
+
+  Fit regression tree to `klassets_xy` object
+
+- [`fit_linear_model_tree()`](https://jkunst.com/klassets/reference/fit_linear_model_tree.md)
+  :
+
+  Fit Linear Model tree to `klassets_xy` object
+
+- [`fit_regression_random_forest()`](https://jkunst.com/klassets/reference/fit_regression_random_forest.md)
+  :
+
+  Fit regression random forest to `klassets_xy` object
+
+- [`fit_loess()`](https://jkunst.com/klassets/reference/fit_loess.md) :
+
+  Fit Local polynomial regression to `klassets_xy` object
+
+- [`fit_mars()`](https://jkunst.com/klassets/reference/fit_mars.md) :
+
+  Fit Multivariate Adaptive Regression Splines to `klassets_xy` object
+
+## MNIST
+
+Functions and data sets to fit models to MNIST data and compare
+predictive performance and variable importance.
+
+- [`mnist_train`](https://jkunst.com/klassets/reference/mnist_train.md)
+  : MNIST train data
+- [`mnist_test`](https://jkunst.com/klassets/reference/mnist_test.md) :
+  MNIST test data
+- [`mnist_plot_digits()`](https://jkunst.com/klassets/reference/mnist_plot_digits.md)
+  : Plot some digits from train mnist data
+
+## Example data sets
+
+Small data sets used in examples and teaching material.
+
+- [`idyob10k`](https://jkunst.com/klassets/reference/idyob10k.md) :
+  10,000 observations of ID and year of birth
+- [`idyob1k`](https://jkunst.com/klassets/reference/idyob1k.md) : 1000
+  observations of ID and year of birth
+
+# Articles
+
+### All vignettes
+
+- [Binary
+  classification](https://jkunst.com/klassets/articles/Binary-classification.md):
+- [Clustering](https://jkunst.com/klassets/articles/Clustering.md):
+- [Working on MNIST
+  data](https://jkunst.com/klassets/articles/MNIST.md):
+- [Quasi Anscombe data
+  sets](https://jkunst.com/klassets/articles/Quasi-Anscombe-data-sets.md):
+- [Regression](https://jkunst.com/klassets/articles/Regression.md):

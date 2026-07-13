@@ -5,79 +5,67 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="klassets">
 <title>Quasi Anscombe data sets • klassets</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_IBM%20Plex%20Sans-0.4.1/font.css" rel="stylesheet">
-<link href="../deps/_Fira%20Mono-0.4.1/font.css" rel="stylesheet">
-<link href="../deps/_Josefin%20Sans-0.4.1/font.css" rel="stylesheet">
-<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Quasi Anscombe data sets">
-<meta property="og:description" content="klassets">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/IBM_Plex_Sans-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Quasi Anscombe data sets">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">klassets</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Binary-classification.html">Binary classification</a>
-    <a class="dropdown-item" href="../articles/Clustering.html">Clustering</a>
-    <a class="dropdown-item" href="../articles/MNIST.html">Working on MNIST data</a>
-    <a class="dropdown-item" href="../articles/Quasi-Anscombe-data-sets.html">Quasi Anscombe data sets</a>
-    <a class="dropdown-item" href="../articles/Regression.html">Regression</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/Binary-classification.html">Binary classification</a></li>
+    <li><a class="dropdown-item" href="../articles/Clustering.html">Clustering</a></li>
+    <li><a class="dropdown-item" href="../articles/MNIST.html">Working on MNIST data</a></li>
+    <li><a class="dropdown-item" href="../articles/Quasi-Anscombe-data-sets.html">Quasi Anscombe data sets</a></li>
+    <li><a class="dropdown-item" href="../articles/Regression.html">Regression</a></li>
+  </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/jbkunst/klassets/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/jbkunst/klassets/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
 
 
-<script src="Quasi-Anscombe-data-sets_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Quasi Anscombe data sets</h1>
+
+      <h1>Quasi Anscombe data sets</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jbkunst/klassets/blob/HEAD/vignettes/articles/Quasi-Anscombe-data-sets.Rmd" class="external-link"><code>vignettes/articles/Quasi-Anscombe-data-sets.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jbkunst/klassets/blob/main/vignettes/articles/Quasi-Anscombe-data-sets.Rmd" class="external-link"><code>vignettes/articles/Quasi-Anscombe-data-sets.Rmd</code></a></small>
       <div class="d-none name"><code>Quasi-Anscombe-data-sets.Rmd</code></div>
     </div>
 
@@ -90,188 +78,187 @@
 <h3 id="set-1-the-original">Set 1: The original<a class="anchor" aria-label="anchor" href="#set-1-the-original"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jkunst.com/klassets/">klassets</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_1.html">sim_quasianscombe_set_1</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, beta1 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span>
-  <span class="co"># xlim(0, NA) +</span>
-  <span class="co"># ylim(0, NA) +</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Original data set"</span><span class="op">)</span></code></pre></div>
-<p><img src="Quasi-Anscombe-data-sets_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jkunst.com/klassets/">klassets</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_1.html">sim_quasianscombe_set_1</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, beta1 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># xlim(0, NA) +</span></span>
+<span>  <span class="co"># ylim(0, NA) +</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Original data set"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Quasi-Anscombe-data-sets_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level3">
-<h3 id="set-4-no-linear-relationship">Set 4: No linear relationship<a class="anchor" aria-label="anchor" href="#set-4-no-linear-relationship"></a>
+<h3 id="set-2-no-linear-relationship">Set 2: No linear relationship<a class="anchor" aria-label="anchor" href="#set-2-no-linear-relationship"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">func</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">1.5</span> <span class="op">*</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span>
-
-<span class="va">df2_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_2.html">sim_quasianscombe_set_2</a></span><span class="op">(</span><span class="va">df</span>, residual_factor <span class="op">=</span> <span class="fl">0</span>, fun <span class="op">=</span> <span class="va">func</span><span class="op">)</span>
-
-<span class="va">funktion</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span>
-
-<span class="va">df2_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_2.html">sim_quasianscombe_set_2</a></span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="va">funktion</span>, residual_factor <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">func</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">1.5</span> <span class="op">*</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="va">df2_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_2.html">sim_quasianscombe_set_2</a></span><span class="op">(</span><span class="va">df</span>, residual_factor <span class="op">=</span> <span class="fl">0</span>, fun <span class="op">=</span> <span class="va">func</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">funktion</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span></span>
+<span></span>
+<span><span class="va">df2_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_2.html">sim_quasianscombe_set_2</a></span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="va">funktion</span>, residual_factor <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="set-3-extreme-values">Set 3: Extreme values<a class="anchor" aria-label="anchor" href="#set-3-extreme-values"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df3_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_3.html">sim_quasianscombe_set_3</a></span><span class="op">(</span><span class="va">df</span>, prop <span class="op">=</span> <span class="fl">0.10</span><span class="op">)</span>
-
-<span class="va">df3_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_3.html">sim_quasianscombe_set_3</a></span><span class="op">(</span><span class="va">df</span>, prop <span class="op">=</span> <span class="fl">0.15</span>, residual_factor <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df3_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_3.html">sim_quasianscombe_set_3</a></span><span class="op">(</span><span class="va">df</span>, prop <span class="op">=</span> <span class="fl">0.10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df3_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_3.html">sim_quasianscombe_set_3</a></span><span class="op">(</span><span class="va">df</span>, prop <span class="op">=</span> <span class="fl">0.15</span>, residual_factor <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="set-4-clusters">Set 4: Clusters<a class="anchor" aria-label="anchor" href="#set-4-clusters"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df4_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_4.html">sim_quasianscombe_set_4</a></span><span class="op">(</span><span class="va">df</span>, prop <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span>
-
-<span class="va">df4_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_4.html">sim_quasianscombe_set_4</a></span><span class="op">(</span><span class="va">df</span>, rescale_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">.1</span><span class="op">)</span>, prop <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df4_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_4.html">sim_quasianscombe_set_4</a></span><span class="op">(</span><span class="va">df</span>, prop <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df4_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_4.html">sim_quasianscombe_set_4</a></span><span class="op">(</span><span class="va">df</span>, rescale_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">.1</span><span class="op">)</span>, prop <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="set-5-heteroskedasticity">Set 5: Heteroskedasticity<a class="anchor" aria-label="anchor" href="#set-5-heteroskedasticity"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df5_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_5.html">sim_quasianscombe_set_5</a></span><span class="op">(</span><span class="va">df</span>, residual_factor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-
-<span class="va">df5_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_5.html">sim_quasianscombe_set_5</a></span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">x</span><span class="op">**</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df5_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_5.html">sim_quasianscombe_set_5</a></span><span class="op">(</span><span class="va">df</span>, residual_factor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df5_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_5.html">sim_quasianscombe_set_5</a></span><span class="op">(</span><span class="va">df</span>, fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">x</span><span class="op">**</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="set-6-simpsons-paradox">Set 6: Simpson’s Paradox<a class="anchor" aria-label="anchor" href="#set-6-simpsons-paradox"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df6_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_6.html">sim_quasianscombe_set_6</a></span><span class="op">(</span><span class="va">df</span>, residual_factor <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="va">df6_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_6.html">sim_quasianscombe_set_6</a></span><span class="op">(</span><span class="va">df</span>, groups <span class="op">=</span> <span class="fl">4</span>, b1_factor <span class="op">=</span> <span class="fl">0</span>, residual_factor <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df6_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_6.html">sim_quasianscombe_set_6</a></span><span class="op">(</span><span class="va">df</span>, residual_factor <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df6_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_quasianscombe_set_6.html">sim_quasianscombe_set_6</a></span><span class="op">(</span><span class="va">df</span>, groups <span class="op">=</span> <span class="fl">4</span>, b1_factor <span class="op">=</span> <span class="fl">0</span>, residual_factor <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="combine-results">Combine results<a class="anchor" aria-label="anchor" href="#combine-results"></a>
 </h2>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org" class="external-link">purrr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/" class="external-link">broom</a></span><span class="op">)</span>
-
-<span class="va">dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  <span class="st">"Original"</span> <span class="op">=</span> <span class="va">df</span>,
-  <span class="st">"Set 2 v1"</span> <span class="op">=</span> <span class="va">df2_1</span>,
-  <span class="st">"Set 2 v2"</span> <span class="op">=</span> <span class="va">df2_2</span>,
-  <span class="st">"Set 3 v1"</span> <span class="op">=</span> <span class="va">df3_1</span>,
-  <span class="st">"Set 3 v2"</span> <span class="op">=</span> <span class="va">df3_2</span>,
-  <span class="st">"Set 4 v1"</span> <span class="op">=</span> <span class="va">df4_1</span>,
-  <span class="st">"Set 4 v2"</span> <span class="op">=</span> <span class="va">df4_2</span>,
-  <span class="st">"Set 5 v1"</span> <span class="op">=</span> <span class="va">df5_1</span>,
-  <span class="st">"Set 5 v2"</span> <span class="op">=</span> <span class="va">df5_2</span>,
-  <span class="st">"Set 6 v1"</span> <span class="op">=</span> <span class="va">df6_1</span>,
-  <span class="st">"Set 6 v2"</span> <span class="op">=</span> <span class="va">df6_2</span>
-<span class="op">)</span>
-
-<span class="va">dfs</span> <span class="op">&lt;-</span> <span class="va">dfs</span> |&gt; 
-  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">enframe</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"set"</span><span class="op">)</span> |&gt; 
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>From <span class="citation">[@warnes]</span>(<a href="https://github.com/warnes" class="external-link uri">https://github.com/warnes</a>) <a href="https://github.com/r-gregmisc/gtools/blob/master/R/stars.pval.R" class="external-link">gtools</a> package</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/" class="external-link">broom</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Original"</span> <span class="op">=</span> <span class="va">df</span>,</span>
+<span>  <span class="st">"Set 2 v1"</span> <span class="op">=</span> <span class="va">df2_1</span>,</span>
+<span>  <span class="st">"Set 2 v2"</span> <span class="op">=</span> <span class="va">df2_2</span>,</span>
+<span>  <span class="st">"Set 3 v1"</span> <span class="op">=</span> <span class="va">df3_1</span>,</span>
+<span>  <span class="st">"Set 3 v2"</span> <span class="op">=</span> <span class="va">df3_2</span>,</span>
+<span>  <span class="st">"Set 4 v1"</span> <span class="op">=</span> <span class="va">df4_1</span>,</span>
+<span>  <span class="st">"Set 4 v2"</span> <span class="op">=</span> <span class="va">df4_2</span>,</span>
+<span>  <span class="st">"Set 5 v1"</span> <span class="op">=</span> <span class="va">df5_1</span>,</span>
+<span>  <span class="st">"Set 5 v2"</span> <span class="op">=</span> <span class="va">df5_2</span>,</span>
+<span>  <span class="st">"Set 6 v1"</span> <span class="op">=</span> <span class="va">df6_1</span>,</span>
+<span>  <span class="st">"Set 6 v2"</span> <span class="op">=</span> <span class="va">df6_2</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dfs</span> <span class="op">&lt;-</span> <span class="va">dfs</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">enframe</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"set"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>From <a href="https://github.com/warnes" class="external-link"><span class="citation">@warnes</span></a> <a href="https://github.com/r-gregmisc/gtools/blob/master/R/stars.pval.R" class="external-link">gtools</a>
+package</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">stars.pval</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://rdrr.io/r/stats/symnum.html" class="external-link">symnum</a></span><span class="op">(</span><span class="va">p.value</span>,
-      corr <span class="op">=</span> <span class="cn">FALSE</span>, na <span class="op">=</span> <span class="cn">FALSE</span>,
-      cutpoints <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">1</span><span class="op">)</span>,
-      symbols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"***"</span>, <span class="st">"**"</span>, <span class="st">"*"</span>, <span class="st">"."</span>, <span class="st">" "</span><span class="op">)</span>
-    <span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">stars.pval</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/symnum.html" class="external-link">symnum</a></span><span class="op">(</span><span class="va">p.value</span>,</span>
+<span>      corr <span class="op">=</span> <span class="cn">FALSE</span>, na <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>      cutpoints <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>      symbols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"***"</span>, <span class="st">"**"</span>, <span class="st">"*"</span>, <span class="st">"."</span>, <span class="st">" "</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="visual-representation-of-the-data-sets">Visual representation of the data sets<a class="anchor" aria-label="anchor" href="#visual-representation-of-the-data-sets"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pxy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dfs</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"gray80"</span>, color <span class="op">=</span> <span class="st">"gray60"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">set</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">pxy</span></code></pre></div>
-<p><img src="Quasi-Anscombe-data-sets_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<code class="sourceCode R"><span><span class="va">pxy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dfs</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"gray80"</span>, color <span class="op">=</span> <span class="st">"gray60"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">set</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pxy</span></span></code></pre></div>
+<p><img src="Quasi-Anscombe-data-sets_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="checking-coefficients-and-its-significance">Checking Coefficients and its significance<a class="anchor" aria-label="anchor" href="#checking-coefficients-and-its-significance"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_mods</span> <span class="op">&lt;-</span> <span class="va">dfs</span> |&gt; 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_nest.html" class="external-link">group_nest</a></span><span class="op">(</span><span class="va">set</span><span class="op">)</span> |&gt; 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>
-    model <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">lm</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span>,
-    parameters <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu">broom</span><span class="fu">::</span><span class="va"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">)</span>
-    <span class="co"># value = map(model, coefficients),</span>
-    <span class="co"># coef  = map(value, names)</span>
-    <span class="op">)</span> 
-
-<span class="va">dfcoef</span> <span class="op">&lt;-</span> <span class="va">df_mods</span> |&gt; 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">set</span>, <span class="va">parameters</span><span class="op">)</span> |&gt; 
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">parameters</span><span class="op">)</span><span class="op">)</span> |&gt; 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sig <span class="op">=</span> <span class="fu">stars.pval</span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">dfcoef</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 22 × 7</span></span>
-<span class="co">#&gt;    set      term        estimate std.error statistic  p.value sig  </span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Original (Intercept)     2.74    0.276       9.93 1.74<span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Original x               2.04    0.053<span style="text-decoration: underline;">3</span>     38.3  1.01<span style="color: #949494;">e</span><span style="color: #BB0000;">-60</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Set 2 v1 (Intercept)     2.74    1.18        2.33 2.20<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> *    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Set 2 v1 x               2.04    0.228       8.97 2.11<span style="color: #949494;">e</span><span style="color: #BB0000;">-14</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Set 2 v2 (Intercept)     2.74    0.898       3.05 2.94<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span> **   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Set 2 v2 x               2.04    0.174      11.8  1.95<span style="color: #949494;">e</span><span style="color: #BB0000;">-20</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Set 3 v1 (Intercept)     2.74    1.15        2.37 1.97<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> *    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Set 3 v1 x               2.04    0.223       9.14 8.86<span style="color: #949494;">e</span><span style="color: #BB0000;">-15</span> ***  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Set 3 v2 (Intercept)     2.74    1.05        2.61 1.06<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> *    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Set 3 v2 x               2.04    0.203      10.0  9.74<span style="color: #949494;">e</span><span style="color: #BB0000;">-17</span> ***  </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 12 more rows</span></span>
-
-<span class="va">dfcoef</span> |&gt; 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">set</span>, <span class="va">term</span>, <span class="va">estimate</span><span class="op">)</span> |&gt; 
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"term"</span>, values_from <span class="op">=</span> <span class="st">"estimate"</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 3</span></span>
-<span class="co">#&gt;    set      `(Intercept)`     x</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Original          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Set 2 v1          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Set 2 v2          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Set 3 v1          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Set 3 v2          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Set 4 v1          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Set 4 v2          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Set 5 v1          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Set 5 v2          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Set 6 v1          2.74  2.04</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Set 6 v2          2.74  2.04</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_mods</span> <span class="op">&lt;-</span> <span class="va">dfs</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_nest.html" class="external-link">group_nest</a></span><span class="op">(</span><span class="va">set</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    model <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">lm</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span>,</span>
+<span>    parameters <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu">broom</span><span class="fu">::</span><span class="va"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">)</span></span>
+<span>    <span class="co"># value = map(model, coefficients),</span></span>
+<span>    <span class="co"># coef  = map(value, names)</span></span>
+<span>    <span class="op">)</span> </span>
+<span></span>
+<span><span class="va">dfcoef</span> <span class="op">&lt;-</span> <span class="va">df_mods</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">set</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">parameters</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sig <span class="op">=</span> <span class="fu">stars.pval</span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dfcoef</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 22 × 7</span></span></span>
+<span><span class="co">#&gt;    set      term        estimate std.error statistic  p.value sig  </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Original (Intercept)     2.74    0.276       9.93 1.74<span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span> ***  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Original x               2.04    0.053<span style="text-decoration: underline;">3</span>     38.3  1.01<span style="color: #949494;">e</span><span style="color: #BB0000;">-60</span> ***  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Set 2 v1 (Intercept)     2.74    1.18        2.33 2.20<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> *    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Set 2 v1 x               2.04    0.228       8.97 2.11<span style="color: #949494;">e</span><span style="color: #BB0000;">-14</span> ***  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Set 2 v2 (Intercept)     2.74    0.898       3.05 2.94<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span> **   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Set 2 v2 x               2.04    0.174      11.8  1.95<span style="color: #949494;">e</span><span style="color: #BB0000;">-20</span> ***  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Set 3 v1 (Intercept)     2.74    1.15        2.37 1.97<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> *    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Set 3 v1 x               2.04    0.223       9.14 8.86<span style="color: #949494;">e</span><span style="color: #BB0000;">-15</span> ***  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Set 3 v2 (Intercept)     2.74    1.05        2.61 1.06<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> *    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Set 3 v2 x               2.04    0.203      10.0  9.74<span style="color: #949494;">e</span><span style="color: #BB0000;">-17</span> ***  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 12 more rows</span></span></span>
+<span></span>
+<span><span class="va">dfcoef</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">set</span>, <span class="va">term</span>, <span class="va">estimate</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"term"</span>, values_from <span class="op">=</span> <span class="st">"estimate"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 3</span></span></span>
+<span><span class="co">#&gt;    set      `(Intercept)`     x</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Original          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Set 2 v1          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Set 2 v2          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Set 3 v1          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Set 3 v2          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Set 4 v1          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Set 4 v2          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Set 5 v1          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Set 5 v2          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Set 6 v1          2.74  2.04</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Set 6 v2          2.74  2.04</span></span></code></pre></div>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by <a href="https://jkunst.com" class="external-link">Joshua Kunst</a>.</p>
+  <p>Developed by <a href="https://jkunst.com" class="external-link">Joshua Kunst</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
