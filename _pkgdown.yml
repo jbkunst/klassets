@@ -63,3 +63,8 @@ reference:
   - mnist_train
   - mnist_test
   - mnist_plot_digits
+- title: Example data sets
+  desc: Small data sets used in examples and teaching material.
+  contents:
+  - idyob10k
+  - idyob1k
