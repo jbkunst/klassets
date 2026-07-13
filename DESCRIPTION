@@ -2,7 +2,7 @@ Package: klassets
 Title: Tools to Simulate Data Sets for Teaching Statistical Models and ML Algorithms
 Description: Collection of functions to simulate data sets for teaching and
     explaining how machine learning algorithms work.
-Version: 0.1.0.9000
+Version: 0.1.2
 Authors@R: person("Joshua", "Kunst", role = c("aut", "cre"), email = "jbkunst@gmail.com")
 License: MIT + file LICENSE
 Encoding: UTF-8
