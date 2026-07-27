@@ -1,0 +1,13 @@
+# Workflow derived from https://github.com/r-wasm/actions/tree/v3/examples
+on:
+  release:
+    types: [published]
+
+name: Build and deploy wasm R package image
+
+jobs:
+  release-file-system-image:
+    uses: r-wasm/actions/.github/workflows/release-file-system-image.yml@v3
+    permissions:
+      contents: write
+      repository-projects: read
